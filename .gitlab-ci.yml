@@ -8,8 +8,7 @@
 .agent-47: &agent-47
     retry: 1
     tags:
-        - agent-smith
-        - dds
+        - agent-smith , dds
 
 .define_config: &triggered_by_api_call
     only:

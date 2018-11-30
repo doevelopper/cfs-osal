@@ -1,6 +1,8 @@
 
 add_library(cfs.osal.main
     cfs/osal/TimeFixture
+    cfs/osal/task/Runnable
+    cfs/osal/properties/XProperty
 )
 
 apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})

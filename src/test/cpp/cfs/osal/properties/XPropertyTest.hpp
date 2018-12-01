@@ -1,10 +1,12 @@
+
+
 /***************************************************************************
-* Copyright (c) 2016, Johan Mabille and Sylvain Corlay                     *
-*                                                                          *
-* Distributed under the terms of the BSD 3-Clause License.                 *
-*                                                                          *
-* The full license is in the file LICENSE, distributed with this software. *
-****************************************************************************/
+ * Copyright (c) 2016, Johan Mabille and Sylvain Corlay                     *
+ *                                                                          *
+ * Distributed under the terms of the BSD 3-Clause License.                 *
+ *                                                                          *
+ * The full license is in the file LICENSE, distributed with this software. *
+ ****************************************************************************/
 
 #include "gtest/gtest.h"
 
@@ -31,6 +33,7 @@ XVALIDATE_STATIC(double, Foo, bar, proposal)
     {
         throw std::runtime_error("Only non-negative values are valid.");
     }
+
     return proposal;
 }
 
@@ -109,7 +112,9 @@ struct Ro
 {
     MAKE_OBSERVED()
 
-    XPROPERTY(double, Ro, bin, 1.0, [](double& i) { if (i < 0.0) i = 0.0; });
+    XPROPERTY(double, Ro, bin, 1.0, [](double& i) {
+        if (i < 0.0) i = 0.0;
+    });
 };
 
 TEST(xproperty, lambda_validation)
@@ -119,3 +124,4 @@ TEST(xproperty, lambda_validation)
     ro.bin = -1.0;
     ASSERT_EQ(0.0, ro.bin());
 }
+

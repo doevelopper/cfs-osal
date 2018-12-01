@@ -28,7 +28,7 @@ include(CheckCXXCompilerFlag)
 #set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set(CMAKE_CXX_EXTENSIONS OFF)
 
-set (COMMON_CXX_FLAGS -W -Wall -Wextra -Weffc++ -Wpedantic  -Wold-style-cast -Wcast-align -Woverloaded-virtual -Wformat=2)
+set (COMMON_CXX_FLAGS -W -Wall -Wextra -Weffc++ -Wpedantic  -Wold-style-cast -Wcast-align -Woverloaded-virtual -Wformat=2 -Wzero-as-null-pointer-constant)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wconversion -Wsign-conversion -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wlogical-op -Wnull-dereference -Wuseless-cast -Wdouble-promotion)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Werror=reorder -Werror=non-virtual-dtor -fmax-errors=5 -Werror=return-type -Werror=format-security -Werror=shadow)

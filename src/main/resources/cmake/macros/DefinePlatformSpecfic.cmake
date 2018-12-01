@@ -30,6 +30,10 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     )
 endif()
 
+#if (CMAKE_BUILD_TYPE AND NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|Coverage|Profiling)$")
+#	message(FATAL_ERROR "Invalid value for CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+#endif()
+
 #set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo;Coverage;Profiling" CACHE STRING "" FORCE )
 
 

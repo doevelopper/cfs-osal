@@ -9,9 +9,16 @@ apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(cfs.osal.main
     PUBLIC
+#        $<$<PLATFORM_ID:Linux>:rt>
         LOG4CXX::LOG4CXX
 )
 
+set_target_properties( cfs.osal.main PROPERTIES
+    VERSION 
+        ${PROJECT_VERSION}
+    SOVERSION 
+        "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
+)
 include(GenerateExportHeader)
 generate_export_header(cfs.osal.main
     EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Export.hpp"
@@ -89,10 +96,13 @@ target_compile_options(cfs.osal.main
 
 target_include_directories(cfs.osal.main 
     PUBLIC
-         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cfs/osal>
-         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-         $<INSTALL_INTERFACE:include/cfs/osal>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}> 
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cfs/osal>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+        $<INSTALL_INTERFACE:include/cfs/osal>
+        $<INSTALL_INTERFACE:include>
 
     SYSTEM 
          PUBLIC

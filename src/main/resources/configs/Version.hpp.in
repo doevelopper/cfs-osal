@@ -25,7 +25,16 @@
 
 #include <sstream>
 #include <string>
-#include <cppbdd101/GitRevision.hpp>
+#include <cfs/osal/GitRevision.hpp>
+
+#define CFS_OSAL_VERSION "@PROJECT_VERSION@"
+#define CFS_OSAL_VERSION_DESC (@PROJECT_VERSION_MAJOR@ * 100000) \
+                           + (@PROJECT_VERSION_MINOR@ * 1000) \
+                           + (@PROJECT_VERSION_PATCH@ * 10) \
+                           + @PROJECT_VERSION_HOTFIX@
+
+#define RELEASE_LEVEL   ReleaseLevel::@RELEASE_LEVEL@
+#define RELEASE_SERIAL  0
 
 /*!
  * @brief ReleaseLevel indicates the release level of this API
@@ -42,9 +51,6 @@ enum ReleaseLevel
     CANDIDATE    = 0xC , /**< API is in release candidate state. */
     FINAL        = 0xF , /**< API is in final state, i.e. officially approved. */
 };
-
-#define RELEASE_LEVEL   ReleaseLevel::@RELEASE_LEVEL@
-#define RELEASE_SERIAL  0
 
 /*!
  * @brief Version as a single 4-byte hex number, e.g. 0x010502B2 == 1.5.2b2.
@@ -259,7 +265,7 @@ public:
             }
         }
 
-            //if same minor level, compare patch level
+        //if same minor level, compare patch level
         if ((ve_ref_list.at(1).toInt() == ve_elem_list.at(1).toInt()) &&
                     (ve_ref_list.at(2).toInt() < ve_elem_list.at(2).toInt()))
         {

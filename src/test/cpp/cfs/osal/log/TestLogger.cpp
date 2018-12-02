@@ -1,0 +1,339 @@
+
+
+#include <cfs/osal/log/TestLogger.hpp>
+#include <unistd.h>
+#include <iostream>
+#include <string>
+#include <typeinfo>
+#include <stdlib.h>     /* getenv */
+
+// log4cxx::LoggerPtr loggerPtr __attribute__((init_priority(10)));
+
+using namespace cfs::osal::log::test;
+
+const char *       TestLogger::configEnv = "DIDACTICS_LOG_CONFIG";
+
+log4cxx::LoggerPtr LOG = log4cxx::Logger::getLogger(std::string("cfs.osal.log.test.TestLogger"));
+
+TestLogger::TestLogger(unsigned long delay)
+    :   watchPeriod(delay)
+{
+    //    ::setenv("LOG4CXX_CONFIGURATION_PATH", "/etc/cfg/log4cxx.xml", 1);
+    this->initLogger();
+    // LOG4CXX_TRACE(LOG,"TestLogger::TestLogger");
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+}
+
+TestLogger::TestLogger(const TestLogger & orig) {
+}
+
+TestLogger::~TestLogger() {
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger(), __LOG4CXX_FUNC__);
+
+    if (log4cxx::LogManager::getLoggerRepository()->isConfigured())
+    {
+        LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), "---- END LOGGING -----");
+    }
+
+    log4cxx::LogManager::shutdown();
+}
+
+// TestLogger::TestLogger(const std::string &name)
+// : mLogger(log4cxx::Logger::getLogger(name))
+// {
+// }
+
+TestLogger::TestLogger(const std::string & logFileProperties,
+                       std::string path)
+{
+    path.append(logFileProperties);
+    ::setenv("LOG4CXX_CONFIGURATION_FILE", path.c_str(), 1);
+}
+
+bool TestLogger::checkLogManagerStatus ()
+{
+    // LOG4CXX_TRACE(LOG,"TestLogger::checkLogManagerStatus");
+    // Check that we have not accidentally triggered configuration.
+    // Paranoia due to "When the LogManager class is loaded into memory the
+
+    // default initialization procedure is initiated" in LogManager Doxygen.
+    return (log4cxx::LogManager::getLoggerRepository()->isConfigured());
+}
+
+unsigned long TestLogger::periodicalCheck () const
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+
+    return (this->watchPeriod);
+}
+
+void TestLogger::periodicalCheck ( unsigned long delay)
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    this->watchPeriod = delay;
+}
+
+bool TestLogger::initLogger ()
+{
+    std::string configurationPath("");
+
+    if (checkLogManagerStatus())
+    {
+        throw std::logic_error("log4cxx configuration detected");
+    }
+    else
+    {
+        char * filePath;
+        try
+        {
+            if ((filePath = getenv("LOG4CXX_CONFIGURATION")) == NULL)
+            {
+                //std::cerr << "Failed to get loggger cnfiguratin file" << std::endl;
+            }
+            else
+            {
+                configurationPath.assign(filePath);
+            }
+        }
+        catch ( log4cxx::helpers::Exception & e )
+        {
+            std::cout << typeid (e).name( ) << ": " << e.what( ) << std::endl;
+        }
+        catch (std::exception & e)
+        {
+            std::cout << typeid (e).name () << ": " << e.what () << std::endl;
+        }
+        catch (...)
+        {
+            std::cerr << "Mein Gott Vas den loss ??? " << std::endl;
+        }
+
+        if (configurationPath.empty() /*&& getenv(log4cxx.properties)*/)
+        {
+            // log4cxx::BasicConfigurator::configure();
+            // log4cxx::LayoutPtr sbcLayout( new log4cxx::PatternLayout("[%d{yyyy-MM-ddTHH:mm:ss}] %p: %c: %m [%t]%n"));
+            // log4cxx::PatternLayoutPtr   layout   (new log4cxx::PatternLayout ("%d{HH:mm:ss} %p %c{1} - %m%n"));
+            // log4cxx::PatternLayoutPtr   layout   (new log4cxx::PatternLayout  ("\%-5p [\%t] [\%F:\%L]: \%m\%n"));
+
+            // log4cxx::PatternLayoutPtr   layout   (new log4cxx::PatternLayout  ("%d{yyyy-MM-dd HH:mm:ss.SSS} (%-6c)
+            // [%-6p] [%-5t] -- %m%n"));
+
+            // log4cxx::PatternLayoutPtr   layout   (new log4cxx::PatternLayout  ("%d{yyyy-MM-dd HH:mm:ss.SSS} (%-6c)
+            // [%-6p] [%-5t] [%r] (%-10.20l:%L) -- %m%n"));
+
+            // log4cxx::PatternLayoutPtr   layout   (new log4cxx::PatternLayout  ("%d{yyyy-MM-dd HH:mm:ss.SSS} (%-6c)
+            // [%-6p] [%15.15t] [%-6r] (%-10.20l) -- %m%n"));
+
+            //log4cxx::PatternLayoutPtr layout   (new log4cxx::PatternLayout  (
+            //                                        "%d{yyyy-MM-dd HH:mm:ss.SSS} (%-6c) [%-6p] [%15.15t] (%-10.20l) --
+            // %m%n"));
+
+            log4cxx::PatternLayoutPtr layout( new log4cxx::PatternLayout(
+                                                  "[%-6.6p] %d{HH:mm:ss.SSS} [%15.15t] (%20.20c)  (%-10.20l) - %-20.20M - %m%n"
+                                                  ) );
+
+            // log4cxx::rolling::RollingFileAppender * rollingFileAppender (new
+            // log4cxx::rolling::RollingFileAppender(layout
+            // ,
+            // "arkhe-gcs.log" ,
+            // true));
+            // rollingFileAppender->setMaxFileSize("10MB");
+            // rollingFileAppender->setMaxBackupIndex(10);
+
+
+            log4cxx::ConsoleAppenderPtr consoleAppender (new log4cxx::ConsoleAppender (layout));
+            //            log4cxx::FileAppender * fileAppender = new log4cxx::FileAppender( log4cxx::LayoutPtr(layout
+            // ),"cfs.log",
+            //                                                                         false );
+
+            log4cxx::helpers::Pool pool;
+            consoleAppender->activateOptions(pool);
+            log4cxx::BasicConfigurator::configure( consoleAppender );
+            //        log4cxx::BasicConfigurator::configure( log4cxx::AppenderPtr( fileAppender ) );
+            log4cxx::Logger::getRootLogger()->setLevel (log4cxx::Level::getTrace ());
+
+            //       log4cxx::LogManager::getLoggerRepository()->setConfigured(true);
+            log4cxx::Logger::getRootLogger( )->setLevel( /*DEFINED_LOG_ALL*/ true ? log4cxx::Level::getTrace( ) :
+                                                                             log4cxx::Level::getInfo() );
+            log4cxx::LogManager::getLoggerRepository()->getRootLogger()->info(
+                "Starting the nternal configured logging system.");
+            LOG4CXX_TRACE(LOG, "Log4cxx file Path " << filePath);
+        }
+        else
+        {
+            if (::access(configurationPath.c_str(), R_OK) == 0)
+            {
+#if APR_HAS_THREADS
+                this->loadConfigAndWatch(log4cxx::File( configurationPath.c_str( )).getPath( ));
+#else
+                this->loadConfig(log4cxx::File( configurationPath.c_str( )).getPath( ));
+#endif
+
+                /*
+                                if (configurationPath.substr(configurationPath.find_last_of(".") + 1).compare("xml") ==
+                                   0)
+                                {
+                 #if APR_HAS_THREADS
+                                    log4cxx::xml::DOMConfigurator::configureAndWatch(configurationPath,
+                                       this->periodicalCheck());
+                 #else
+                                    cfgRootPath.append(logFileProperties);
+                                    log4cxx::xml::DOMConfigurator::configure(log4cxx::File(cfgRootPath).getPath());
+                 #endif
+                                }
+                                else
+                                {
+                 #if APR_HAS_THREADS
+                                    log4cxx::PropertyConfigurator::configureAndWatch(configurationPath,
+                                       this->periodicalCheck());
+                 #else
+                                    log4cxx::PropertyConfigurator::configure(cfgRootPath);
+                 #endif
+                                }
+                 */
+                // loggerPtr->trace("TestLogger initialized");
+            }
+
+            log4cxx::Logger::getRootLogger()->setLevel(log4cxx::Level::getAll());
+            log4cxx::LogManager::getLoggerRepository()->setConfigured(true);
+            // log4cxx::LogManager::getLoggerRepository()->getRootLogger()->trace("Starting the logging system" +
+            // configurationPath );
+            // LOG4CXX_TRACE(log4cxx::Logger::getRootLogger(),"TestLogger initialized. Appenders sise:" <<
+            // log4cxx::Logger::getRootLogger()->getAllAppenders().size() );
+        }
+    }
+
+    LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), "----START LOGGING-----" );
+    LOG4CXX_TRACE(
+        log4cxx::Logger::getRootLogger(),
+        "TestLogger initialized. Appenders sise:" << log4cxx::Logger::getRootLogger()->getAllAppenders().size() );
+    // log4cxx::AppenderList listOfQppenders = log4cxx::Logger::getRootLogger()->getAllAppenders();
+    /*for (size_t i = 0; i < listOfQppenders.size(); ++i)
+       {
+        LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), log4cxx::Logger::getRootLogger().operator ->().);
+       }*/
+
+    return (this->checkLogManagerStatus());
+}
+
+void TestLogger::loggerConfigure (std::string const & filename)
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    // TODO: does resetConfiguration() remove existing appenders?
+    log4cxx::BasicConfigurator::resetConfiguration();
+
+    if (getFileExtension(filename).compare(".xml") == 0)
+    {
+        log4cxx::xml::DOMConfigurator::configure(filename);
+    }
+    else
+    {
+        log4cxx::PropertyConfigurator::configure(filename);
+    }
+}
+
+bool TestLogger::loggerReset ()
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    log4cxx::LogManager::resetConfiguration();
+    log4cxx::BasicConfigurator::resetConfiguration();
+
+    return (true);
+}
+
+std::string TestLogger::getFileExtension (const std::string & s)
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    size_t i = s.rfind('.', s.length());
+
+    if (i != std::string::npos)
+    {
+        return (s.substr(i + 1, s.length() - i));
+    }
+
+    return ("");
+}
+
+log4cxx::LoggerPtr TestLogger::getLoggerByName (const char * loggerName)
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+
+    return (log4cxx::LogManager::getLoggerRepository()->getLogger(std::string(loggerName)));
+}
+
+void TestLogger::setLoggerLevel (const std::string &loggerId,
+                                 const std::string &level)
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    log4cxx::Logger::getLogger(loggerId)->setLevel(log4cxx::Level::toLevel(level, log4cxx::Level::getInfo()));
+}
+
+void TestLogger::setRootDefaultLevel (const std::string &level)
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    log4cxx::Logger::getRootLogger()->setLevel(log4cxx::Level::toLevel(level, log4cxx::Level::getInfo()));
+}
+
+void TestLogger::loadConfig( const std::string & configFilename )
+{
+    if( log4cxx::LogManager::getLoggerRepository( )->isConfigured( ) )
+    {
+        if( !configFilename.empty( ) )
+        {
+            if( configFilename.find( ".xml" ) != std::string::npos )
+            {
+                log4cxx::xml::DOMConfigurator::configure( configFilename );
+                // log4cxx::xml::DOMConfigurator::configure( log4cxx::File( configFilename ).getPath( ) );
+            }
+            else
+            {
+                log4cxx::PropertyConfigurator::configure( configFilename );
+            }
+        }
+    }
+    else
+    {
+        LOG4CXX_WARN( log4cxx::Logger::getRootLogger( ), "log4cxx configuration detected." );
+    }
+}
+
+void TestLogger::loadConfigAndWatch( const std::string & configFilename )
+{
+    if( log4cxx::LogManager::getLoggerRepository( )->isConfigured( ) )
+    {
+        if( !configFilename.empty( ) )
+        {
+            if( configFilename.find( ".xml" ) != std::string::npos )
+            {
+                log4cxx::xml::DOMConfigurator::configureAndWatch( configFilename,
+                                                                  static_cast< long >(this->periodicalCheck( ) ));
+            }
+            else
+            {
+                log4cxx::PropertyConfigurator::configureAndWatch( configFilename,
+                                                                  static_cast< long >(this->periodicalCheck( ) ));
+            }
+        }
+    }
+    else
+    {
+        LOG4CXX_WARN( log4cxx::Logger::getRootLogger( ), "log4cxx configuration detected." );
+    }
+}
+
+void
+TestLogger::loggerNames( std::vector<std::string> & names )
+{
+    LOG4CXX_TRACE(log4cxx::Logger::getRootLogger( ), __LOG4CXX_FUNC__);
+    log4cxx::LoggerList list = log4cxx::LogManager::getCurrentLoggers( );
+    log4cxx::LoggerList::iterator logger = list.begin( );
+    names.clear( );
+
+    for(; logger != list.end( ); logger++ )
+    {
+        LOG4CXX_TRACE( log4cxx::Logger::getRootLogger( ), "Logger "
+                       << std::distance(list.begin(), logger) << (*logger)->getName( ) );
+        names.push_back( (*logger)->getName( ) );
+    }
+}
+

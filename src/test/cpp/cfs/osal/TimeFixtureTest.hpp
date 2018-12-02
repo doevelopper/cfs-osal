@@ -4,6 +4,7 @@
 #define CFS_OSAL_TIMEFIXTURETEST_HPP
 
 #include <gmock/gmock.h>
+#include <cfs/osal/log/TestLogger.hpp>
 
 namespace cfs::osal::test
 {
@@ -22,6 +23,8 @@ namespace cfs::osal::test
             void TearDown() override;
 
         protected:
+
+            static log4cxx::LoggerPtr logger;
 
         private:
     };

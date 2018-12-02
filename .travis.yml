@@ -1,0 +1,14 @@
+
+language: cpp
+
+addons:
+    apt:
+        packages:
+            - p7zip-full
+            - doxygen
+
+branches:
+    only:
+        - master
+        - develop
+

@@ -1,15 +1,27 @@
 
-add_library(cfs.osal.test
+add_executable (cfs.osal.test.bin
+#add_library(cfs.osal.test
     cfs/osal/Test
+    cfs/osal/unitTest
     cfs/osal/TimeFixtureTest
-#    cfs/osal/log/Logger
-#    cfs/osal/log/internal/LoggerPrivate
     cfs/osal/log/TestLogger
 )
 
-apply_style_targets_command(cfs.osal.test ${CMAKE_CURRENT_SOURCE_DIR})
+apply_style_targets_command(cfs.osal.test.bin ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_include_directories(cfs.osal.test 
+#include(GenerateExportHeader)
+#generate_export_header(cfs.osal.test
+#    EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/TestExport.hpp"
+#    INCLUDE_GUARD_NAME TEST_CFS_OSAL_EXPORT_HPP
+#    # EXPORT_MACRO_NAME API_DECLS
+#    #BASE_NAME CFS_OSAL
+#    #PREFIX_NAME CFS_OSAL_
+#    #STATIC_DEFINE BUILT_AS_STATIC
+#    DEPRECATED_MACRO_NAME TEST_CFS_OSAL_DEPRECATED
+#    ${NO_BUILD_DEPRECATED}
+#)
+
+target_include_directories(cfs.osal.test.bin 
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
@@ -21,19 +33,32 @@ target_include_directories(cfs.osal.test
         $<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(cfs.osal.test
+target_link_libraries(cfs.osal.test.bin
     PUBLIC  
         cfs.osal.main
-#        LOG4CXX::LOG4CXX
         GMock::GMock
         GTest::GTest
 )
 
-add_executable (cfs.osal.test.bin
-    cfs/osal/unitTest
+gtest_discover_tests(cfs.osal.test.bin
+    TEST_PREFIX "CFS-OSAL:-: "
+    TEST_SUFFIX ----
+    PROPERTIES LABELS CFS::OSAL TEST
+    DISCOVERY_TIMEOUT 
+        10
+    EXTRA_ARGS 
+        --iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module cfs.osal.test.bin
+    WORKING_DIRECTORY 
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 
-target_link_libraries(cfs.osal.test.bin
-    PUBLIC cfs.osal.test
-)
+#add_executable (cfs.osal.test.bin
+#    cfs/osal/Test
+#    cfs/osal/unitTest
+#)
+
+#target_link_libraries(cfs.osal.test.bin
+#    PUBLIC 
+#        cfs.osal.test
+#)
 

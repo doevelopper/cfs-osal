@@ -59,6 +59,7 @@ target_compile_definitions(cfs.osal.main
     PRIVATE
         "VERBOSITY=$<IF:$<BOOL:${VERBOSE}>,30,10>"
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Debug>>: -DRELEASE_LEVEL="SNAPSHOOT"> # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
+        $<$<CXX_COMPILER_ID:GNU>: NOMINMAX>
         
 )
 
@@ -68,8 +69,10 @@ target_compile_options(cfs.osal.main
     INTERFACE
         $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
         $<$<CONFIG:Release>:-g0 -O2>
+        $<$<CXX_COMPILER_ID:GNU>:$<BUILD_INTERFACE:-Wall;-Wextra;-Wpedantic>>
     PUBLIC 
         -m64
+        $<$<CXX_COMPILER_ID:GNU>: ${GNU_CXX_FLAGS} >
         $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>: ${COMMON_CXX_FLAGS}>
         $<IF:$<COMPILE_LANGUAGE:CXX>,-Wold-style-cast,>
 
@@ -83,13 +86,12 @@ target_compile_options(cfs.osal.main
         $<$<CONFIG:Debug>: -ggdb3>
         $<$<CONFIG:Debug>: -O0 -g -D_DEBUG -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -fno-omit-frame-pointer>
         
-        $<$<OR:$<CONFIG:Release>,$<CONFIG:Profile>>: DISABLE_VAR>
 #        $<IF:$<CONFIG:Debug>: helper_debug.cpp,helper_release.cpp>
 
+        $<$<OR:$<CONFIG:Release>,$<CONFIG:Profile>>: DISABLE_VAR>
         $<$<CONFIG:Coverage>: -O0  -fprofile-arcs -ftest-coverage --coverage>
 
-        $<$<CONFIG:Profile>: -fsanitize=memory -fsanitize-memory-track-origins=2 -fno-omit-frame-pointer -fsanitize=null>
-        $<$<CONFIG:Profile>: -fsanitize=unreachable -fstack-check -fvtable-verify=std>
+        $<$<CONFIG:Profile>: ${CHECK_MEMORY_FLAGS}>
 
 )
 
@@ -104,9 +106,9 @@ target_include_directories(cfs.osal.main
         $<INSTALL_INTERFACE:include/cfs/osal>
         $<INSTALL_INTERFACE:include>
 
-    SYSTEM 
-         PUBLIC
-             ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
+#    SYSTEM 
+     PUBLIC
+        ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
 )
 
 

@@ -5,6 +5,8 @@
 # sudo visudo or sudo vi /etc/sudoers
 # %gitlab-runner ALL=(ALL) NOPASSWD: ALL
 
+image: gcc
+
 .agent-47: &agent-47
     retry: 1
 #    tags:
@@ -111,6 +113,8 @@ validate:
     before_script:
         - echo $CI_PIPELINE_ID
         - echo "Validate ${CI_PROJECT_NAME} is correct and all necessary information is available."
+        - apt-get update --yes
+        - apt-get install --yes cmake make
 
     script:
         - > 
@@ -120,6 +124,7 @@ validate:
 
         - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_INSTALL_PREFIX=/opt/dds
         - cmake --build  ${BUILD_DIRECTORY} --target all --clean-first
+        - cmake --build  ${BUILD_DIRECTORY} --target test 
 
     after_script:
         - echo "${BUILD_DIRECTORY} directory created"

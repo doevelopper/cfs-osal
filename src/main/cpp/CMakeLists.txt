@@ -19,6 +19,7 @@ set_target_properties( cfs.osal.main PROPERTIES
     SOVERSION 
         "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
 )
+
 include(GenerateExportHeader)
 generate_export_header(cfs.osal.main
     EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Export.hpp"

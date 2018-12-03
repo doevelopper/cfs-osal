@@ -337,3 +337,38 @@ TestLogger::loggerNames( std::vector<std::string> & names )
     }
 }
 
+/*
+   void addConsoleAppender(log4cxx::LoggerPtr logger, std::string layout,  std::string target)
+   {
+    log4cxx::PatternLayout *playout = new log4cxx::PatternLayout(layout);
+    log4cxx::ConsoleAppender *appender = new log4cxx::ConsoleAppender(log4cxx::LayoutPtr(playout), target);
+    log4cxx::helpers::Pool pool;
+    appender->activateOptions(pool);
+    logger->addAppender(appender);
+   }
+
+   void addFileAppender(log4cxx::LoggerPtr logger, std::string layout, std::string filename, bool append)
+   {
+   log4cxx::PatternLayout *playout = new log4cxx::PatternLayout(layout);
+   log4cxx::FileAppender *appender = new log4cxx::FileAppender(log4cxx::LayoutPtr(playout), filename, append);
+   log4cxx::helpers::Pool pool;
+   appender->activateOptions(pool);
+   logger->addAppender(appender);
+   }
+
+   void
+   addRollingfileAppender(log4cxx::LoggerPtr logger, std::string layout, std::string filename, bool append, int
+      bkup_index
+    , std::string filesize)
+   {
+    log4cxx::PatternLayout *playout = new log4cxx::PatternLayout(layout);
+    log4cxx::RollingFileAppender *appender = new log4cxx::RollingFileAppender(log4cxx::LayoutPtr(playout), filename,
+       append);
+    appender->setMaxBackupIndex(bkup_index);
+    appender->setMaxFileSize(filesize);
+    log4cxx::helpers::Pool pool;
+    appender->activateOptions(pool);
+    logger->addAppender(appender);
+   }
+   //*/
+

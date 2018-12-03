@@ -59,5 +59,5 @@ add_custom_command(TARGET cfs.osal.integration-test
         "Killing process to close cucumber wire port. (bind: Address already in use)"
 )
 
-#add_dependencies( feature-test cfs.osal.integration-test)
+#add_dependencies( feature-test cfs.osal.integration-test cfs.osal.test.bin)
 

@@ -112,4 +112,4 @@ target_include_directories(cfs.osal.main
         ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
 )
 
-
+#add_dependencies(compile cfs.osal.main)

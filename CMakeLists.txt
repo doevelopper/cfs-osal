@@ -41,6 +41,7 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/test/resources/cmake"
 )
 
+include(LSBInfo)
 include(CompilerOption)
 include(DefinePlatformSpecfic)
 include(macros)

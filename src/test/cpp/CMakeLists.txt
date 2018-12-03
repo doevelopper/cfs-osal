@@ -62,3 +62,4 @@ gtest_discover_tests(cfs.osal.test.bin
 #        cfs.osal.test
 #)
 
+#add_dependencies(test-compile cfs.osal.test.bin)

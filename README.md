@@ -23,7 +23,7 @@
 [![License: LGPL v3][lgpl-v3-license-shield]][lgpl-v3-license]
 [![License][license-shield]](LICENSE)
 
-|  | [![GitLab CI][master-pipeline-shield]][gitlabci] | Travis CI | Circle CI | Bitbucket CI |
+|  | GitLab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|
 | Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
 | Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|

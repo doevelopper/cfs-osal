@@ -14,18 +14,15 @@
 ```
 [![CII Best Practices][Best-Practices-shield]][Best-Practices]
 
-[![Cmake Scripts][Cmake-shield]][cmake]
-
-[![Activity][commits-shield]][commits]
 ![Project Stage][project-stage-shield]
-[![License][license-shield]](LICENSE)
+[![Maintenance][maintenance-status-shield]][maintenance-status]
 
 
+[![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
 [![CPP][cpp-lang-shield]][cpp-lang]
-[![Maintenance][maintenance-status-shield]][maintenance-status]
-[![License][apache-license-shield]][apache-license]
 [![License: LGPL v3][lgpl-v3-license-shield]][lgpl-v3-license]
+[![License][license-shield]](LICENSE)
 
 |  | [![GitLab CI][master-pipeline-shield]][gitlabci] | Travis CI | Jenkins CI | Circle CI | BitBucket CI |
 |---------------|----------------|-----------|------------|-----------|--------------|

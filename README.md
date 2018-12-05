@@ -17,21 +17,20 @@
 ![Project Stage][project-stage-shield]
 [![Maintenance][maintenance-status-shield]][maintenance-status]
 
-
 [![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
 [![CPP][cpp-lang-shield]][cpp-lang]
 [![License: LGPL v3][lgpl-v3-license-shield]][lgpl-v3-license]
 [![License][license-shield]](LICENSE)
 
-|  | [![GitLab CI][master-pipeline-shield]][gitlabci] | Travis CI | Jenkins CI | Circle CI | BitBucket CI |
-|---------------|----------------|-----------|------------|-----------|--------------|
-| Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Integration |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Code Coverage |[![Code Quality ][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
-| Code Analysis | [![Code Quality][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
-| Delpoy |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+|  | [![GitLab CI][master-pipeline-shield]][gitlabci] | Travis CI | Circle CI | Bitbucket CI |
+|---------------|----------------|-----------|------------|-----------|
+| Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
+| Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
+| Integration |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
+| Code Coverage |[![Code Quality ][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|
+| Code Analysis | [![Code Quality][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|
+| Delpoy |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
 
 
 Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |

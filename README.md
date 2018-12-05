@@ -15,7 +15,7 @@
 [![CII Best Practices][Best-Practices-shield]][Best-Practices]
 
 [![Cmake Scripts][Cmake-shield]][cmake]
-[![Defects][Issues-shield]][Issues]
+
 [![Activity][commits-shield]][commits]
 ![Project Stage][project-stage-shield]
 [![License][license-shield]](LICENSE)
@@ -29,20 +29,19 @@
 
 |  | [![GitLab CI][master-pipeline-shield]][gitlabci] | Travis CI | Jenkins CI | Circle CI | BitBucket CI |
 |---------------|----------------|-----------|------------|-----------|--------------|
-| Buid  |[![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Test  | [![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Integration |[![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Integration |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
 | Code Coverage |[![Code Quality ][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
-| Code Analysis | [![Code Quality] [master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
-| Delpoy |[![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Code Analysis | [![Code Quality][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
+| Delpoy |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
 
 
-
-Branch   | Gitlab-CI | Travis | Build |  Tests  | Integration Test | Coverage | Documentation |
-|--------|-----------|--------|-------|---------|------------------|----------|---------------|
-|[__master__][master-branch] | [![pipeline status][master-pipeline-shield]][master-pipeline] |-|-|-|-|[![coverage report][master-coverage-shield]][master-coverage]| ![tbd][developpement-status-shield]
-|[__develop__][develp-branch] | [![pipeline status][develop-pipeline-shield]][develop-pipeline] |-|-|-|-| [![coverage report][develop-coverage-shield]][develop-coverage]|-|
-|[__release__][release-branch] 
+Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |
+|--------|---------|---------|-----------|--------|---------------|
+|[__master__][master-branch] |[![Defects][Issues-shield]][Issues]| [![When][maste-commits-shield]][maste-commits-shield] | [![pipeline status](https://gitlab.com/doevelopper/cfs-osal/badges/master/pipeline.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/master) | [![coverage report](https://gitlab.com/doevelopper/cfs-osal/badges/master/coverage.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/master) | ![tbd](https://img.shields.io/badge/development%20status-active-green.svg)
+|[__develop__][develp-branch] |[![Defects][Issues-shield]][Issues]| [![When][tumbleweed-commits-shield]][tumbleweed-commits] | [![pipeline status](https://gitlab.com/doevelopper/cfs-osal/badges/develop/pipeline.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/develop) | [![coverage report](https://gitlab.com/doevelopper/cfs-osal/badges/develop/coverage.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/develop)|-|
+|[__release__][release-branch] |[![Defects][Issues-shield]][Issues]| [![When][production-commits-shield]][production-commits] | [![CFS OSAL](https://img.shields.io/github/release/doevelopper/cfs-osal.svg)](https://github.com/doevelopper/cfs-osal/releases) |-|-|
 
 [master-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/master
 [develp-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/develop

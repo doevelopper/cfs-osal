@@ -29,12 +29,12 @@
 
 |  | [![GitLab CI][master-pipeline-shield]][gitlabci] | Travis CI | Jenkins CI | Circle CI | BitBucket CI |
 |---------------|----------------|-----------|------------|-----------|--------------|
-| Buid  |[![CT/CI/CD status [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Test  | [![CT/CI/CD status [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Integration |[![CT/CI/CD status [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
-| Code Coverage |[![Code Quality [master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
-| Code Analysis | [![Code Quality [master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
-| Delpoy |[![CT/CI/CD status [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Buid  |[![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Test  | [![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Integration |[![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
+| Code Coverage |[![Code Quality ][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
+| Code Analysis | [![Code Quality] [master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|-NA-|
+| Delpoy |[![CT/CI/CD status] [master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|-NA-|
 
 
 
@@ -48,7 +48,7 @@ Branch   | Gitlab-CI | Travis | Build |  Tests  | Integration Test | Coverage | 
 [develp-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/develop
 [release-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/release
 
-[Cmake-shield] : https://img.shields.io/badge/language-cmake%207%25-brown.svg
+[Cmake-shield]: https://img.shields.io/badge/language-cmake%207%25-brown.svg
 [cmake]: https://cmake.org/
 
 [Issues-shield]: https://img.shields.io/github/issues/doevelopper/cfs-osal.svg

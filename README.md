@@ -8,10 +8,10 @@
  [..   [..[..      [..    [..       [..     [.. [..    [.. [..       [.. [..      
    [....  [..        [.. ..           [....       [.. ..  [..         [..[........
                                                                                   
-
 ------- 01000011 01000110 01010011  01001111 01010011 01000001 01001100 --------
                           -- A.H.L --
 ```
+
 [![CII Best Practices][Best-Practices-shield]][Best-Practices]
 
 ![Project Stage][project-stage-shield]
@@ -22,8 +22,10 @@
 [![CPP][cpp-lang-shield]][cpp-lang]
 [![License: LGPL v3][lgpl-v3-license-shield]][lgpl-v3-license]
 [![License][license-shield]](LICENSE)
+[![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
 
-|  | GitLab CI | Travis CI | Circle CI | Bitbucket CI |
+
+|  | Gitlab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|
 | Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
 | Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
@@ -39,6 +41,38 @@ Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |
 |[__develop__][develp-branch] |[![Defects][Issues-shield]][Issues]| [![When][tumbleweed-commits-shield]][tumbleweed-commits] | [![pipeline status](https://gitlab.com/doevelopper/cfs-osal/badges/develop/pipeline.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/develop) | [![coverage report](https://gitlab.com/doevelopper/cfs-osal/badges/develop/coverage.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/develop)|-|
 |[__release__][release-branch] |[![Defects][Issues-shield]][Issues]| [![When][production-commits-shield]][production-commits] | [![CFS OSAL](https://img.shields.io/github/release/doevelopper/cfs-osal.svg)](https://github.com/doevelopper/cfs-osal/releases) |-|-|
 
+
+<hr>
+
+Copyright © 2014 - 2018 A.H.L , Inc. All Rights Reserved.
+Copyright the authors and contributors. See individual source files
+for details.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+ 
+ - Design Documentations, SW Requirements, Test plans and Tests reports are copyright 2011-2018 A.H.L, Inc. Under [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
+ 
+ 
+ 
 [master-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/master
 [develp-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/develop
 [release-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/release
@@ -91,6 +125,5 @@ Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |
 [apache-license]: https://opensource.org/licenses/Apache-2.0
 [lgpl-v3-license-shield]: https://img.shields.io/badge/License-LGPL%20v3-blue.svg
 [lgpl-v3-license]: http://www.gnu.org/licenses/lgpl-3.0
-
-
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2388/badge)](https://bestpractices.coreinfrastructure.org/projects/2388)
+[cc-by-nc-sa-4-0-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+[cc-by-nc-sa-4-0]: https://creativecommons.org/licenses/by-nc-sa/4.0/

@@ -26,6 +26,8 @@
 
 [![Code Climate][codeclimate-shield]][codeclimate]
 [![Issue Count][codeclimate-Issue-Count-shield]][codeclimate-Issue-Count]
+[![Coveralls][Coveralls-todo-shields]][Coveralls-todo]
+[![Coverity][coverity-scan-shields]][coverity-scan]
 
 |  | Gitlab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|
@@ -128,6 +130,12 @@ for details.
 [Python-lang]: https://python.org/
 [cpp-lang-shield]: https://img.shields.io/badge/language-C++%2035.5%25-blue.svg
 [cpp-lang]: https://isocpp.org/
+
+[coverity-scan-shields]: https://img.shields.io/coverity/scan/6828.svg?style=flat&logo=coverity
+[coverity-scan]: https://scan.coverity.com/projects/6828
+
+[Coveralls-todo-shields]: https://img.shields.io/badge/coveralls-ToDo-lightgrey.svg?
+[Coveralls-todo]: https://coveralls.io/github/cginternals/glbinding
 
 [developpement-status-shield]: https://img.shields.io/badge/development%20status-active-green.svg
 [maintenance-status-shield]: https://img.shields.io/badge/Maintained%3F-yes-green.svg

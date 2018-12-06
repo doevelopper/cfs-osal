@@ -14,9 +14,9 @@
 
 [![CII Best Practices][Best-Practices-shield]][Best-Practices]
 
-![Project Stage][project-stage-shield]
 [![Maintenance][maintenance-status-shield]][maintenance-status]
 [![Maintainability][maintainability-status-shield]][maintainability-status]
+[![Code Climate][codeclimate-shield]][codeclimate]
 
 [![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
@@ -25,13 +25,14 @@
 [![License][license-shield]](LICENSE)
 [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
 
-[![Code Climate][codeclimate-shield]][codeclimate]
 [![Issue Count][codeclimate-Issue-Count-shield]][codeclimate-Issue-Count]
 [![Coveralls][Coveralls-io-shields]][Coveralls-io]
 [![Coverity][coverity-scan-shields]][coverity-scan]
 [![GitHub version][GitHub-version-shields]][GitHub-version] 
 [![Codacy Badge][codacy-badge-shields]][codacy-badge-shields]
 [![codecov][code-cov-shields]][code-cov]
+
+![Project Stage][project-stage-shield]
 
 |  | Gitlab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|
@@ -153,7 +154,7 @@ for details.
 [bkp-Coveralls-todo]: https://coveralls.io/github/cginternals/glbinding
 [Coveralls-io-shields]: https://coveralls.io/repos/github/doevelopper/cfs-osal/badge.svg?branch=master
 [Coveralls-io]: https://coveralls.io/github/doevelopper/cfs-osal?branch=master
-[code-cov-shields]: https://codecov.io/gh/doevelopper/cfs-osal/branch/master/graph/badge.svg) 
+[code-cov-shields]: https://codecov.io/gh/doevelopper/cfs-osal/branch/master/graph/badge.svg
 [code-cov]: https://codecov.io/gh/doevelopper/cfs-osal
 
 [developpement-status-shield]: https://img.shields.io/badge/development%20status-active-green.svg

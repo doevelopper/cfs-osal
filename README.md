@@ -147,8 +147,8 @@ for details.
 [cpp-lang-shield]: https://img.shields.io/badge/language-C++%2035.5%25-blue.svg
 [cpp-lang]: https://isocpp.org/
 
-[coverity-scan-shields]: https://img.shields.io/coverity/scan/6828.svg?style=flat&logo=coverity
-[coverity-scan]: https://scan.coverity.com/projects/6828
+[coverity-scan-shields]: https://img.shields.io/coverity/scan/17388.svg?style=flat&logo=coverity
+[coverity-scan]: https://scan.coverity.com/projects/17388
 
 
 [bkp-Coveralls-todo-shields]: https://img.shields.io/badge/coveralls-ToDo-lightgrey.svg?

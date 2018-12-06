@@ -1,6 +1,17 @@
 
 language: cpp
+dist: xenial
 
+#
+# Tokens
+#
+env:
+    global:
+        secure: "GTECGTGCC"
+
+#
+# Build Matrix
+#
 matrix:
   include:
 
@@ -32,12 +43,59 @@ matrix:
       addons: *clang38
       env: COMPILER='clang++-3.8' BUILD_TYPE='Debug'
 
+
+#
+# Coverity Scan
+#
+    - os: linux
+        env:
+            - TEST="Coverity Scan"
+        addons:
+            apt:
+                sources:
+                    - ubuntu-toolchain-r-test
+                packages:
+                    - ca-certificates
+                    - g++-8
+                    - g++-8
+                    - gdb
+                coverity_scan:
+                    project:
+        #                name: "doevelopper/cfs-osal"
+                        name: $TRAVIS_REPO_SLUG
+                        description: "CFS OS Abstraction Layer."
+                    notification_email: doevelopper@users.noreply.github.com
+        #            build_command_prepend: "cov-configure --comptype gcc --compiler gcc-8"
+                    build_command_prepend: "cmake -E make_directory build && cmake -E chdir build cmake -DCMAKE_CXX_COMPILER=g++-8 .. "
+                    build_command:   "cmake --build build --target all -- -j4"
+        #            branch_pattern: coverity_scan
+
+#
+# Codecov
+#
+      - os: linux
+        env:
+            - TEST="Codecov"
+        addons:
+            apt:
+                sources:
+                    - ubuntu-toolchain-r-test
+                packages:
+                    - gcc-8
+                    - g++-8
+        script:
+            - cmake -DENABLE_COVERAGE=ON -DCMAKE_CXX_COMPILER="g++-8" ..
+            - cmake --build build --target all
+            - cmake --build build --target test
+            - bash <(curl -s https://codecov.io/bash)
+
 env:
     global:
         # Ubuntu version
         - LINUX_DIST=trusty
         - DEPS_DIR=${TRAVIS_BUILD_DIR}/dependencies
 
+        
 before_install:
     # Combine global build options with OS/compiler-dependent options
     - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
@@ -47,6 +105,13 @@ before_script:
     - mkdir -pv ${DEPS_DIR} && cd ${DEPS_DIR}
     - export CXX=${COMPILER}
     - cd ${TRAVIS_BUILD_DIR}
+    - |
+      if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
+        CMAKE_URL="http://www.cmake.org/files/v3.13/cmake-3.13.1-Linux-x86_64.tar.gz"
+        mkdir -p ${DEPS_DIR}/cmake
+        travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C ${DEPS_DIR}/cmake
+        export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+      fi
     #- cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev
     #- cd Build
 
@@ -64,7 +129,7 @@ branches:
         - master
         - develop
 
-
 script:
     - make --version
+    - cmake --version
 

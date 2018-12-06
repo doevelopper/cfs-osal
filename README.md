@@ -16,6 +16,7 @@
 
 ![Project Stage][project-stage-shield]
 [![Maintenance][maintenance-status-shield]][maintenance-status]
+[![Maintainability][maintainability-status-shield]][maintainability-status]
 
 [![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
@@ -26,8 +27,11 @@
 
 [![Code Climate][codeclimate-shield]][codeclimate]
 [![Issue Count][codeclimate-Issue-Count-shield]][codeclimate-Issue-Count]
-[![Coveralls][Coveralls-todo-shields]][Coveralls-todo]
+[![Coveralls][Coveralls-io-shields]][Coveralls-io]
 [![Coverity][coverity-scan-shields]][coverity-scan]
+[![GitHub version][GitHub-version-shields]][GitHub-version] 
+[![Codacy Badge][codacy-badge-shields]][codacy-badge-shields]
+[![codecov][code-cov-shields]][code-cov]
 
 |  | Gitlab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|
@@ -74,9 +78,14 @@ for details.
  SUCH DAMAGE.
  
  - Design Documentations, SW Requirements, Test plans and Tests reports are copyright 2011-2018 A.H.L, Inc. Under [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
+
+
+[codacy-badge-shields]: https://api.codacy.com/project/badge/Grade/14eae26a4b2140f3a4e684eff3ce2049
+[codacy-badge]: https://www.codacy.com/app/happyman/cfs-osal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=doevelopper/cfs-osal&amp;utm_campaign=Badge_Grade
  
- 
- 
+[GitHub-version-shields]: https://badge.fury.io/gh/doevelopper%2Fcfs-osal.svg 
+[GitHub-version]: https://badge.fury.io/gh/doevelopper%2Fcfs-osal 
+
 [master-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/master
 [develp-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/develop
 [release-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/release
@@ -108,8 +117,13 @@ for details.
 
 [travis-build-status-shield]: https://travis-ci.org/doevelopper/cfs-osal.svg?branch=master
 [travis-build-status]: https://travis-ci.org/doevelopper/cfs-osal
-[codelimate-test-coverage-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/coverage.svg
-[codelimate-test-coverage]: https://codeclimate.com/github/doevelopper/cfs-osal/coverage
+
+[codelimate-test-coverage-shield]: https://api.codeclimate.com/v1/badges/bbe26bb09405f5581f84/test_coverage
+[codelimate-test-coverage]: https://codeclimate.com/github/doevelopper/cfs-osal/test_coverage
+
+[old-codelimate-test-coverage-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/coverage.svg
+[old-codelimate-test-coverage]: https://codeclimate.com/github/doevelopper/cfs-osal/coverage
+
 [codeclimate-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/gpa.svg
 [codeclimate]: https://codeclimate.com/github/doevelopper/cfs-osal
 [codeclimate-Issue-Count-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/issue_count.svg
@@ -134,12 +148,20 @@ for details.
 [coverity-scan-shields]: https://img.shields.io/coverity/scan/6828.svg?style=flat&logo=coverity
 [coverity-scan]: https://scan.coverity.com/projects/6828
 
-[Coveralls-todo-shields]: https://img.shields.io/badge/coveralls-ToDo-lightgrey.svg?
-[Coveralls-todo]: https://coveralls.io/github/cginternals/glbinding
+
+[bkp-Coveralls-todo-shields]: https://img.shields.io/badge/coveralls-ToDo-lightgrey.svg?
+[bkp-Coveralls-todo]: https://coveralls.io/github/cginternals/glbinding
+[Coveralls-io-shields]: https://coveralls.io/repos/github/doevelopper/cfs-osal/badge.svg?branch=master
+[Coveralls-io]: https://coveralls.io/github/doevelopper/cfs-osal?branch=master
+[code-cov-shields]: https://codecov.io/gh/doevelopper/cfs-osal/branch/master/graph/badge.svg) 
+[code-cov]: https://codecov.io/gh/doevelopper/cfs-osal
 
 [developpement-status-shield]: https://img.shields.io/badge/development%20status-active-green.svg
 [maintenance-status-shield]: https://img.shields.io/badge/Maintained%3F-yes-green.svg
 [maintenance-status]: https://gitlab.com/doevelopper/cfs-osal/tree/develop
+[maintainability-status-shield]: https://api.codeclimate.com/v1/badges/bbe26bb09405f5581f84/maintainability
+[maintainability-status]: https://codeclimate.com/github/doevelopper/cfs-osal/maintainability
+
 [apache-license-shield]: https://img.shields.io/badge/license-Apache%20license%202.0-blue.svg
 [apache-license]: https://opensource.org/licenses/Apache-2.0
 [lgpl-v3-license-shield]: https://img.shields.io/badge/License-LGPL%20v3-blue.svg

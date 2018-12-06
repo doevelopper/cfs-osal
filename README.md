@@ -22,7 +22,6 @@
 [![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
 [![CPP][cpp-lang-shield]][cpp-lang]
-
 [![License: LGPL v3][lgpl-v3-license-shield]][lgpl-v3-license]
 [![License][license-shield]](LICENSE)
 [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]

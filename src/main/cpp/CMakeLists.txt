@@ -61,11 +61,12 @@ target_compile_definitions(cfs.osal.main
         "VERBOSITY=$<IF:$<BOOL:${VERBOSE}>,30,10>"
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Debug>>: -DRELEASE_LEVEL="SNAPSHOOT"> # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
         $<$<CXX_COMPILER_ID:GNU>: NOMINMAX>
+        -D_GLIBCXX_SANITIZE_VECTOR
         
 )
 
 set_target_properties ( cfs.osal.main PROPERTIES LINK_FLAGS -m64 )
-
+#export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1
 target_compile_options(cfs.osal.main
     INTERFACE
         $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
@@ -73,7 +74,7 @@ target_compile_options(cfs.osal.main
         $<$<CXX_COMPILER_ID:GNU>:$<BUILD_INTERFACE:-Wall;-Wextra;-Wpedantic>>
     PUBLIC 
         -m64
-        $<$<CXX_COMPILER_ID:GNU>: ${GNU_CXX_FLAGS} >
+        $<$<CXX_COMPILER_ID:GNU>: ${GNU_CXX_FLAGS} -U_FORTIFY_SOURCE -fsanitize-address-use-after-scope>
         $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>: ${COMMON_CXX_FLAGS}>
         $<IF:$<COMPILE_LANGUAGE:CXX>,-Wold-style-cast,>
 

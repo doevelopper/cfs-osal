@@ -24,15 +24,17 @@
 [![License][license-shield]](LICENSE)
 [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
 
+[![Code Climate][codeclimate-shield]][codeclimate]
+[![Issue Count][codeclimate-Issue-Count-shield]][codeclimate-Issue-Count]
 
 |  | Gitlab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|
-| Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
-| Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
-| Integration |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
-| Code Coverage |[![Code Quality ][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|
-| Code Analysis | [![Code Quality][master-coverage-shield]][master-coverage]|-NA-|-NA-|-NA-|
-| Delpoy |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|-NA-|-NA-|-NA-|
+| Buid  |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|[![Build Status][travis-build-status-shield]][travis-build-status]|-NA-|-NA-|
+| Test  | [![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|[![Build Status][travis-build-status-shield]][travis-build-status]|-NA-|-NA-|
+| Integration |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|[![Build Status][travis-build-status-shield]][travis-build-status]|-NA-|-NA-|
+| Code Coverage |[![Code Quality ][master-coverage-shield]][master-coverage]|[![Test Coverage][codelimate-test-coverage-shield]][codelimate-test-coverage]|-NA-|-NA-|
+| Code Analysis | [![Code Quality][master-coverage-shield]][master-coverage]|[![Test Coverage][codelimate-test-coverage-shield]][codelimate-test-coverage]|-NA-|-NA-|
+| Delpoy |[![CT/CI/CD status][master-pipeline-shield]][master-pipeline]|[![Build Status][travis-build-status-shield]][travis-build-status]|-NA-|-NA-|
 
 
 Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |
@@ -101,6 +103,15 @@ for details.
 [develop-coverage]: https://gitlab.com/doevelopper/cfs-osal/commits/develop
 
 [gitlabci]: https://gitlab.com/doevelopper/cfs-osal/pipeline
+
+[travis-build-status-shield]: https://travis-ci.org/doevelopper/cfs-osal.svg?branch=master
+[travis-build-status]: https://travis-ci.org/doevelopper/cfs-osal
+[codelimate-test-coverage-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/coverage.svg
+[codelimate-test-coverage]: https://codeclimate.com/github/doevelopper/cfs-osal/coverage
+[codeclimate-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/gpa.svg
+[codeclimate]: https://codeclimate.com/github/doevelopper/cfs-osal
+[codeclimate-Issue-Count-shield]: https://codeclimate.com/github/doevelopper/cfs-osal/badges/issue_count.svg
+[codeclimate-Issue-Count]: https://codeclimate.com/github/doevelopper/cfs-osal
 
 [license-shield]: https://img.shields.io/badge/license-Apache%20license%202.0-blue.svg
 [semver]: http://semver.org/spec/v2.0.0.htm

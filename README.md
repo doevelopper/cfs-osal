@@ -12,8 +12,9 @@
                           -- A.H.L --
 ```
 
-[![CII Best Practices][Best-Practices-shield]][Best-Practices]
 
+[![GitHub version][GitHub-version-shields]][GitHub-version] 
+![Project Stage][project-stage-shield]
 [![Maintenance][maintenance-status-shield]][maintenance-status]
 [![Maintainability][maintainability-status-shield]][maintainability-status]
 [![Code Climate][codeclimate-shield]][codeclimate]
@@ -21,6 +22,7 @@
 [![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
 [![CPP][cpp-lang-shield]][cpp-lang]
+
 [![License: LGPL v3][lgpl-v3-license-shield]][lgpl-v3-license]
 [![License][license-shield]](LICENSE)
 [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
@@ -28,11 +30,10 @@
 [![Issue Count][codeclimate-Issue-Count-shield]][codeclimate-Issue-Count]
 [![Coveralls][Coveralls-io-shields]][Coveralls-io]
 [![Coverity][coverity-scan-shields]][coverity-scan]
-[![GitHub version][GitHub-version-shields]][GitHub-version] 
 [![Codacy Badge][codacy-badge-shields]][codacy-badge-shields]
 [![codecov][code-cov-shields]][code-cov]
 
-![Project Stage][project-stage-shield]
+[![CII Best Practices][Best-Practices-shield]][Best-Practices]
 
 |  | Gitlab CI | Travis CI | Circle CI | Bitbucket CI |
 |---------------|----------------|-----------|------------|-----------|

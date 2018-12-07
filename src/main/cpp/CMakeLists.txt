@@ -114,3 +114,38 @@ target_include_directories(cfs.osal.main
 )
 
 #add_dependencies(compile cfs.osal.main)
+
+# Support find_package(<target> NO_MODULE).
+#configure_package_config_file(${MODULE_NAME}-config.cmake.in ${MODULE_NAME_LOWER}-config.cmake
+#	INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${MODULE_NAME}-${MODULE_VERSION}
+#)
+
+#write_basic_package_version_file(${CMAKE_BINARY_DIR}/${MODULE_NAME_LOWER}-config-version.cmake
+#	VERSION ${MODULE_VERSION}
+#	COMPATIBILITY ExactVersion
+#)
+
+
+# To make the component usable not only from the install directory but also from the build directory
+#export(
+#    TARGETS l101.main.bin
+#    FILE l101.main.bin-export.cmake
+#)
+
+#install(
+#    FILES 
+#        ${CMAKE_BINARY_DIR}/l101.main-config.cmake 
+#        ${CMAKE_BINARY_DIR}/l101.main-config-version.cmake
+#    DESTINATION 
+#        ${CMAKE_INSTALL_LIBDIR}/cmake/${MODULE_NAME}-${MODULE_VERSION}
+#    COMPONENT 
+#        development
+#)
+
+#install(EXPORT l101.main
+#	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${MODULE_NAME}-${MODULE_VERSION}
+#	NAMESPACE ${PROJECT_NAME}::
+#	FILE l101.main-export.cmake
+#	COMPONENT development
+#)
+

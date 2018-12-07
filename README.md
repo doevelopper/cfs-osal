@@ -49,7 +49,6 @@ You should be aware that this project is supported solely by me and provided as 
 [![GitHub pull-requests][github-pull-requests-shieds]][github-pull-requests]
 [![GitHub pull-requests closed][github-pull-requests-closed-shields]][github-pull-requests-closed]
 
-[![Open Source Love][open-source-love-shields]][open-source-love]
 [![CII Best Practices][Best-Practices-shield]][Best-Practices]
 [![Semver][Semmentic-versioning-shields]][Semmentic-versioning]
 [![Code Style Guide: Google c++][code-style-guide-cpp-shield]][code-style-guide-cpp]
@@ -65,6 +64,7 @@ You should be aware that this project is supported solely by me and provided as 
 [![Coverity][coverity-scan-shields]][coverity-scan]
 [![Codacy Badge][codacy-badge-shields]][codacy-badge-shields]
 [![codecov][code-cov-shields]][code-cov]
+[![Build Status][cloud-drone-io-shields]][cloud-drone-io]
 
 [![Cmake Scripts][Cmake-shield]][cmake]
 [![Python][Python-lang-shield]][Python-lang]
@@ -128,6 +128,9 @@ for details.
 
 [![You Can Ask Me Anything !][ask-me-anything-shields]][ask-me-anything]
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+
+[![Open Source Love][open-source-love-shields]][open-source-love]
+
 ---
 > [Website](https://www.tbd.acme) &nbsp;&middot;&nbsp;
 > GitHub [@doevelopper](https://github.com/doevelopper) &nbsp;&middot;&nbsp;
@@ -173,7 +176,6 @@ for details.
 [develop-travis-build-status-shield]: https://travis-ci.org/doevelopper/cfs-osal.svg?branch=develop
 [develop-travis-build-status]: https://travis-ci.org/doevelopper/cfs-osal
 
-[![Build Status][cloud-drone-io-shields]][cloud-drone-io]
 [cloud-drone-io-shields]: https://cloud.drone.io/api/badges/doevelopper/cfs-osal/status.svg?branch=master
 [cloud-drone-io]: https://cloud.drone.io/doevelopper/cfs-osal
 [develop-cloud-drone-io-shields]: https://cloud.drone.io/api/badges/doevelopper/cfs-osal/status.svg?branch=develop

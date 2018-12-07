@@ -11,8 +11,16 @@
 ------- 01000011 01000110 01010011  01001111 01010011 01000001 01001100 --------
                           -- A.H.L --
 ```
+<p align="center">
+	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+</p>
+[![GitHub pull-requests][github-pull-requests-shieds]][github-pull-requests]
+[![GitHub pull-requests closed][github-pull-requests-closed-shields]][github-pull-requests-closed]
 
+[![Open Source Love][open-source-love-shields]][open-source-love]
 [![CII Best Practices][Best-Practices-shield]][Best-Practices]
+[![Semver][Semmentic-versioning-shields]][Semmentic-versioning]
+[![Code Style Guide: Google c++][code-style-guide-cpp-shield]][code-style-guide-cpp]
 
 [![GitHub version][GitHub-version-shields]][GitHub-version] 
 ![Project Stage][project-stage-shield]
@@ -78,7 +86,12 @@ for details.
  SUCH DAMAGE.
  
  - Design Documentations, SW Requirements, Test plans and Tests reports are copyright 2011-2018 A.H.L, Inc. Under [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
-
+[![You Can Ask Me Anything !][ask-me-anything-shields]][ask-me-anything]
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+---
+> [Website](https://www.tbd.acme) &nbsp;&middot;&nbsp;
+> GitHub [@doevelopper](https://github.com/doevelopper) &nbsp;&middot;&nbsp;
+> Twitter [@doevelopper](https://twitter.com/hapyman_1st)
 
 [codacy-badge-shields]: https://api.codacy.com/project/badge/Grade/14eae26a4b2140f3a4e684eff3ce2049
 [codacy-badge]: https://www.codacy.com/app/happyman/cfs-osal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=doevelopper/cfs-osal&amp;utm_campaign=Badge_Grade
@@ -168,3 +181,21 @@ for details.
 [lgpl-v3-license]: http://www.gnu.org/licenses/lgpl-3.0
 [cc-by-nc-sa-4-0-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 [cc-by-nc-sa-4-0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+[Semmentic-versioning-shields]: http://img.shields.io/SemVer/2.0.0.png
+[Semmentic-versioning]: http://semver.org/spec/v2.0.0.html
+
+[code-style-guide-cpp-shield]: https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat
+[code-style-guide-cpp]: https://github.com/google/styleguide
+
+[open-source-love-shields]: https://badges.frapsoft.com/os/v3/open-source-200x33.png?v=103
+[open-source-love]: https://github.com/doevelopper/cfs-osal
+
+[ask-me-anything-shields]: https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg
+[ask-me-anything]: https://github.com/doevelopper
+
+[github-pull-requests-shieds]: https://img.shields.io/github/issues-pr/doevelopper/cfs-osal.svg
+[github-pull-requests]: https://GitHub.com/doevelopper/cfs-osal/pull/
+
+[github-pull-requests-closed-shields]: https://img.shields.io/github/issues-pr-closed/doevelopper/cfs-osal.svg
+[github-pull-requests-closed]: https://github.com/doevelopper/cfs-osal/pull/

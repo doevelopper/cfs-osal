@@ -1,3 +1,5 @@
+<!-- [![Image caption](/src/main/resources/images/osal.logo.jpg)](#) -->
+
 ```txt
 
     [..   [........  [.. ..           [....       [.. ..        [.       [..      
@@ -13,11 +15,26 @@
 ```
 
 [d]: #project
-**[Build][bld] | [Install][i] | [INSTALL DEPS][idp] | [Usage][u] | [API][a] | [Author][auth] | [Contribute][ctb] | [Distribution][dtb] | [LICENSE][cpl] | [SUPPORT][ps]**
+**[Overview][ovw] | [LICENSE][cpl] | [SUPPORT][ps]**
+
+
+### Overview
+[ovw]: #Overview 'Project Overview' 
 
 <p align="center">
 	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/cfs%20osal-black-000000.svg"></a>
 </p>
+
+## ACKNOWLEDGMENTS
+[acc]: acknowledgments
+List project that inspired creation of this one:
+ - @NASA https://github.com/nasa/osal
+
+## PRODUCTION STATUS & SUPPORT
+[ps]: #production-status--support 'Production use disclaimer & support info'
+
+You should be aware that this project is supported solely by me and provided as is.
+<br>If you want to become a **patron** or offer me a **support** please [follow here][auth].
 
 [![GitHub pull-requests][github-pull-requests-shieds]][github-pull-requests]
 [![GitHub pull-requests closed][github-pull-requests-closed-shields]][github-pull-requests-closed]
@@ -99,7 +116,7 @@ for details.
 ---
 > [Website](https://www.tbd.acme) &nbsp;&middot;&nbsp;
 > GitHub [@doevelopper](https://github.com/doevelopper) &nbsp;&middot;&nbsp;
-> Twitter [@doevelopper](https://twitter.com/hapyman_1st)
+> Twitter [@doevelopper](https://twitter.com/happyman_1rst) or just [email](mailto:happyman@hotmail.fr) me.
 
 [codacy-badge-shields]: https://api.codacy.com/project/badge/Grade/14eae26a4b2140f3a4e684eff3ce2049
 [codacy-badge]: https://www.codacy.com/app/happyman/cfs-osal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=doevelopper/cfs-osal&amp;utm_campaign=Badge_Grade

@@ -15,12 +15,22 @@
 ```
 
 [d]: #project
-**[Overview][ovw] | [LICENSE][cpl] | [SUPPORT][ps]**
-
+**[Overview][ovw] | [Features][feat] |[License][cpl] | [Support][ps]**
 
 ### Overview
-[ovw]: #Overview 'Project Overview' 
+[ovw]: #Overview 'Project Overview'
 
+### Features
+[feat]: #Features 'Pending Features'
+The OSAL consists of a set of interfaces (abstract classes) that provide all the required operating system services for the application
+
+ - Tasking services
+ - Synchronization services
+ - Message queues
+ - Communication service
+ - Timer service
+
+	
 <p align="center">
 	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/cfs%20osal-black-000000.svg"></a>
 </p>
@@ -160,6 +170,14 @@ for details.
 
 [travis-build-status-shield]: https://travis-ci.org/doevelopper/cfs-osal.svg?branch=master
 [travis-build-status]: https://travis-ci.org/doevelopper/cfs-osal
+[develop-travis-build-status-shield]: https://travis-ci.org/doevelopper/cfs-osal.svg?branch=develop
+[develop-travis-build-status]: https://travis-ci.org/doevelopper/cfs-osal
+
+[![Build Status][cloud-drone-io-shields]][cloud-drone-io]
+[cloud-drone-io-shields]: https://cloud.drone.io/api/badges/doevelopper/cfs-osal/status.svg?branch=master
+[cloud-drone-io]: https://cloud.drone.io/doevelopper/cfs-osal
+[develop-cloud-drone-io-shields]: https://cloud.drone.io/api/badges/doevelopper/cfs-osal/status.svg?branch=develop
+[develop-cloud-drone-io]: https://cloud.drone.io/doevelopper/cfs-osal
 
 [codelimate-test-coverage-shield]: https://api.codeclimate.com/v1/badges/bbe26bb09405f5581f84/test_coverage
 [codelimate-test-coverage]: https://codeclimate.com/github/doevelopper/cfs-osal/test_coverage

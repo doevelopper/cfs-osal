@@ -11,6 +11,10 @@
 ------- 01000011 01000110 01010011  01001111 01010011 01000001 01001100 --------
                           -- A.H.L --
 ```
+
+[d]: #project
+**[Build][bld] | [Install][i] | [INSTALL DEPS][idp] | [Usage][u] | [API][a] | [Author][auth] | [Contribute][ctb] | [Distribution][dtb] | [LICENSE][cpl] | [SUPPORT][ps]**
+
 <p align="center">
 	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/cfs%20osal-black-000000.svg"></a>
 </p>
@@ -60,6 +64,7 @@ Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |
 
 
 <hr>
+ **[project description][d]**
 
 Copyright © 2014 - 2018 A.H.L , Inc. All Rights Reserved.
 Copyright the authors and contributors. See individual source files
@@ -87,6 +92,7 @@ for details.
  SUCH DAMAGE.
  
  - Design Documentations, SW Requirements, Test plans and Tests reports are copyright 2011-2018 A.H.L, Inc. Under [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
+
 [![You Can Ask Me Anything !][ask-me-anything-shields]][ask-me-anything]
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 ---

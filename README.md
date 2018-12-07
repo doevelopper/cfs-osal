@@ -12,8 +12,9 @@
                           -- A.H.L --
 ```
 <p align="center">
-	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/cfs%20osal-black-000000.svg"></a>
 </p>
+
 [![GitHub pull-requests][github-pull-requests-shieds]][github-pull-requests]
 [![GitHub pull-requests closed][github-pull-requests-closed-shields]][github-pull-requests-closed]
 

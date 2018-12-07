@@ -28,7 +28,7 @@
 ## ACKNOWLEDGMENTS
 [acc]: acknowledgments
 List project that inspired creation of this one:
- - @NASA https://github.com/nasa/osal
+ - @NASA [Core Flight Executive](https://github.com/nasa/osal)
 
 ## PRODUCTION STATUS & SUPPORT
 [ps]: #production-status--support 'Production use disclaimer & support info'
@@ -79,6 +79,11 @@ Branch   | Defects | Commits | Gitlab-CI | Travis | Documentation |
 |[__develop__][develp-branch] |[![Defects][Issues-shield]][Issues]| [![When][tumbleweed-commits-shield]][tumbleweed-commits] | [![pipeline status](https://gitlab.com/doevelopper/cfs-osal/badges/develop/pipeline.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/develop) | [![coverage report](https://gitlab.com/doevelopper/cfs-osal/badges/develop/coverage.svg)](https://gitlab.com/doevelopper/cfs-osal/commits/develop)|-|
 |[__release__][release-branch] |[![Defects][Issues-shield]][Issues]| [![When][production-commits-shield]][production-commits] | [![CFS OSAL](https://img.shields.io/github/release/doevelopper/cfs-osal.svg)](https://github.com/doevelopper/cfs-osal/releases) |-|-|
 
+
+## CONTRIBUTION & LICENSE
+[cpl]:#contribution--license 'Contribution guide & license info'
+
+Check out (if any) <a href='/CONTRIBUTION'>contribution guide</a> or <a href='/LICENSE'>license</a> for more details.
 
 <hr>
 

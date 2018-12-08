@@ -123,7 +123,7 @@ for details.
  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  SUCH DAMAGE.
  
- - Design Documentations, SW Requirements, Test plans and Tests reports are copyright 2011-2018 A.H.L, Inc. Under [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
+ - Design Documentations, SW Requirements, Test plans and Tests reports are [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
  - Cmake and shell Scripts are  [![gplv3-cc-by-nc-sa-4-0][license-gplv3-cc-by-4-0-shields]][license-gplv3-cc-by-4-0]
 
 [![You Can Ask Me Anything !][ask-me-anything-shields]][ask-me-anything]

@@ -29,7 +29,6 @@ The OSAL consists of a set of interfaces (abstract classes) that provide all the
  - Message queues
  - Communication service
  - Timer service
-
 	
 <p align="center">
 	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/cfs%20osal-black-000000.svg"></a>
@@ -125,6 +124,7 @@ for details.
  SUCH DAMAGE.
  
  - Design Documentations, SW Requirements, Test plans and Tests reports are copyright 2011-2018 A.H.L, Inc. Under [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
+ - Cmake and shell Scripts are  [gplv3-cc-by-nc-sa-4-0][license-gplv3-cc-by-4-0.shields]][license-gplv3-cc-by-4-0]
 
 [![You Can Ask Me Anything !][ask-me-anything-shields]][ask-me-anything]
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
@@ -231,6 +231,9 @@ for details.
 [lgpl-v3-license]: http://www.gnu.org/licenses/lgpl-3.0
 [cc-by-nc-sa-4-0-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 [cc-by-nc-sa-4-0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+[license-gplv3-cc-by-4-0.shields]: https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg
+[license-gplv3-cc-by-4-0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 [Semmentic-versioning-shields]: http://img.shields.io/SemVer/2.0.0.png
 [Semmentic-versioning]: http://semver.org/spec/v2.0.0.html

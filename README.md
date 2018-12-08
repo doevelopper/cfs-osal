@@ -232,7 +232,7 @@ for details.
 [cc-by-nc-sa-4-0-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 [cc-by-nc-sa-4-0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-[license-gplv3-cc-by-4-0.shields]: https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg
+[license-gplv3-cc-by-4-0-shields]: https://img.shields.io/badge/License-GPLv3%2B%20%2F%20CC%20BY--SA%204.0-blue.svg
 [license-gplv3-cc-by-4-0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 [Semmentic-versioning-shields]: http://img.shields.io/SemVer/2.0.0.png

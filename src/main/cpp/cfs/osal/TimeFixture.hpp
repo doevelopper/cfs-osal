@@ -7,9 +7,11 @@
 #include <chrono>
 #include <sstream>
 
+#include <cfs/osal/Export.hpp>
+
 namespace cfs::osal
 {
-    class TimeFixture
+    class CFS_OSAL_MAIN_EXPORT TimeFixture
     {
         public:
 

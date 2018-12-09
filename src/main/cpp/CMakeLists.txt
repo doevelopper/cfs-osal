@@ -3,6 +3,10 @@ add_library(cfs.osal.main
     cfs/osal/TimeFixture
     cfs/osal/task/Runnable
     cfs/osal/properties/XProperty
+    cfs/osal/thread/WorkerThread
+    cfs/osal/queues/MultiProducerMultiConsumerQueue
+    cfs/osal/queues/SingleProducerSingleConsumerQueue
+    cfs/osal/queues/MultiProducerSingleConsumerQueue
 )
 
 apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})
@@ -24,9 +28,9 @@ include(GenerateExportHeader)
 generate_export_header(cfs.osal.main
     EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Export.hpp"
     INCLUDE_GUARD_NAME CFS_OSAL_EXPORT_HPP
-    EXPORT_MACRO_NAME API_DECLS
-    BASE_NAME cfs-oasl 
-    PREFIX_NAME CFS_OSAL_
+#    EXPORT_MACRO_NAME CFS_OSAL_API_DECLS
+#    BASE_NAME OSAL 
+#    PREFIX_NAME CFS_
     STATIC_DEFINE BUILT_AS_STATIC
     DEPRECATED_MACRO_NAME CFS_OSAL_DEPRECATED
     ${NO_BUILD_DEPRECATED}

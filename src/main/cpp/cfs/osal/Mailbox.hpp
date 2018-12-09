@@ -7,9 +7,11 @@
 #include <mutex>
 #include <queue>
 
+#include <cfs/osal/Export.hpp>
+
 namespace cfs::osal
 {
-    class Mailbox : public std::enable_shared_from_this<Mailbox>
+    class CFS_OSAL_MAIN_EXPORT Mailbox : public std::enable_shared_from_this<Mailbox>
     {
         enum class Command : std::uint16_t
         {

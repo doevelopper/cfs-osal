@@ -45,7 +45,14 @@ namespace cfs::osal::queues::test
 
             template<typename T>
             long double run( T producerFunc, T consumerFunc);
-
+            /*
+                        template<typename T>
+                        cfs::osal::queues::MultiProducerMultiConsumerQueue * mpScUnterTest;
+                        template<typename T>
+                        cfs::osal::queues::MultiProducerSingleConsumerQueue * mpScUnterTest;
+                        template<typename T>
+                        cfs::osal::queues::SingleProducerSingleConsumerQueue * spscUnterTest;
+             */
             static const unsigned long ITERATION;
             static log4cxx::LoggerPtr logger;
 

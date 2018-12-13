@@ -9,6 +9,9 @@ log4cxx::LoggerPtr MSPMSConsumerQueueTest::logger = log4cxx::Logger::getLogger(s
 const unsigned long MSPMSConsumerQueueTest::ITERATION = 100000000;
 
 MSPMSConsumerQueueTest::MSPMSConsumerQueueTest()
+//:mpScUnterTest()
+//,mpScUnterTest()
+//,spscUnterTest()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
 }

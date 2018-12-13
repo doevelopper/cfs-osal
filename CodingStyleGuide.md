@@ -1,5 +1,9 @@
 # Best Practices for C++ Development
-
+The coding standard followed in this code base is similar in most ways to the
+style followed by the Linux kernel. Naturally there are exceptions. Most
+notably is the indentation (more on this later). Above all else we ask
+that when modifying the code that you follow the most important rule:
+check the surrounding code and imitate its style [1].
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -22,7 +26,9 @@ The rules contained in this document have deliberately been made as generic as p
 The guiding principle should be that consistency with existing code is paramount, therefore in the interests of brevity, detailed justification for the rules has been omitted.
 
 The use of the words SHOULD, MUST etc., comply with RFC 2119.
-
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119].
 
 ## Naming Conventions
 
@@ -57,6 +63,46 @@ The use of the words SHOULD, MUST etc., comply with RFC 2119.
 1.  Boolean accessor functions MUST be named as `isComplete` NOT `complete`
 1.  Parameter names in function declaration and definition MUST be identical
 1.  Parameters in constructor initialiser lists SHOULD be as per `classMember`
+
+## Comments
+There are two acceptable commenting styles: block, line.  Block comments
+are used to document a largeish block of code, typically a function. Sometimes
+block comments are useful with a function to document a loop or a particularly
+tricky part of an algorithm. Line comments are typically a single sentence on a
+single line. They provide some brief explanation of a line or two of code.
+
+NOTE: Comments are most useful to convey the purpose, parameters and results
+from functions and objects in a system. Excessive use of comments within a
+function is indicative of two things: over documentation and code that needs
+to be refactored. To combat the first case let's say that it's safe to assume
+that your code will be read by competent C programmers. The second case can be
+tricky and there's no rule of thumb. Follow your instincts and keep in mind
+that excessive line comments are a sort of "code smell" that may mean your
+code would benefit from some restructuring.
+
+### Examples
+```c
+/*
+ * This block comment could apply to some function and describe its inner
+ * workings.  Notice these sentences have traditional capitalization and
+ * punctuation... that's because it has to be read in a way completely
+ * unlike the Post-It style content of next-line and line comments.
+ */
+```
+```c
+// This is *not* an acceptable block comment.
+// Don't do this.
+// Please.
+```
+```c
+/* This is a line comment */
+```
+
+## Whitespace
+All indentation must be spaces, not tabs. Lines are indented in multiples of
+4 spaces. Each line of code and documentation will end with a non-whitespace
+character. There must *not* be any whitespace between the last line of code
+or documentation in a file and the end of the file
 
 ## Project and Library Structure
 
@@ -211,6 +257,22 @@ The use of the words SHOULD, MUST etc., comply with RFC 2119.
 	```
 1. `auto` types should always be assigned with `operator=`
 
+Single letter variable names should be avoided.  Exceptions are:
+* "i", "j", and "k" are loop counters or temporary array indexes
+* "m" and "n" are row and column indexes for multidimensional arrays
+* "c" and "s" are temporary/parameter characters or strings
+* "r", "g", "b", and "a" are red, green, blue, and alpha levels, but only when
+* they are used together
+* "x", "y", and "z" are coordinate values
+
+Abbreviated words in variable names should be avoided.  Exceptions are:
+* "char" = character
+* "col" = column.  Typically there is also "row" so it is not confused with color
+* "cnt" = count
+* "pos" = position
+* "rem" = remainder
+* "ctx" = context
+
 ## Language Extensions
 
 1.  Language features MUST NOT be used until supported by all compilers used _for a given ML build version_
@@ -259,3 +321,11 @@ The GoogleTest framework is used for testing the C++ code.
 1.  Classes SHOULD NOT inherit from more than one base class
 1.  All code SHOULD compile with no warnings
 1.  Overloaded function parameters SHOULD NOT be implicitly convertible
+
+## References
+1. GNOME C Coding Style : https://developer.gnome.org/programming-guidelines/stable/c-coding-style.html.en
+2. Alan Bridger, Mick Brooks, and Jim Pisano, C Coding Standards, 2001, http://www.alma.nrao.edu/development/computing/docs/joint/0009/2001-02-28.pdf
+3. Brian Kernighan, Dennis Ritchie, The C Programing Language, 1988
+
+
+[RFC 2119]: http://www.ietf.org/rfc/rfc2119.txt

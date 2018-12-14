@@ -102,7 +102,7 @@ namespace xp
         private:
 
             std::unordered_map<std::size_t, std::vector<std::function<void(derived_type&)> > > m_observers;
-            std::unordered_map<std::size_t, std::vector<xtl::any> > m_validators;
+            std::unordered_map<std::size_t, std::vector<xtl::any> >                            m_validators;
 
             template <class X, class Y, class Z>
             friend class xproperty;

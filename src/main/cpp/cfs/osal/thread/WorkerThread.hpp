@@ -82,9 +82,9 @@ namespace cfs::osal::thread
              */
             void threadFunc(size_t id, WorkerThread* steal_donor);
 
-            Queue<Task> m_queue;
+            Queue<Task>       m_queue;
             std::atomic<bool> m_running_flag;
-            std::thread m_thread;
+            std::thread       m_thread;
     };
 
     namespace detail

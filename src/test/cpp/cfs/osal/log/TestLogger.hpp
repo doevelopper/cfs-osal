@@ -73,19 +73,19 @@ namespace cfs::osal::log::test
             TestLogger(const TestLogger & orig);
             TestLogger(const std::string & logFileProperties, std::string path = "/etc/cfg");
             TestLogger(const std::string &name)
-                : mLogger(log4cxx::Logger::getLogger(name))
+                : m_logger(log4cxx::Logger::getLogger(name))
             {
             }
 
             log4cxx::LoggerPtr operator = (const TestLogger &logger)
             {
-                return mLogger;
+                return m_logger;
             }
 
             virtual ~TestLogger();
             log4cxx::LoggerPtr operator -> (void)
             {
-                return mLogger;
+                return m_logger;
             }
 
             /*!
@@ -183,7 +183,7 @@ namespace cfs::osal::log::test
              * @brief Name of the env variable pointing to logging config file
              */
             static const char * configEnv;
-            log4cxx::LoggerPtr mLogger;
+            log4cxx::LoggerPtr  m_logger;
             bool checkLogManagerStatus ();
             std::string getFileExtension (const std::string & s);
 

@@ -25,14 +25,14 @@ namespace cfs::osal::test
 
         private:
 
-            std::string m_testSuites;
+            std::string  m_testSuites;
             unsigned int m_numberOfTestIteration;
             //           cfs::osal::log::test::Logger * testsLoggingService;
 
             cfs::osal::log::test::TestLogger * testsLoggingService;
 
             static const unsigned long LOGGER_WATCH_DELAY;
-            static log4cxx::LoggerPtr logger;
+            static log4cxx::LoggerPtr  logger;
     };
 }
 

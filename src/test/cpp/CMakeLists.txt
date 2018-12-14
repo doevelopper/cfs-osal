@@ -6,6 +6,8 @@ add_executable (cfs.osal.test.bin
     cfs/osal/TimeFixtureTest
     cfs/osal/log/TestLogger
     cfs/osal/queues/MSPMSConsumerQueueTest
+    cfs/osal/MessageTest
+    cfs/osal/MessageDataTest
 )
 
 apply_style_targets_command(cfs.osal.test.bin ${CMAKE_CURRENT_SOURCE_DIR})

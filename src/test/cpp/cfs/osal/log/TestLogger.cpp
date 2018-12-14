@@ -11,7 +11,7 @@
 
 using namespace cfs::osal::log::test;
 
-const char *       TestLogger::configEnv = "DIDACTICS_LOG_CONFIG";
+const char * TestLogger::configEnv = "DIDACTICS_LOG_CONFIG";
 
 log4cxx::LoggerPtr LOG = log4cxx::Logger::getLogger(std::string("cfs.osal.log.test.TestLogger"));
 
@@ -39,7 +39,7 @@ TestLogger::~TestLogger() {
 }
 
 // TestLogger::TestLogger(const std::string &name)
-// : mLogger(log4cxx::Logger::getLogger(name))
+// : m_logger(log4cxx::Logger::getLogger(name))
 // {
 // }
 

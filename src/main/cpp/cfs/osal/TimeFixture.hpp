@@ -47,12 +47,12 @@ namespace cfs::osal
 
         private:
 
-            static unsigned s_timer_number;
+            static unsigned                                    s_timer_number;
             std::chrono::time_point<std::chrono::system_clock> m_start;
-            const char* m_name;
-            const unsigned m_number;
-            std::size_t m_unit;
-            std::stringstream m_timeInformation;
+            const char*                                        m_name;
+            const unsigned                                     m_number;
+            std::size_t                                        m_unit;
+            std::stringstream                                  m_timeInformation;
     };
 }
 

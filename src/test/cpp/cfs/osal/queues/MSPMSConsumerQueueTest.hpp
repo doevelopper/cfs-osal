@@ -54,7 +54,7 @@ namespace cfs::osal::queues::test
                         cfs::osal::queues::SingleProducerSingleConsumerQueue * spscUnterTest;
              */
             static const unsigned long ITERATION;
-            static log4cxx::LoggerPtr logger;
+            static log4cxx::LoggerPtr  logger;
 
         private:
     };

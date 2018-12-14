@@ -39,7 +39,7 @@ bool MultiProducerMultiConsumerQueue<T>::enqueue(const T& data)
 
     for (;;)
     {
-        Buffer *  node = &m_buffer[headSeqence & m_mask];
+        Buffer * node = &m_buffer[headSeqence & m_mask];
         std::size_t node_seq = node->seq.load(std::memory_order_acquire);
         intptr_t dif = ( static_cast<intptr_t>( node_seq) - static_cast<intptr_t>(headSeqence));
 
@@ -81,7 +81,7 @@ bool MultiProducerMultiConsumerQueue<T>::dequeue(T& data)
 
     for (;;)
     {
-        Buffer*  node = &m_buffer[tailSeqence & m_mask];
+        Buffer* node = &m_buffer[tailSeqence & m_mask];
         std::size_t node_seq = node->seq.load(std::memory_order_acquire);
         intptr_t dif = ( static_cast<intptr_t>( node_seq) - static_cast<intptr_t>(tailSeqence + 1));
         // if seq and head_seq are the same then it means this slot is empty

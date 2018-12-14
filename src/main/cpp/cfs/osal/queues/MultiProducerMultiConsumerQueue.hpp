@@ -41,9 +41,9 @@ namespace cfs::osal::queues
             {
             }
 
-            const std::size_t m_size;
-            const std::size_t m_mask;
-            Buffer * const m_buffer;
+            const std::size_t        m_size;
+            const std::size_t        m_mask;
+            Buffer * const           m_buffer;
             std::atomic<std::size_t> m_headSequence;
             std::atomic<std::size_t> m_tailSequence;
     };

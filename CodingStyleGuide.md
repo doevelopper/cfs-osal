@@ -30,6 +30,35 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119].
 
+## general workflow
+
+### documents and general rules
+- use GIT where possible
+	- try to have every document as some kind of text file, which can be version controlled properly
+- documents, especially documentation, should be written in plain text files, markup should be done with `markdown` or `Github-flavoured markdown`. Markdown files have the file suffix `.md`
+- filenames should be all lower case, have no spaces and no special characters `|/\~!?=^%&$`.
+
+
+### git
+- use it!
+- commit often, but
+	- commit complete code AND
+	- test the code before committing (at least if it compiles!)
+
+#### commit messages
+- use imperative language in present tense, e.g. `fix bug`/ `add new form field`
+- first line contains a summary
+	- \<prefix\> \<text\>
+	- prefixes are:
+		- [CODE] / [FEATURE] - adding "normal" code additions
+		- [DOC] - documentation
+		- [BUGFIX]
+		- [CLEANUP] - refactoring, etc
+		- [SECURITY]
+		- [GIT] / [UPDATE] - updating submodules
+- body text could contain more detailed information
+	- create lists with asteriskes 
+
 ## Naming Conventions
 
 1.  Code SHOULD be consistent with its surrounding context.

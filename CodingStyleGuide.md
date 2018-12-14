@@ -30,6 +30,35 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119].
 
+## General workflow
+
+### documents and general rules
+- use GIT where possible
+	- try to have every document as some kind of text file, which can be version controlled properly
+- documents, especially documentation, should be written in plain text files, markup should be done with `markdown` or `Github-flavoured markdown`. Markdown files have the file suffix `.md`
+- filenames should be all lower case, have no spaces and no special characters `|/\~!?=^%&$`.
+
+
+### git
+- use it!
+- commit often, but
+	- commit complete code AND
+	- test the code before committing (at least if it compiles!)
+
+#### commit messages
+- use imperative language in present tense, e.g. `fix bug`/ `add new form field`
+- first line contains a summary
+	- \<prefix\> \<text\>
+	- prefixes are:
+		- [CODE] / [FEATURE] - adding "normal" code additions
+		- [DOC] - documentation
+		- [BUGFIX]
+		- [CLEANUP] - refactoring, etc
+		- [SECURITY]
+		- [GIT] / [UPDATE] - updating submodules
+- body text could contain more detailed information
+	- create lists with asteriskes 
+
 ## Naming Conventions
 
 1.  Code SHOULD be consistent with its surrounding context.
@@ -55,10 +84,10 @@ interpreted as described in [RFC 2119].
 1.  Constants MUST be named as per `CONSTANT_NAME`
 1.  Macros MUST be named as per `MACRO_NAME(...)`. However...
 1. Macros SHOULD NOT be used unless unavoidable
-1.  Files MUST be named as per `CClassName.cc`, `CClassName.h` if they contain a single or principle class named `CClassName`
-1.  Files containing primarily global typedefs  SHOULD be named as per `<Identifier>Types.h` where `<Identifier> `pertains to the file contents.
-1.  Files containing primarily constants SHOULD be named` Constants.h`
-1.  Files containing the function `main()` MUST be called `Main[Xxx].cc`. Where `Xxx` is only used if necessary to distinguish multiple such files in the same directory
+1.  Files MUST be named as per `CClassName.cpp`, `CClassName.hpp` if they contain a single or principle class named `CClassName`
+1.  Files containing primarily global typedefs  SHOULD be named as per `<Identifier>Types.hpp` where `<Identifier> `pertains to the file contents.
+1.  Files containing primarily constants SHOULD be named` Constants.hpp`
+1.  Files containing the function `main()` MUST be called `Main[Xxx].cpp`. Where `Xxx` is only used if necessary to distinguish multiple such files in the same directory
 1.  Non-boolean accessor functions MUST be named as `clientId` NOT `getClientId`
 1.  Boolean accessor functions MUST be named as `isComplete` NOT `complete`
 1.  Parameter names in function declaration and definition MUST be identical

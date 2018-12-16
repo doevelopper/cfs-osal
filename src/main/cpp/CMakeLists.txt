@@ -7,9 +7,15 @@ add_library(cfs.osal.main
     cfs/osal/queues/MultiProducerMultiConsumerQueue
     cfs/osal/queues/SingleProducerSingleConsumerQueue
     cfs/osal/queues/MultiProducerSingleConsumerQueue
-    cfs/osal/Mailbox
+#    cfs/osal/Mailbox
     cfs/osal/Message
     cfs/osal/MessageData
+    cfs/osal/Object
+    cfs/osal/BidirectionnalContainer
+    cfs/osal/FileDescriptor
+    cfs/osal/MappedMemory
+    cfs/osal/Singleton
+    cfs/osal/SpinLock
 )
 
 apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})

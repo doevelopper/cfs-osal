@@ -100,6 +100,11 @@ before_install:
     # Combine global build options with OS/compiler-dependent options
     - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
     - export CXX_FLAGS=${CXX_FLAGS}" "${ENV_CXX_FLAGS}
+    - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
+          set -e;
+          sudo apt-get update -qq;
+          sudo apt-get -y install valgrind;
+      fi
 
 before_script:
     - mkdir -pv ${DEPS_DIR} && cd ${DEPS_DIR}
@@ -114,6 +119,30 @@ before_script:
       fi
     #- cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev
     #- cd Build
+
+    # to stop the script after an error/warning
+    - set -e
+    - |-
+        case "${BUILD_TYPE}" in
+            "coverage")
+                cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_COVERAGE=ON ..
+        ;;
+            "asan")
+                cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZER=address ..
+        ;;
+            "ubsan")
+                cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZER=undefined ..
+        ;;
+            "cross")
+                cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-mingw64.cmake -DCMAKE_EXE_LINKER_FLAGS="-static -s" ..
+        ;;
+            "release")
+                cmake -DCMAKE_BUILD_TYPE=Release ..
+        ;;
+      *)
+        cmake ..
+        ;;
+    esac
 
 install:
     - |
@@ -132,4 +161,8 @@ branches:
 script:
     - make --version
     - cmake --version
-
+    - if [ "${TRAVIS_OS_NAME}" == "linux" -a "${BUILD_TYPE}" == "Debug" ]; then
+        set -e;
+        valgrind --leak-check=full --error-exitcode=1 ./build/x86_64-Linux-GNU_GCC_7.3.0-DEBUG/bin/executable;
+      fi
+    - ctest -C ${BUILD_TYPE} -V

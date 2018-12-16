@@ -6,6 +6,8 @@
 #include <memory>
 #include <utility>
 
+#include <cfs/osal/Message.hpp>
+
 namespace cfs::osal
 {
     /*!
@@ -13,7 +15,7 @@ namespace cfs::osal
      * Payload is constructed when MessageData is created and the MessageData instance owns the payload data.
      */
     template <typename PayloadType>
-    class MessageData : public Message
+    class MessageData : public cfs::osal::Message
     {
         public:
 
@@ -24,7 +26,7 @@ namespace cfs::osal
              */
             template <typename ... Args>
             MessageData(int msgId, Args&& ... args)
-                : Message(msgId)
+                : cfs::osal::Message(msgId)
                 ,m_payLoad(new PayloadType(std::forward<Args>(args) ...))
             {
             }

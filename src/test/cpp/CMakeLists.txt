@@ -16,6 +16,8 @@ add_executable (cfs.osal.test.bin
     cfs/osal/thread/WorkerThreadTest
     cfs/osal/SpinLockTest
     cfs/osal/SingletonTest
+    cfs/osal/SemaphoreTest
+    cfs/osal/BinaryWriterTest
 )
 
 apply_style_targets_command(cfs.osal.test.bin ${CMAKE_CURRENT_SOURCE_DIR})

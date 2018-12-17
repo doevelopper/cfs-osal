@@ -16,6 +16,10 @@ add_library(cfs.osal.main
     cfs/osal/MappedMemory
     cfs/osal/Singleton
     cfs/osal/SpinLock
+    cfs/osal/SystemMonitor
+    cfs/osal/Semaphore
+    cfs/osal/BinaryWriter
+    cfs/osal/task/Task
 )
 
 apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})

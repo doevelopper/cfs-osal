@@ -17,7 +17,7 @@ namespace cfs::osal::task
              * This method must be overritten
              */
             virtual void run () noexcept = 0;
-            virtual ~runnable()
+            virtual ~Runnable()
             {
             }
     };

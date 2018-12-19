@@ -24,19 +24,16 @@ Semaphore::~Semaphore()
     }
 }
 
-inline
 void Semaphore::post()
 {
     sem_post(&m_Sem);
 }
 
-inline
 void Semaphore::wait()
 {
     sem_wait(&m_Sem);
 }
 
-inline
 bool Semaphore::tryWait()
 {
     return (!sem_trywait(&m_Sem) ? true : false);

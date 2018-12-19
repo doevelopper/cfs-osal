@@ -16,6 +16,7 @@ namespace cfs::osal::task
     {
         public:
 
+            Runnable();
             Runnable(Runnable const&) = delete;
             Runnable& operator =(Runnable const&) = delete;
             virtual ~Runnable();

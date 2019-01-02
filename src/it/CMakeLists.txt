@@ -4,7 +4,7 @@ set(FEATURE_TEST_FORMAT --format progress)  #--format pretty OR --format pretty 
 set(FEATURE_TEST_OPTION --backtrace --format html --color)
 
 add_executable(cfs.osal.it-test.steps
-    cfs/osal/features/step_definitions/ApplicationSteps
+    features/step_definitions/cfs/osal/ApplicationSteps
 
 )
 
@@ -28,7 +28,7 @@ add_custom_target(cfs.osal.integration-test
     COMMAND 
         cucumber ${FEATURE_TEST_FORMAT} ${FEATURE_TEST_OPTION} 
             --out ${CMAKE_INSTALL_PREFIX}/qa/test-result/cfs.osal.test-report.html 
-            --strict ${CMAKE_CURRENT_SOURCE_DIR}/cfs/osal/features
+            --strict ${CMAKE_CURRENT_SOURCE_DIR}/features
 
     WORKING_DIRECTORY 
         ${CMAKE_CURRENT_SOURCE_DIR}

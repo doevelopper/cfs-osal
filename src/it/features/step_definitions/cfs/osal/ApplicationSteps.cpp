@@ -1,6 +1,6 @@
 
 
-#include <cfs/osal/features/step_definitions/ApplicationSteps.hpp>
+#include <features/step_definitions/cfs/osal/ApplicationSteps.hpp>
 
 using cucumber::ScenarioScope;
 /*

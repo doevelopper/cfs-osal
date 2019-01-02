@@ -17,6 +17,13 @@ void Runnable::entry(Runnable * Run)
 
 Runnable::~Runnable()
 {
+    try
+    {
+        stop();
+    }
+    catch(...)
+    {     /*??*/
+    }
 }
 
 void Runnable::stop()

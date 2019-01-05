@@ -1,5 +1,5 @@
 # language: en
-# Project CPPBDD101
+# Project CFS-OSAL
 # file 001-Dummy.feature
 #
 
@@ -61,3 +61,18 @@ Feature: Dummy Featuree
 #                | 2     | "Bonjour tout le monde" |
 #                | 3     | "Hola mundo"            |
 #                | 4     | "Hello vilag"           |
+
+    Scenario: Request the List Resource
+#        When I retrieve the List Resource
+#        Then I get an OK response
+#         And the List Response has pagination details:
+#             | Offset | 0 |
+#             | Total Count | 100 |
+#         And the List Response has records:
+#             | ID | Name |
+#             | 1 | One |
+#             | 2 | Two |
+#             | 3 | Three |
+#             | 4 | Four |
+#             | 5 | Five |
+

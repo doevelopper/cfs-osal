@@ -24,15 +24,42 @@
 [feat]: #Features 'Pending Features'
 The OSAL consists of a set of interfaces (abstract classes) that provide all the required operating system services for the application
 
+The  following  table  provides more  information  on OS  Abstractor  Interface API  level  of  support across different target OS‘s
+
  - Tasking services
  - Synchronization services
  - Message queues
  - Communication service
  - Timer service
 	
-<p align="center">
-	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/cfs%20osal-black-000000.svg"></a>
+<p align="left">
+	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/CFS%20OSAL-API-000000.svg"></a>
 </p>
+
+| OS Abstraction  API 	| Linux/Unix 	| RTEMS 	| Android 	| QNX 	| ThreadX 	| VxWorks 	| FreeRTOS 	|
+|---------------------	|---------	|--------	|------------	|-----	|---------	|---------	|----------	|
+| Process             	|YES <sup>1</sup>	|        	|           	|     	|         	|         	|          	|
+| Task                	|         	|        	|            	|     	|         	|         	|          	|
+| Thread              	|         	|        	|            	|     	|         	|         	|          	|
+| Mailbox           	|         	|        	|            	|     	|         	|         	|          	|
+| Timer               	|         	|        	|            	|     	|         	|         	|          	|
+| Event               	|         	|        	|            	|     	|         	|         	|          	|
+| Semaphores          	|         	|        	|            	|     	|         	|         	|          	|
+| Mutex               	|         	|        	|            	|     	|         	|         	|          	|
+| Queues              	|         	|        	|            	|     	|         	|         	|          	|
+| Pipes               	|         	|        	|            	|     	|         	|         	|          	|
+| Clocks              	|         	|        	|            	|     	|         	|         	|          	|
+
+Notes
+1: stub -for future development
+2: stub - This API is intended to be user configured
+3: Only supported some arm Target platforms
+4: Profiler not supported
+5: Task Pooling not supported
+6: Signaling not supported
+7: Only supported on VxWorks 6.x and later
+8: Supported in Kernel mode only.
+
 
 ## ACKNOWLEDGMENTS
 [acc]: acknowledgments

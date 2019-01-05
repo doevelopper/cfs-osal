@@ -3,55 +3,46 @@
 #include <features/step_definitions/cfs/osal/ApplicationSteps.hpp>
 
 using cucumber::ScenarioScope;
-/*
-   // return to known state before every scenario
-   BEFORE()
-   {
 
-   }
+// return to known state before every scenario
+BEFORE()
+{
+}
 
-   GIVEN("^brake control is enabled$")
-   {
+GIVEN("^enabled$")
+{
+}
 
-   }
+GIVEN("^disabled$")
+{
+}
 
-   GIVEN("^brake control is disabled$")
-   {
+THEN("^should be enabled$")
+{
+}
 
-   }
-
-   THEN("^control should be enabled$")
-   {
-
-   }
-
-   THEN("^control should be disabled$")
-   {
-
-   }
+THEN("^should be disabled$")
+{
+}
 
 
-   //*
-   GIVEN("^an animal is created (.*)$")
-   {
+GIVEN("^is created (.*)$")
+{
     REGEX_PARAM(int, sensor_val);
-   }
+}
 
-   WHEN("^a turtle is created$")
-   {
+WHEN("^created$")
+{
+}
 
-   }
-
-   THEN("^it should be able to move to (.*)$")
-   {
+THEN("^should be able to move to (.*)$")
+{
     REGEX_PARAM(float, command);
-   }
+}
 
-   THEN("^the (.*) solenoid should be activated with duty cycle (.*)$")
-   {
+THEN("^the (.*) should be activated with duty cycle (.*)$")
+{
     REGEX_PARAM(std::string, solenoid);
     REGEX_PARAM(int, duty_cycle);
-   }
-
- */
+}
 

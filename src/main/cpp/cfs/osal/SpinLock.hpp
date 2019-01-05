@@ -12,7 +12,7 @@ namespace cfs::osal
         public:
 
             SpinLock(void)
-                : atomicLock(false)
+                : m_atomicLock(false)
             {
                 return;
             }
@@ -29,22 +29,22 @@ namespace cfs::osal
 
             void lock(void)
             {
-                while (atomicLock.exchange(true));
+                while (m_atomicLock.exchange(true));
             }
 
             void unlock(void)
             {
-                atomicLock = false;
+                m_atomicLock = false;
             }
 
             bool isLocked(void) const
             {
-                return atomicLock;
+                return m_atomicLock;
             }
 
         private:
 
-            std::atomic_bool atomicLock;
+            std::atomic_bool m_atomicLock;
     };
 }
 

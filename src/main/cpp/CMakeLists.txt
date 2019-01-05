@@ -20,6 +20,7 @@ add_library(cfs.osal.main
     cfs/osal/Semaphore
     cfs/osal/BinaryWriter
     cfs/osal/task/Task
+    ${CMAKE_BINARY_DIR}/cfs/osal/Version
 )
 
 apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})
@@ -114,20 +115,20 @@ target_compile_options(cfs.osal.main
 
 )
 
-
 target_include_directories(cfs.osal.main 
     PUBLIC
+    #        ${CMAKE_BINARY_DIR}/cfs/osal
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}> 
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cfs/osal>
+        $<BUILD_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
         $<INSTALL_INTERFACE:include/cfs/osal>
         $<INSTALL_INTERFACE:include>
 
 #    SYSTEM 
-     PUBLIC
-        ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
+#     PUBLIC
+#        ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
 )
 
 #add_dependencies(compile cfs.osal.main)
@@ -145,8 +146,8 @@ target_include_directories(cfs.osal.main
 
 # To make the component usable not only from the install directory but also from the build directory
 #export(
-#    TARGETS l101.main.bin
-#    FILE l101.main.bin-export.cmake
+#    TARGETS .main.bin
+#    FILE .main.bin-export.cmake
 #)
 
 #install(
@@ -159,7 +160,7 @@ target_include_directories(cfs.osal.main
 #        development
 #)
 
-#install(EXPORT l101.main
+#install(EXPORT .main
 #	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${MODULE_NAME}-${MODULE_VERSION}
 #	NAMESPACE ${PROJECT_NAME}::
 #	FILE l101.main-export.cmake

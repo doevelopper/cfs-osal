@@ -23,13 +23,19 @@ namespace cfs::osal
 
         public:
 
-            virtual ~Mailbox(){
+            Mailbox() = delete;
+            Mailbox(const Mailbox&) = delete;
+            Mailbox(Mailbox&&) = delete;
+            Mailbox& operator=(const Mailbox&) = delete;
+            Mailbox& operator=(Mailbox&&) = delete;
+            ~Mailbox()
+            {
             }
 
-            std::shared_ptr<Mailbox> getMailbox()
-            {
-                return shared_from_this();
-            }
+            //std::shared_ptr<Mailbox> getMailbox()
+            //{
+            //return shared_from_this();
+            //}
 
             void *mapmem(std::uint32_t base, std::uint32_t size);
             void *unmapmem(void *addr, std::uint32_t sizea);

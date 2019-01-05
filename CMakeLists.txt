@@ -41,6 +41,10 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/test/resources/cmake"
 )
 
+option(BUILD_SHARED_LIBS "If enabled, shared libs will be built by default, otherwise static libs" OFF)
+add_definitions(-DRELEASE_LEVEL="SNAPSHOOT") # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
+set(RELEASE_LEVEL "SNAPSHOOT")
+
 include(LSBInfo)
 include(CompilerOption)
 include(DefinePlatformSpecfic)
@@ -101,6 +105,21 @@ write_compiler_detection_header(
 #   ALLOW_UNKNOWN_COMPILER_VERSIONS
 )
 
+configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/configs/GitRevision.hpp.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/GitRevision.hpp"
+               @ONLY)
+
+configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/configs/AppInfo.hpp.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/AppInfo.hpp"
+                @ONLY)
+
+configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/configs/Version.hpp.in"
+               "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Version.hpp"
+                @ONLY)
+
+configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/configs/Version.cpp.in"
+                "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Version.cpp"
+                @ONLY)
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(${CMAKE_INSTALL_PREFIX}/cmake/cfs-osal-config-version.cmake COMPATIBILITY ExactVersion)

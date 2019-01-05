@@ -18,6 +18,8 @@ add_executable (cfs.osal.test.bin
     cfs/osal/SingletonTest
     cfs/osal/SemaphoreTest
     cfs/osal/BinaryWriterTest
+
+    cfs/osal/VersionTest
 )
 
 apply_style_targets_command(cfs.osal.test.bin ${CMAKE_CURRENT_SOURCE_DIR})

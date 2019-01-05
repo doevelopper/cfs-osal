@@ -30,7 +30,9 @@ namespace cfs::osal
             Message(const Message&) = delete;
             Message& operator=(const Message&) = delete;
 
-            /*! "Virtual move constructor" */
+            /*!
+             * @brief Virtual move constructor
+             */
             virtual std::unique_ptr<Message> move();
 
             /*!

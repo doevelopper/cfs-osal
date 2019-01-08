@@ -26,6 +26,7 @@ namespace cfs::osal::test
 
         protected:
 
+            Semaphore *               semaphoreUnderTest;
             static log4cxx::LoggerPtr logger;
 
         private:

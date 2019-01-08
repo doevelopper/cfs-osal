@@ -3,6 +3,7 @@
 #ifndef CFS_OSAL_SEMAPHORE_HPP
 #define CFS_OSAL_SEMAPHORE_HPP
 
+#include <cstdint>
 #include <semaphore.h>
 
 namespace cfs::osal
@@ -11,7 +12,7 @@ namespace cfs::osal
     {
         public:
 
-            Semaphore();
+            Semaphore(std::int32_t pshared = 0, std::uint32_t value = 0);
             virtual ~Semaphore();
 
             /*!

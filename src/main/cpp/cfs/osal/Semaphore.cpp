@@ -6,9 +6,9 @@
 
 using namespace cfs::osal;
 
-Semaphore::Semaphore()
+Semaphore::Semaphore(std::int32_t pshared, std::uint32_t value)
 {
-    int ret = sem_init(&m_Sem, 0, 0);
+    int ret = sem_init(&m_Sem, pshared, value);
     if(ret != 0)
     {
         throw std::system_error(ret, std::system_category());

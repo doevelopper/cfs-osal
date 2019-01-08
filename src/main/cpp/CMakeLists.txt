@@ -1,6 +1,7 @@
 
 add_library(cfs.osal.main
     cfs/osal/TimeFixture
+    cfs/osal/Timer
     cfs/osal/task/Runnable
     cfs/osal/properties/XProperty
     cfs/osal/thread/WorkerThread
@@ -27,14 +28,15 @@ apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(cfs.osal.main
     PUBLIC
-#        $<$<PLATFORM_ID:Linux>:rt>
+        $<$<PLATFORM_ID:Linux>:rt>
+        $<$<PLATFORM_ID:Linux>:pthread>
         LOG4CXX::LOG4CXX
 )
 
 set_target_properties( cfs.osal.main PROPERTIES
-    VERSION 
+    VERSION
         ${PROJECT_VERSION}
-    SOVERSION 
+    SOVERSION
         "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
 )
 
@@ -43,7 +45,7 @@ generate_export_header(cfs.osal.main
     EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Export.hpp"
     INCLUDE_GUARD_NAME CFS_OSAL_EXPORT_HPP
 #    EXPORT_MACRO_NAME CFS_OSAL_API_DECLS
-#    BASE_NAME OSAL 
+#    BASE_NAME OSAL
 #    PREFIX_NAME CFS_
     STATIC_DEFINE BUILT_AS_STATIC
     DEPRECATED_MACRO_NAME CFS_OSAL_DEPRECATED
@@ -80,7 +82,7 @@ target_compile_definitions(cfs.osal.main
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Debug>>: -DRELEASE_LEVEL="SNAPSHOOT"> # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
         $<$<CXX_COMPILER_ID:GNU>: NOMINMAX>
         -D_GLIBCXX_SANITIZE_VECTOR
-        
+
 )
 
 set_target_properties ( cfs.osal.main PROPERTIES LINK_FLAGS -m64 )
@@ -90,7 +92,7 @@ target_compile_options(cfs.osal.main
         $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
         $<$<CONFIG:Release>:-g0 -O2>
         $<$<CXX_COMPILER_ID:GNU>:$<BUILD_INTERFACE:-Wall;-Wextra;-Wpedantic>>
-    PUBLIC 
+    PUBLIC
         -m64
         $<$<CXX_COMPILER_ID:GNU>: ${GNU_CXX_FLAGS} -U_FORTIFY_SOURCE -fsanitize-address-use-after-scope>
         $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>: ${COMMON_CXX_FLAGS}>
@@ -105,7 +107,7 @@ target_compile_options(cfs.osal.main
         $<$<CONFIG:Debug>: -O0>
         $<$<CONFIG:Debug>: -ggdb3>
         $<$<CONFIG:Debug>: -O0 -g -D_DEBUG -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -fno-omit-frame-pointer>
-        
+
 #        $<IF:$<CONFIG:Debug>: helper_debug.cpp,helper_release.cpp>
 
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Profile>>: DISABLE_VAR>
@@ -115,18 +117,18 @@ target_compile_options(cfs.osal.main
 
 )
 
-target_include_directories(cfs.osal.main 
+target_include_directories(cfs.osal.main
     PUBLIC
     #        ${CMAKE_BINARY_DIR}/cfs/osal
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}> 
+        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
         $<BUILD_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
         $<INSTALL_INTERFACE:include/cfs/osal>
         $<INSTALL_INTERFACE:include>
 
-#    SYSTEM 
+#    SYSTEM
 #     PUBLIC
 #        ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
 )
@@ -151,12 +153,12 @@ target_include_directories(cfs.osal.main
 #)
 
 #install(
-#    FILES 
-#        ${CMAKE_BINARY_DIR}/l101.main-config.cmake 
+#    FILES
+#        ${CMAKE_BINARY_DIR}/l101.main-config.cmake
 #        ${CMAKE_BINARY_DIR}/l101.main-config-version.cmake
-#    DESTINATION 
+#    DESTINATION
 #        ${CMAKE_INSTALL_LIBDIR}/cmake/${MODULE_NAME}-${MODULE_VERSION}
-#    COMPONENT 
+#    COMPONENT
 #        development
 #)
 

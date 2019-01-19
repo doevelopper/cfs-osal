@@ -8,6 +8,7 @@ add_library(cfs.osal.main
     cfs/osal/queues/MultiProducerMultiConsumerQueue
     cfs/osal/queues/SingleProducerSingleConsumerQueue
     cfs/osal/queues/MultiProducerSingleConsumerQueue
+    cfs/osal/MessageQueue
 #    cfs/osal/Mailbox
     cfs/osal/Message
     cfs/osal/MessageData
@@ -119,7 +120,7 @@ target_compile_options(cfs.osal.main
 
 target_include_directories(cfs.osal.main
     PUBLIC
-    #        ${CMAKE_BINARY_DIR}/cfs/osal
+#        ${CMAKE_BINARY_DIR}/cfs/osal
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
@@ -150,6 +151,17 @@ target_include_directories(cfs.osal.main
 #export(
 #    TARGETS .main.bin
 #    FILE .main.bin-export.cmake
+#)
+
+#install (
+#    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/cfs/osal
+#    DESTIATION ${CMAKE_INSTALL_INCLUDEDIR}
+#    FILE_MATCHING PATTERN "*.hpp"
+#)
+
+#install( TARGETS
+#    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#    ARCHIVES DESTINATION ${CMAKE_INSTALL_LIBDIR}
 #)
 
 #install(

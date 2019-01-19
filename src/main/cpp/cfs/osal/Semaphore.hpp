@@ -8,10 +8,33 @@
 
 namespace cfs::osal
 {
+    /*!
+     *
+     * @brief Class providing implementation of Posix semaphore (both named and unnamed)
+     *
+     */
     class Semaphore
     {
+        enum OpenMode : std::int8_t
+        {
+            SEM_OPEN = 0,  /*!< Open an existing semaphore (default) */
+            SEM_CREATE,    /*!< Create a new semaphore */
+            SEM_EXCLUSIVE, /*!< Create a new semaphore in exclusive mode */
+            SEM_OPEN_UNKN
+        };
+
         public:
 
+            Semaphore(const Semaphore& arg) = delete;
+            Semaphore& operator=(const Semaphore& rhs) = delete;
+            /*!
+             * @brief Open or create a named semaphore
+             * @param [in, out] name Name of Semaphore for a named semaphore
+             * @param [in] flag
+             * @param [in] mode
+             * @param [in] value
+             */
+            Semaphore(std::string & name,OpenMode flag = SEM_OPEN, std::uint32_t mode = 0666,std::uint32_t value = -1);
             Semaphore(std::int32_t pshared = 0, std::uint32_t value = 0);
             virtual ~Semaphore();
 
@@ -41,10 +64,8 @@ namespace cfs::osal
 
         private:
 
-            sem_t m_Sem;
-
-            Semaphore(const Semaphore& arg);
-            Semaphore& operator=(const Semaphore& rhs);
+            std::string m_namedSemaphore;
+            sem_t       m_Sem;
     };
 }
 

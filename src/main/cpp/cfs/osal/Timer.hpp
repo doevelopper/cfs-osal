@@ -9,12 +9,12 @@
 
 namespace cfs::osal
 {
-    template <class T>
+    template <typename T>
     class Timer
     {
-        enum class TimerType
+        enum class TimerType : std::uint8_t
         {
-            SINGLE_SHOOT, //timer which Signals only one time
+            SINGLE_SHOOT, //timer which Signals only ones
             MULTI_SHOOT   //Periodic timer
         };
 
@@ -25,12 +25,14 @@ namespace cfs::osal
             Timer(Timer&&) = default;
             Timer& operator=(const Timer&) = default;
             Timer& operator=(Timer&&) = default;
+
             /*!
              * @brief Construct a Timer with a explanatory message.
              * @param handler Class to which timer needs to notify the during timeout.
              */
             Timer(T * handler);
             virtual ~Timer();
+
             /*!
              * @brief Gets the internal timer ID
              */
@@ -41,12 +43,12 @@ namespace cfs::osal
 
             T*  getHandler();
 
-            void start(long msec);
+            void start(std::uint64_t msec);
             void Start();
             void Stop();
 
-            void setInterval(long msec);
-            int getInterval();
+            void setInterval(std::uint64_t msec);
+            std::uint64_t getInterval();
 
             TimerType getTimerType();
             void setTimerType(TimerType type);
@@ -55,14 +57,14 @@ namespace cfs::osal
 
         private:
 
-            void StartTimer(long msec);
+            void StartTimer(std::uint64_t msec);
             void StopTimer();
             static void TimerThreadFunc(union sigval arg);
 
-            T *       m_handler;
-            timer_t   m_TimerID;
-            TimerType m_TimerType;
-            long      m_interval;
+            T *           m_handler;
+            timer_t       m_TimerID;
+            TimerType     m_TimerType;
+            std::uint64_t m_interval;
 
             static const std::uint64_t MS_TO_NS_FACTOR;
     };

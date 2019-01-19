@@ -4,37 +4,38 @@
 
 using namespace cfs::osal;
 
-template <class T>
+template <typename T>
 const std::uint64_t Timer<T>::MS_TO_NS_FACTOR = 1000000;
 
-template <class T>
+template <typename T>
 Timer<T>::Timer(T * handler)
     : m_handler(handler)
-    ,m_TimerType(TimerType::MULTI_SHOT)
-    ,m_interval(100)
+    , m_TimerType(TimerType::MULTI_SHOT)
+    , m_interval(100)
     , m_TimerID(NULL)
 {
 }
 
-template <class T>
+template <typename T>
 void Timer<T>::TimerThreadFunc(union sigval arg)
 {
     Timer<T> * pThis = static_cast<Timer<T>*>(arg.sival_ptr);
     pThis->getHandler()->OnTimeOut();
 }
 
-template <class T>
+template <typename T>
 T* Timer<T>::getHandler()
 {
     return m_handler;
 }
 
 /*
-template <class T>
-TimerType Timer<T>::getTimerType()
-{
+   template <typename T>
+   TimerType Timer<T>::getTimerType()
+   {
     return m_TimerType;
-}*/
+   }
+ */
 
 template <class T>
 void Timer<T>::setTimerType(TimerType type)
@@ -43,48 +44,49 @@ void Timer<T>::setTimerType(TimerType type)
 }
 
 template <class T>
-void Timer<T>::setInterval(long msec)
+void Timer<T>::setInterval(std::uint64_t msec)
 {
     m_interval = msec;
 }
 
 template <class T>
-int  Timer<T>::getInterval()
+std::uint64_t Timer<T>::getInterval()
 {
     return m_interval;
 }
 
-template <class T>
-void Timer<T>::start(long msec)
-{
-    /*
+/*
+   template <class T>
+   void Timer<T>::start(long msec)
+   {
+
     stopTimer();
     startTimer(msec);
     m_handler->OnStart();
-    */
-}
 
-template <class T>
-void Timer<T>::start()
-{
-    /*
+   }
+
+   template <class T>
+   void Timer<T>::start()
+   {
+
     stopTimer();
     startTimer(m_interval);
     m_handler->OnStart();
-    */
-}
 
-template <class T>
-void Timer<T>::StartTimer(long msec)
-{
+   }
+
+   template <class T>
+   void Timer<T>::StartTimer(long msec)
+   {
     int status;
     struct itimerspec ts;
     struct sigevent se;
 
-    /*
-     * Set the sigevent structure to cause the signal to be
-     * delivered by creating a new thread.
-     */
+
+     // Set the sigevent structure to cause the signal to be
+     //        delivered by creating a new thread.
+
     se.sigev_notify = SIGEV_THREAD;
     se.sigev_value.sival_ptr = this;
     //se.sigev_notify_function = TimerThreadFunc;
@@ -102,27 +104,27 @@ void Timer<T>::StartTimer(long msec)
         //Handle Timer Set Time Error;
         return;
     }
-}
+   }
 
-template <class T>
-void Timer<T>::stopTimer()
-{
+   template <class T>
+   void Timer<T>::stopTimer()
+   {
     if(m_TimerID != NULL)
     {
         try
         {
             stop();
         }
-        catch(.../*TimerException& ex*/)
+        catch(...TimerException& ex)
         {   //Catching exception if any during stoping of alraedy started timer
             std::cout<<"Exception in stopping the timer."<<ex.what()<< std::endl;
         }
     }
-}
+   }
 
-template <class T>
-void Timer<T>::stop()
-{
+   template <class T>
+   void Timer<T>::stop()
+   {
     int status = timer_delete(m_TimerID);
     if (status == -1)
     {
@@ -131,4 +133,6 @@ void Timer<T>::stop()
     }
     m_TimerID = NULL;
     m_handler->OnStop();
-}
+   }
+ */
+

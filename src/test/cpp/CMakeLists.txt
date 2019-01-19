@@ -17,6 +17,7 @@ add_executable (cfs.osal.test.bin
     cfs/osal/SpinLockTest
     cfs/osal/SingletonTest
     cfs/osal/SemaphoreTest
+    cfs/osal/MessageQueueTest
     cfs/osal/BinaryWriterTest
 
     cfs/osal/VersionTest
@@ -36,7 +37,7 @@ apply_style_targets_command(cfs.osal.test.bin ${CMAKE_CURRENT_SOURCE_DIR})
 #    ${NO_BUILD_DEPRECATED}
 #)
 
-target_include_directories(cfs.osal.test.bin 
+target_include_directories(cfs.osal.test.bin
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
@@ -49,7 +50,7 @@ target_include_directories(cfs.osal.test.bin
 )
 
 target_link_libraries(cfs.osal.test.bin
-    PUBLIC  
+    PUBLIC
         cfs.osal.main
         GMock::GMock
         GTest::GTest
@@ -59,11 +60,11 @@ gtest_discover_tests(cfs.osal.test.bin
     TEST_PREFIX "CFS-OSAL:-: "
     TEST_SUFFIX ----
     PROPERTIES LABELS CFS::OSAL TEST
-    DISCOVERY_TIMEOUT 
+    DISCOVERY_TIMEOUT
         10
-    EXTRA_ARGS 
+    EXTRA_ARGS
         --iterration 1 --outputpath ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} --module cfs.osal.test.bin
-    WORKING_DIRECTORY 
+    WORKING_DIRECTORY
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )
 
@@ -73,7 +74,7 @@ gtest_discover_tests(cfs.osal.test.bin
 #)
 
 #target_link_libraries(cfs.osal.test.bin
-#    PUBLIC 
+#    PUBLIC
 #        cfs.osal.test
 #)
 

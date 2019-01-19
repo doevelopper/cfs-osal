@@ -6,6 +6,8 @@
 #include <ctime>
 #include <chrono>
 #include <sstream>
+#include <thread>
+#include <functional>
 
 #include <cfs/osal/Export.hpp>
 

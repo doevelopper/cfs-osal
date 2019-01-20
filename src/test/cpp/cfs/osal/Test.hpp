@@ -22,6 +22,8 @@ namespace cfs::osal::test
 
             int run (int argc = 0, char * argv[] = NULL);
             static void showUsage(std::string name);
+            // Mechanism for reporting unit tests for which there is no implementation yet.
+            void notYetImplemented();
 
         private:
 

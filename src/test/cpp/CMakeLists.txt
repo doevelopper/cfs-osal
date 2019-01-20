@@ -19,7 +19,7 @@ add_executable (cfs.osal.test.bin
     cfs/osal/SemaphoreTest
     cfs/osal/MessageQueueTest
     cfs/osal/BinaryWriterTest
-
+    cfs/osal/mocks/SystemCallMock
     cfs/osal/VersionTest
 )
 

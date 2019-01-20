@@ -17,27 +17,56 @@ VersionTest::VersionTest()
 VersionTest::~VersionTest()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
-
-    delete objectVersionToTest;
 }
 
 void VersionTest::SetUp()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    objectVersionToTest = new semver::Version(std::string("1.2.3"));
 }
 
 void VersionTest::TearDown()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    delete objectVersionToTest;
 }
 
-TEST_F(VersionTest, test_1)
+TEST_F(VersionTest, test_Simple_Version)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 }
-TEST_F(VersionTest, test_2)
+
+TEST_F(VersionTest, test_Simple_Version_Error)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
     ASSERT_TRUE(true);
 }
 
+TEST_F(VersionTest, test_Version_Error)
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+  // test::notYetImplemented();
+    ASSERT_TRUE(true);
+}
+
+
+TEST_F(VersionTest, test_Version_build)
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+  // test::notYetImplemented();
+    ASSERT_TRUE(true);
+}
+
+TEST_F(VersionTest, test_Version_pre_release)
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+  // test::notYetImplemented();
+    ASSERT_TRUE(true);
+}
+
+TEST_F(VersionTest, test_abi_operators)
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+  // test::notYetImplemented();
+    ASSERT_TRUE(true);
+}

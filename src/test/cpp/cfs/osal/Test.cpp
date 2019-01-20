@@ -30,6 +30,12 @@ Test::~Test()
     delete testsLoggingService;
 }
 
+void Test::notYetImplemented()
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    GTEST_NONFATAL_FAILURE_("Not YET implemented!!!!!!");
+}
+
 int Test::run (int argc, char * argv[])
 {
     //    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );

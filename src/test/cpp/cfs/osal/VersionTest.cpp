@@ -45,7 +45,7 @@ TEST_F(VersionTest, test_Simple_Version_Error)
 TEST_F(VersionTest, test_Version_Error)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-  // test::notYetImplemented();
+    // test::notYetImplemented();
     ASSERT_TRUE(true);
 }
 
@@ -53,20 +53,21 @@ TEST_F(VersionTest, test_Version_Error)
 TEST_F(VersionTest, test_Version_build)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-  // test::notYetImplemented();
+    // test::notYetImplemented();
     ASSERT_TRUE(true);
 }
 
 TEST_F(VersionTest, test_Version_pre_release)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-  // test::notYetImplemented();
+    // test::notYetImplemented();
     ASSERT_TRUE(true);
 }
 
 TEST_F(VersionTest, test_abi_operators)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-  // test::notYetImplemented();
+    // test::notYetImplemented();
     ASSERT_TRUE(true);
 }
+

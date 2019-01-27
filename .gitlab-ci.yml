@@ -19,7 +19,7 @@ image: gcc
 
 .define_config: &triggered_by_schedules
     only:
-        - schedules    
+        - schedules
 
 .only_stable: &only_stable
     only:
@@ -73,7 +73,7 @@ image: gcc
         - g++ --version
         - cmake --version
         - doxygen --version
-        - uncrustify --version 
+        - uncrustify --version
         - export NUM_CORES=$(nproc --all)
         - export CCACHE_BASEDIR=$CI_PROJECT_DIR
         - export OS_NAME=$(lsb_release -is)
@@ -121,14 +121,14 @@ validate:
         - apt-get install --yes cmake make
 
     script:
-        - > 
+        - >
            if [ ! -d "${BUILD_DIRECTORY}" ]; then
                cmake -E make_directory ${BUILD_DIRECTORY}
            fi
 
         - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_INSTALL_PREFIX=/opt/dds
 #        - cmake --build  ${BUILD_DIRECTORY} --target all --clean-first
-#        - cmake --build  ${BUILD_DIRECTORY} --target test 
+#        - cmake --build  ${BUILD_DIRECTORY} --target test
 
     after_script:
         - echo "${BUILD_DIRECTORY} directory created"

@@ -2,14 +2,14 @@
 
 ```txt
 
-    [..   [........  [.. ..           [....       [.. ..        [.       [..      
- [..   [..[..      [..    [..       [..    [..  [..    [..     [. ..     [..      
-[..       [..       [..           [..        [.. [..          [.  [..    [..      
-[..       [......     [..         [..        [..   [..       [..   [..   [..      
-[..       [..            [..      [..        [..      [..   [...... [..  [..      
- [..   [..[..      [..    [..       [..     [.. [..    [.. [..       [.. [..      
+    [..   [........  [.. ..           [....       [.. ..        [.       [..
+ [..   [..[..      [..    [..       [..    [..  [..    [..     [. ..     [..
+[..       [..       [..           [..        [.. [..          [.  [..    [..
+[..       [......     [..         [..        [..   [..       [..   [..   [..
+[..       [..            [..      [..        [..      [..   [...... [..  [..
+ [..   [..[..      [..    [..       [..     [.. [..    [.. [..       [.. [..
    [....  [..        [.. ..           [....       [.. ..  [..         [..[........
-                                                                                  
+
 ------- 01000011 01000110 01010011  01001111 01010011 01000001 01001100 --------
                           -- A.H.L --
 ```
@@ -31,7 +31,7 @@ The  following  table  provides more  information  on OS  Abstractor  Interface 
  - Message queues
  - Communication service
  - Timer service
-	
+
 <p align="left">
 	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/CFS%20OSAL-API-000000.svg"></a>
 </p>
@@ -79,7 +79,7 @@ You should be aware that this project is supported solely by me and provided as 
 [![Semver][Semmentic-versioning-shields]][Semmentic-versioning]
 [![Code Style Guide: Google c++][code-style-guide-cpp-shield]][code-style-guide-cpp]
 
-[![GitHub version][GitHub-version-shields]][GitHub-version] 
+[![GitHub version][GitHub-version-shields]][GitHub-version]
 ![Project Stage][project-stage-shield]
 [![Maintenance][maintenance-status-shield]][maintenance-status]
 [![Maintainability][maintainability-status-shield]][maintainability-status]
@@ -149,7 +149,7 @@ for details.
  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  SUCH DAMAGE.
- 
+
  - Design Documentations, SW Requirements, Test plans and Tests reports are [![License][cc-by-nc-sa-4-0-shield]][cc-by-nc-sa-4-0]
  - Cmake and shell Scripts are  [![gplv3-cc-by-nc-sa-4-0][license-gplv3-cc-by-4-0-shields]][license-gplv3-cc-by-4-0]
 
@@ -165,9 +165,9 @@ for details.
 
 [codacy-badge-shields]: https://api.codacy.com/project/badge/Grade/14eae26a4b2140f3a4e684eff3ce2049
 [codacy-badge]: https://www.codacy.com/app/happyman/cfs-osal?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=doevelopper/cfs-osal&amp;utm_campaign=Badge_Grade
- 
-[GitHub-version-shields]: https://badge.fury.io/gh/doevelopper%2Fcfs-osal.svg 
-[GitHub-version]: https://badge.fury.io/gh/doevelopper%2Fcfs-osal 
+
+[GitHub-version-shields]: https://badge.fury.io/gh/doevelopper%2Fcfs-osal.svg
+[GitHub-version]: https://badge.fury.io/gh/doevelopper%2Fcfs-osal
 
 [master-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/master
 [develp-branch]: https://gitlab.com/doevelopper/cfs-third-parties/tree/develop

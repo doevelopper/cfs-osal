@@ -1,8 +1,8 @@
 env:
     global:
         - secure: "EBGwhqHaPbERmOAPA7a1IprZZdFjEZqnuekgkNTBtzmGTaIYuh1BbSNGmVtnj3DuXuqAusiYN6olW2lMax15Fqw3Mwh++vh6DJFQ4wePImCzot7D4fTcopmNS2yoPl0IeyL/sLyQrxjflBfoTzw6DUZAXiU55gGB1faqCAfM5sQ="
-        - CC=gcc-4.8
-        - CXX=g++-4.8
+        - CC=gcc-8
+        - CXX=g++-8
 
 addons:
     apt:
@@ -27,15 +27,15 @@ addons:
 before_install:
     - ulimit -c unlimited -S
     - ulimit -a
-    - echo -n | openssl s_client -connect scan.coverity.com:443 | 
-        sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | 
+    - echo -n | openssl s_client -connect scan.coverity.com:443 |
+        sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' |
         sudo tee -a /etc/ssl/certs/ca-
     - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
     - sudo apt-get --yes update
     - sudo apt-get install --yes curl wget gcc-8 g++-8;
     - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 90;
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 90;
-	
+
 script:
     - if [[ "${COVERITY_SCAN_BRANCH}" == 1 ]];
         then

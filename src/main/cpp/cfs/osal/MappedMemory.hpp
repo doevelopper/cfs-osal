@@ -14,11 +14,11 @@ namespace cfs::osal
         public:
 
             MappedMemory() = default;
-            MappedMemory(const MappedMemory&) = delete;
+            MappedMemory(const MappedMemory&) noexcept = delete;
             MappedMemory(MappedMemory&&);
-            MappedMemory& operator=(const MappedMemory&) = delete;
+            MappedMemory& operator=(const MappedMemory&) noexcept = delete;
             MappedMemory& operator=(MappedMemory&&);
-            virtual ~MappedMemory();
+            virtual ~MappedMemory() noexcept;
 
             MappedMemory(std::size_t len, std::int32_t prot, std::int32_t flags, std::int32_t fd, off_t off = 0);
             MappedMemory(void *addr, std::size_t len, std::int32_t prot, std::int32_t flags, std::int32_t fd, off_t

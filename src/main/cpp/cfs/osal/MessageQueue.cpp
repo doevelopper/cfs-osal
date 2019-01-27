@@ -4,3 +4,8 @@
 
 using namespace cfs::osal;
 
+
+MessageQueue::~MessageQueue()
+{
+}
+

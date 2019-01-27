@@ -17,7 +17,10 @@ MappedMemory::MappedMemory(void *addr, size_t len, std::int32_t prot, std::int32
 {
     if (m_address == MAP_FAILED)
     {
-        //handle erro
+        // handle error
+        // throw_error("mmap", "%p, %zu, 0x%x, 0x%x, %d, %zu",
+        // nullptr, _size, static_cast<unsigned int>(prot),
+        // static_cast<unsigned int>(flags), fd, off);
     }
 }
 
@@ -29,10 +32,18 @@ MappedMemory::MappedMemory(MappedMemory &&other)
     other.m_size = 0;
 }
 
-MappedMemory::~MappedMemory()
+MappedMemory::~MappedMemory()  noexcept
 {
     if (m_address)
+    {
         ::munmap(m_address, m_size);
+        if (::munmap(reinterpret_cast<void*>(m_address), m_size) == -1)
+        {
+        }
+
+        m_address = nullptr;
+        m_size = 0;
+    }
 }
 
 MappedMemory &MappedMemory::operator=(MappedMemory &&other)

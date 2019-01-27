@@ -1,14 +1,21 @@
-# Type(<scope>): <subject>
+# :emoji: Type(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
 
 # Type should be one of the following:
-# * feat (new feature)
-# * fix (bug fix)
-# * docs (changes to documentation)
-# * style (formatting, missing semi colons, etc; no code change)
-# * refactor (refactoring production code)
-# * test (adding missing tests, refactoring tests; no production code change)
-# * chore (updating grunt tasks etc; no production code change)
-# * wip(wip on feature branch)
+# * :sunny: Feat (new feature)
+# * :cyclone: Fix (bug fix)
+# * :factory: Fixing CI Build
+# * hotfix - Quick fixes to the codebase.
+# * :eyes: Docs (changes to documentation)
+# * :rooster: Style/cosmetic (formatting, missing semi colons, etc; no code change)
+# * :ocean: Refactor (refactoring production code)
+# * :fireworks: Add/Remove/Change (refactoring production code)
+# * :feet: test (adding missing tests, refactoring tests; no production code change)
+# * :wavy_dash: chore (updating grunt tasks etc; no production code change)
+# * :construction: wip(wip on feature branch)
 
 # Scope is just the scope of the change. Something like (admin) or (teacher).
 
@@ -36,11 +43,11 @@
 # Closes #1 and #2. note this marks the item as accepted in Sprintly
 # See also
 
-
 # ---------------------------------------------------------------------------------
 # Jira Issue Processing
 # ISSUE_KEY #comment This is a comment
-# ISSUE_KEY #done 
+# ISSUE_KEY
+# ISSUE_KEY #done
 # ---------------------------------------------------------------------------------
 
 # Consider prefixing your commit messages with a relevant emoji for great good:
@@ -55,7 +62,36 @@
 # :fire: `:fire:` when removing code or files
 # :green_heart: `:green_heart:` when fixing the CI build
 # :white_check_mark: `:white_check_mark:` when adding tests
-# :lock: `:lock:` when dealing with security
+# :cop: `:lock:` when dealing with security
 # :arrow_up: `:arrow_up:` when upgrading dependencies
 # :arrow_down: `:arrow_down:` when downgrading dependencies
 # :shirt: `:shirt:` when removing linter warnings
+# :shower: Delete unused code:shower: Delete unused code
+# :shirt: Fix to follow coding rules/standard
+# :sparkles: Add Small Feature
+# :tada: Add Big Feature
+#
+#  git add .
+#  git config commit.template .gitmessage
+#  git commit -m ":emoji-name: your short and nice description"
+#  git push origin name-of-your-bugfix-or-feature
+#
+# Example:
+#        :bug: [Fixed #123][#124][#125] Torpedoes now sufficiently powered
+#        :sparkles: [#123] Diverting power from warp drive to torpedoes
+#
+#----------------------------- Template
+#
+# Header: one line explaination
+#
+# Body of commit message explaining things in more detail, possibly giving some
+# background about the issue being fixed, etc. Maybe use bullets:
+#   - Write in present tense
+#   - Keep text width of commit message within 80 characters.
+#
+# Use more than one paragraphs, that's is fine.
+#
+# Reviewed-by: Person or link to review on review.apache.org
+# Reported-by: whoever-reported-it, if applicable
+# Signed-off-by: Your Name <youremail@yourhost.com>
+#

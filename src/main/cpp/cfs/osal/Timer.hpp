@@ -31,6 +31,11 @@ namespace cfs::osal
              * @param handler Class to which timer needs to notify the during timeout.
              */
             Timer(T * handler);
+
+            /*!
+             * @brief Destroy the Timer object
+             *
+             */
             virtual ~Timer();
 
             /*!
@@ -42,23 +47,67 @@ namespace cfs::osal
             };
 
             T*  getHandler();
-
+            /*!
+             * @brief
+             *
+             * @param msec
+             */
             void start(std::uint64_t msec);
+
+            /*!
+             * @brief
+             *
+             */
             void Start();
+
+            /*!
+             * @brief
+             *
+             */
             void Stop();
 
+            /*!
+             * @brief Set the Interval object
+             *
+             * @param msec
+             */
             void setInterval(std::uint64_t msec);
+
+            /*!
+             * @brief Get the Interval object
+             *
+             * @return std::uint64_t
+             */
             std::uint64_t getInterval();
 
             TimerType getTimerType();
+            /*!
+             * @brief Set the Timer Type object
+             *
+             * @param type
+             */
             void setTimerType(TimerType type);
 
         protected:
 
         private:
 
+            /*!
+             * @brief
+             *
+             * @param msec
+             */
             void StartTimer(std::uint64_t msec);
+            /*!
+             * @brief
+             *
+             */
             void StopTimer();
+            /*!
+             * @brief
+             *
+             * @param sigval
+             */
             static void TimerThreadFunc(union sigval arg);
 
             T *           m_handler;

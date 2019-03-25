@@ -30,6 +30,7 @@ namespace cfs::osal
             Mailbox& operator=(Mailbox&&) = delete;
             ~Mailbox()
             {
+                //[] { } ==> noOp()
             }
 
             //std::shared_ptr<Mailbox> getMailbox()

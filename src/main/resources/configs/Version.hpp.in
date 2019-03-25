@@ -35,6 +35,16 @@
 #include <cfs/osal/Export.hpp>
 #include <cfs/osal/GitRevision.hpp>
 
+#cmakedefine BUILD_DATE "@BUILD_DATE@"
+#cmakedefine BUILD_TIME "@BUILD_TIME@"
+#cmakedefine BUILD_USER "@BUILD_USER@"
+#cmakedefine BUILD_FLAGS "@BUILD_FLAGS@"
+#cmakedefine BUILD_JAVA_JVM_LIBRARY "@BUILD_JAVA_JVM_LIBRARY@"
+
+#cmakedefine BUILD_GIT_SHA "@BUILD_GIT_SHA@"
+#cmakedefine BUILD_GIT_BRANCH "@BUILD_GIT_BRANCH@"
+#cmakedefine BUILD_GIT_TAG "@BUILD_GIT_TAG@"
+
 #define CFS_OSAL_VERSION "@PROJECT_VERSION@"
 #define CFS_OSAL_VERSION_DESC (@PROJECT_VERSION_MAJOR@ * 100000) \
                            + (@PROJECT_VERSION_MINOR@ * 1000)    \

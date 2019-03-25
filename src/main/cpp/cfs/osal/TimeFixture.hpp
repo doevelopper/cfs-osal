@@ -17,6 +17,12 @@ namespace cfs::osal
     {
         public:
 
+            /*!
+             * @brief Construct a new Time Fixture object
+             *
+             * @param name
+             * @param unit
+             */
             TimeFixture(const char* name, std::size_t unit = 0)
                 : m_start(std::chrono::system_clock::now())
                 , m_name(name)
@@ -27,6 +33,10 @@ namespace cfs::osal
                 m_timeInformation << "TIMER START [" << m_number << "] - " << m_name;
             }
 
+            /*!
+             * @brief Destroy the Time Fixture object
+             *
+             */
             ~TimeFixture()
             {
                 std::chrono::time_point<std::chrono::system_clock> end

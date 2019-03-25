@@ -13,9 +13,9 @@ namespace cfs::osal::thread
 {
     /*!
      * @brief The WorkerThread class owns task queue and executing thread.
-     * In thread it tries to pop task from queue. If queue is empty then it tries
-     * to steal task from the sibling worker. If steal was unsuccessful then spins
-     * with one millisecond delay.
+     *      In thread it tries to pop task from queue. If queue is empty then it tries
+     *      to steal task from the sibling worker. If steal was unsuccessful then spins
+     *      with one millisecond delay.
      */
     template <typename Task, template<typename> class Queue>
     class CFS_OSAL_MAIN_EXPORT WorkerThread

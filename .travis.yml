@@ -1,0 +1,248 @@
+
+language: cpp
+dist: xenial
+
+git:
+    depth: 1
+
+#
+# blocklist
+#
+branches:
+    except:
+        - legacy
+        - experimental
+#
+# safelist
+#
+
+branches:
+    only:
+        - master
+        - develop
+        - coverity_scan
+    except:
+        - gh-page
+cache:
+    ccache: true
+    directories:
+    - $HOME/.sonar/cache
+
+#
+# Tokens
+#
+env:
+    global:
+        - CCACHE_MAXSIZE=250M
+        - CCACHE_MAXFILES=2000
+        - CCACHE_COMPRESS=1
+        - CMAKE_OPTIONS="-DOPTION_BUILD_EXAMPLES=On -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE=TRUE"
+        - TRAVIS_BUILD_TYPE=Debug
+        - TRAVIS_BUILD_TYPE=Release
+        - TEST_SUITE=integration_tests
+        - TEST_SUITE=unit_tests
+        # Coverity
+        # COVERITY_SCAN_TOKEN
+        # ** specific to your project **
+        - secure: "...."
+        - COVERITY_SCAN_BUILD_COMMAND="make -j2"
+        - COVERITY_SCAN_PROJECT_NAME="doevelopper/cppbdd101"
+        - COVERITY_SCAN_NOTIFICATION_EMAIL="happyman@hotmail.fr"
+        - COVERITY_SCAN_BRANCH_PATTERN="master"
+        - COVERITY_SCAN_BUILD_URL="https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh"
+        - COVERITY_SCAN_BUILD="curl -s $COVERITY_SCAN_BUILD_URL | bash"
+
+#
+# Build Matrix
+#
+matrix:
+  include:
+
+    # Linux C++14 GCC builds
+    - os: linux
+      compiler: gcc
+      addons: &gcc6
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+      env: COMPILER='g++-6' BUILD_TYPE='Release'
+
+    - os: linux
+      compiler: gcc
+      addons: *gcc6
+      env: COMPILER='g++-6' BUILD_TYPE='Debug'
+
+    # Linux C++14 Clang builds
+    - os: linux
+      compiler: clang
+      addons: &clang38
+        apt:
+          sources: ['llvm-toolchain-precise-3.8', 'ubuntu-toolchain-r-test']
+          packages: ['clang-3.8']
+      env: COMPILER='clang++-3.8' BUILD_TYPE='Release'
+
+    - os: linux
+      compiler: clang
+      addons: *clang38
+      env: COMPILER='clang++-3.8' BUILD_TYPE='Debug'
+
+
+#
+# Coverity Scan
+#
+    - os: linux
+        env:
+            - TEST="Coverity Scan"
+        addons:
+            apt:
+                sources:
+                    - ubuntu-toolchain-r-test
+                packages:
+                    - ca-certificates
+                    - g++-8
+                    - g++-8
+                    - gdb
+                coverity_scan:
+                    project:
+        #                name: "doevelopper/cfs-osal"
+                        name: $TRAVIS_REPO_SLUG
+                        description: "CFS OS Abstraction Layer."
+                    notification_email: doevelopper@users.noreply.github.com
+        #            build_command_prepend: "cov-configure --comptype gcc --compiler gcc-8"
+                    build_command_prepend: "cmake -E make_directory build && cmake -E chdir build cmake -DCMAKE_CXX_COMPILER=g++-8 .. "
+                    build_command:   "cmake --build build --target all -- -j4"
+        #            branch_pattern: coverity_scan
+
+#
+# Codecov
+#
+      - os: linux
+        env:
+            - TEST="Codecov"
+        addons:
+            apt:
+                sources:
+                    - ubuntu-toolchain-r-test
+                packages:
+                    - gcc-8
+                    - g++-8
+        script:
+            - cmake -DENABLE_COVERAGE=ON -DCMAKE_CXX_COMPILER="g++-8" ..
+            - cmake --build build --target all
+            - cmake --build build --target test
+            - bash <(curl -s https://codecov.io/bash)
+
+env:
+    global:
+        # Ubuntu version
+        - LINUX_DIST=trusty
+        - DEPS_DIR=${TRAVIS_BUILD_DIR}/dependencies
+
+
+before_install:
+    - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+    # Combine global build options with OS/compiler-dependent options
+    - export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
+    - export CXX_FLAGS=${CXX_FLAGS}" "${ENV_CXX_FLAGS}
+    - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
+          set -e;
+          sudo apt-get update -qq;
+          sudo apt-get -y install valgrind;
+      fi
+
+before_script:
+    - mkdir -pv ${DEPS_DIR} && cd ${DEPS_DIR}
+    - export CXX=${COMPILER}
+    - cd ${TRAVIS_BUILD_DIR}
+    - |
+      if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
+        CMAKE_URL="http://www.cmake.org/files/v3.13/cmake-3.13.1-Linux-x86_64.tar.gz"
+        mkdir -p ${DEPS_DIR}/cmake
+        travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C ${DEPS_DIR}/cmake
+        export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+      fi
+    #- cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev
+    #- cd Build
+
+    # to stop the script after an error/warning
+    - set -e
+    - |-
+        case "${BUILD_TYPE}" in
+            "coverage")
+                cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_COVERAGE=ON ..
+        ;;
+            "asan")
+                cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZER=address ..
+        ;;
+            "ubsan")
+                cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_SANITIZER=undefined ..
+        ;;
+            "cross")
+                cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-mingw64.cmake -DCMAKE_EXE_LINKER_FLAGS="-static -s" ..
+        ;;
+            "release")
+                cmake -DCMAKE_BUILD_TYPE=Release ..
+        ;;
+      *)
+        cmake ..
+        ;;
+    esac
+
+install:
+    - |
+      if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
+        CMAKE_URL="http://www.cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz"
+        mkdir -p ${DEPS_DIR}/cmake
+        travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C ${DEPS_DIR}/cmake
+        export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+      fi
+
+branches:
+    only:
+        - master
+        - develop
+
+script:
+    - make --version
+    - cmake --version
+    - if [ "${TRAVIS_OS_NAME}" == "linux" -a "${BUILD_TYPE}" == "Debug" ]; then
+        set -e;
+        valgrind --leak-check=full --error-exitcode=1 ./build/x86_64-Linux-GNU_GCC_7.3.0-DEBUG/bin/executable;
+      fi
+    - ctest -C ${BUILD_TYPE} -V
+    - cmake -E make_directory $BUILD_DIR
+    - cmake -E chdir $BUILD_DIR
+    - cmake -E time cmake .. -G"Unix Makefiles"
+    - cmake -E time cmake --build $BUILD_DIR --target all --config Debug  --clean-first
+    - cmake --build $BUILD_DIR --target test
+    - cmake --build $BUILD_DIR --config Debug
+    - cmake -E chdir $BUILD_DIR ctest --output-on-failure
+    - cmake --build $BUILD_DIR --config Release
+    - cmake -E chdir $BUILD_DIR ctest --output-on-failure
+    - sonar-scanner
+#Sonar when running on linux
+    - build-wrapper-linux-x86-64 --out-dir bw-output make clean all
+    - sonar-scanner \
+        -Dsonar.projectKey=LinuxSonarCloud \
+        -Dsonar.organization=doevelopper-github \
+        -Dsonar.sources=. \
+        -Dsonar.cfamily.build-wrapper-output=bw-output \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=35a07cefead08596f94b4a3b74b351445db2c488
+#Sonar when running Windows msys2
+    - build-wrapper-win-x86-64.exe --out-dir bw-output make clean all
+    - sonar-scanner.bat -Dsonar.projectKey=LinuxSonarCloud -Dsonar.organization=doevelopper-github \
+        -Dsonar.sources=. -Dsonar.cfamily.build-wrapper-output=bw-output -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=35a07cefead08596f94b4a3b74b351445db2c488
+    - sonar-scanner
+notifications:
+    email:
+        recipients:
+            - happyman@hotmail.fr
+            - rolland.doe@gmail.com
+        on_success: always  # options: [always|never|change] default: always
+        on_failure: always  # options: [always|never|change] default: always
+        on_start: always    # default: false
+        on_cancel: always   # default: always
+        on_error: always    # default: always

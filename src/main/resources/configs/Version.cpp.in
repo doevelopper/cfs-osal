@@ -1,0 +1,250 @@
+
+
+/*
+#
+#               Copyright (c) 2014-2018 A.H.L
+#
+#        Permission is hereby granted, free of charge, to any person obtaining
+#        a copy of this software and associated documentation files (the
+#        "Software"), to deal in the Software without restriction, including
+#        without limitation the rights to use, copy, modify, merge, publish,
+#        distribute, sublicense, and/or sell copies of the Software, and to
+#        permit persons to whom the Software is furnished to do so, subject to
+#        the following conditions:
+#
+#        The above copyright notice and this permission notice shall be
+#        included in all copies or substantial portions of the Software.
+#
+#        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+#        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+#        MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+#        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+#        LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+#        OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+#        WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+#include <regex>
+
+#include <cfs/osal/Version.hpp>
+
+using namespace semver;
+
+/*
+Version::Version(const Version & orig)
+{
+
+}
+*/
+
+Version::Version( const std::string & vers) noexcept
+:  m_major (APPLICATION_VERSION_MAJOR)
+,  m_minor (APPLICATION_VERSION_MINOR)
+,  m_patch (APPLICATION_VERSION_PATCH)
+,  m_build (GIT_COMMIT_VERSION)
+
+{
+/*
+    m_version = version.trimmed();
+    const QStringList parts = m_version.split(". ");
+    const int index = parts.value( 3 ).indexOf( QRegExp( "[A-Z|a-z]" ) );
+
+    major = parts.value( 0 ).toInt();
+    minor = parts.value( 1 ).toInt();
+    tweak = parts.value( 2 ).toInt();
+    patch = parts.value( 3 ).toInt();
+
+    // if ( index != -1 )
+    // {
+    // build = parts.value( 3 ).mid( 0, index ).toInt();
+    // extra = parts.value( 3 ).mid( index );
+    // }
+    // else
+    // {
+    // build = parts.value( 3 ).toInt();
+    // }*/
+}
+
+
+Version::~Version()
+{
+}
+
+/*
+int Version::getMajor ()
+{
+    return VERSION_MAJOR;
+}
+
+int Version::getMinor ()
+{
+    return VERSION_MINOR;
+}
+
+int Version::getPatch ()
+{
+    return VERSION_PATCH;
+}
+
+QString Version::compilerString ()
+{
+    #if defined (Q_CC_CLANG) // must be before GNU, because clang claims to be GNU too
+        QString isAppleString;
+
+        # if defined (__apple_build_version__)// Apple clang has other version numbers
+            isAppleString = QLatin1String(" (Apple)");
+        # endif
+
+        return QLatin1String("Clang " ) + QString::number(__clang_major__) + QLatin1Char('.')
+               + QString::number(__clang_minor__) + isAppleString;
+
+    #elif defined (Q_CC_GNU)
+        return QLatin1String("GCC " ) + QLatin1String(__VERSION__);
+    #elif defined (Q_CC_MSVC)
+
+        if (_MSC_VER > 1999)
+        {
+            return QLatin1String("MSVC <unknown>");
+        }
+
+        if (_MSC_VER >= 1900) // 1900: MSVC 2015
+        {
+            return QLatin1String("MSVC 2015");
+        }
+
+        if (_MSC_VER >= 1800) // 1800: MSVC 2013 (yearly release cycle)
+        {
+            return QLatin1String("MSVC ") + QString::number(2008 + ((_MSC_VER / 100) - 13));
+        }
+
+        if (_MSC_VER >= 1500) // 1500: MSVC 2008, 1600: MSVC 2010, ... (2-year release cycle)
+        {
+            return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
+        }
+
+    #endif
+
+    return QLatin1String("<unknown compiler>");
+}
+
+std::string Version::getABI ()
+{
+    // return @NAMESPACE@_VERSION_ABI;
+
+    return ("Based on ");
+}
+
+bool Version::check ()
+{
+    return (getMajor() == VERSION_MAJOR &&
+            getMinor() == VERSION_MINOR);
+}
+
+std::string Version::getString ()
+{
+    std::ostringstream version;
+    version << getMajor() << '.' << getMinor() << '.' << getPatch() << " " << __DATE__ << " " <<__TIME__;
+    return version.str();
+}
+
+std::string Version::getRevision ()
+{
+    // return @NAMESPACE@_VERSION_REVISION;
+    return QString( " %1 " ).arg( GIT_COMMIT_VERSION , 1 , 16 ).toUpper().toStdString();
+}
+
+std::string Version::getRevString ()
+{
+    std::ostringstream version;
+    version << getString(); // << '.' << std::hex << getRevision() << std::dec;
+    return version.str();
+}
+*/
+/*
+   std::string Version::getSchema ()
+   {
+    return R "(
+        {
+            "title ": "Version ",
+            "type ": "object ",
+            "description ": "Version information of the running application ",
+            "properties ": {
+                "major ": { "type ": "integer " },
+                "minor ": { "type ": "integer " },
+                "tweak ": { "type ": "integer " },
+                "patch ": { "type ": "integer " },
+                "abi ": { "type ": "integer " },
+                "revision ": { "type ": "string " }
+            }
+        }
+    )";
+   }
+
+   std::string Version::toJSON ()
+   {
+    return R "(
+        {
+            "major ": @PROJECT_VERSION_MAJOR@,
+            "minor ": @PROJECT_VERSION_MINOR@,
+            "tweak ": @PROJECT_VERSION_PATCH@,
+            "patch ": @PROJECT_VERSION_PATCH@,
+            "abi ": @PROJECT_VERSION_ABI@,
+            "revision ": " @GIT_REVISION@ "
+        }
+    )";
+   }
+ */
+
+
+constexpr int Version::compareVersion (const Version &rhs) const
+{
+    // size_t min = this->minor < rhs.minor;
+
+ //   if ( *this == rhs )
+//    {
+//        return false;
+//    }
+//    else
+    if ( m_major != rhs.m_major )
+    {
+        return (m_major < rhs.m_major);
+    }
+    else
+    if ( m_minor != rhs.m_minor )
+    {
+        return (m_minor < rhs.m_minor);
+    }
+    else
+    if ( m_patch != rhs.m_patch )
+    {
+        return (m_patch < rhs.m_patch);
+    }
+    else if ( m_build != rhs.m_build )
+    {
+        return (m_build < rhs.m_build);
+    }
+    /*
+    else
+    if ( m_extra.isEmpty() && !rhs.m_extra.isEmpty() )
+    {
+        return (false);
+    }
+    else if ( !extra.isEmpty() && rhs.extra.isEmpty() )
+    {
+        return (true);
+    }
+*/
+}
+
+void Version::set(const std::string & vers)
+{
+    auto semver = std::regex(
+                  "^(0|[1-9][0-9]*)"                   // (1)
+                  "\\.(0|[1-9][0-9]*)"                 // (2)
+                  "\\.(0|[1-9][0-9]*)"                 // (3)
+                  "(?:\\-([0-9a-z-]+[\\.0-9a-z-]*))?"  // (4)
+                  "(?:\\+([0-9a-z-]+[\\.0-9a-z-]*))?"  // (5)
+                  , std::regex_constants::ECMAScript
+                  | std::regex_constants::icase);
+}
+

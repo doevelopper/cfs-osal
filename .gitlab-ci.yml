@@ -1,0 +1,136 @@
+#
+# To check this script syntax: https://gitlab.com/doevelopper/cfs-osal/-/ci/lint
+#
+# sudo usermod -a -G sudo gitlab-runner
+# sudo visudo or sudo vi /etc/sudoers
+# %gitlab-runner ALL=(ALL) NOPASSWD: ALL
+
+image: gcc
+
+.agent-47: &agent-47
+    retry: 1
+#    tags:
+#        - agent-smith
+#        - dds
+
+.define_config: &triggered_by_api_call
+    only:
+        - triggers
+
+.define_config: &triggered_by_schedules
+    only:
+        - schedules
+
+.only_stable: &only_stable
+    only:
+        - master
+        - /^release-.*$/
+
+.tumbleweed: &tumbleweed
+    only:
+        - develop
+
+.armv8l-build-template: &armv8l
+    before_script:
+        - export PATH=/opt/armv8l-linux-gnueabihf/bin/:$PATH
+        - export TRIPLET=armv8l-linux-gnueabihf
+
+.aarch64-build-template: &aarch64
+    before_script:
+        - export PATH=/opt/aarch64-linux-gnu/bin/:$PATH
+        - export TRIPLET=aarch64-linux-gnu
+
+
+.artifacts: &artifacts
+    artifacts:
+        name: "${CI_JOB_NAME}_${CI_COMIT_REF_NAME}_${CI_COMMIT_SHA}"
+        when: always
+        expire_in: 31d
+        paths:
+            - ${DEPS_INSTALL_DIR}
+
+.variables: &variables
+    variables:
+        GIT_DEPTH: "1"
+        PROJECT_NAME: "$CI_PROJECT_NAME"
+        PROJECT_SOURCE_DIR: "$CI_PROJECT_DIR"
+
+        GIT_SUBMODULE_STRATEGY: "none"
+        GET_SOURCES_ATTEMPTS: "3"
+        BUILD_DIRECTORY: "build-$CI_PROJECT_NAME"
+        BUILD_GENERATOR: "Unix Makefiles"
+        COVERITY_COVERAGE_FLAG: "--all --enable-slow"
+        BUILD_INSTALL_DIRECTORY: /opt/dds
+        DEPS_INSTALL_DIR: /home/gitlab-runner/third-party-software-component
+
+.prerequisites: &prerequisites
+    before_script:
+        - date
+        - hostname
+        - echo "Running $CI_JOB_NAME in stage $CI_JOB_STAGE"
+        - echo $CI_PIPELINE_ID
+        - gcc --version
+        - g++ --version
+        - cmake --version
+        - doxygen --version
+        - uncrustify --version
+        - export NUM_CORES=$(nproc --all)
+        - export CCACHE_BASEDIR=$CI_PROJECT_DIR
+        - export OS_NAME=$(lsb_release -is)
+        - export OS_VERS_LONG=$(lsb_release -rs | sed -r "s/^([0-9]+).*/\1/") || true
+        - export PROJECT_NAME=$CI_PROJECT_NAME
+        - export TAG=$CI_BUILD_REF_NAM
+        - export BUILD_DATE=$(date +%Y-%m-%d-%H:%M:%S)
+        - export VERSION=`git describe --first-parent`
+        - export QTDIR=/opt/Qt5.11.2/5.11.2/gcc_64
+        - export CMAKE_PREFIX_PATH=/opt/Qt5.11.2/5.11.2/gcc_64:$CMAKE_PREFIX_PATH
+        - export CMAKE_PREFIX_PATH=${DEPS_INSTALL_DIR}:$CMAKE_PREFIX_PATH
+        - export PATH=/opt/apache-maven/bin:/opt/jdk1.8.0_192/bin:$PATH
+        - export PATH="${PATH}:${DEPS_INSTALL_DIR}/include:${DEPS_INSTALL_DIR}/lib"
+        - export JAVA_HOME=/opt/jdk1.8.0_192/
+        - export M2_HOME=/opt/apache-maven
+
+stages:
+    - configure
+    - compile
+    - test-compile
+    - unit-test
+    - target-package
+    - feature-test
+    - verify
+    - code-review
+    - target-install
+    - site
+    - deploy
+    - target-clean
+
+validate:
+    <<: *agent-47
+    <<: *variables
+
+    stage: configure
+
+    before_script:
+        - echo $CI_PIPELINE_ID
+        - echo "Validate ${CI_PROJECT_NAME} is correct and all necessary information is available."
+        - apt-get update --yes
+        - mkdir -p $HOME/.local
+        - curl -s "https://cmake.org/files/v3.13/cmake-3.13.1-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local
+        - export PATH=$HOME/.local/bin:$PATH
+
+        - apt-get install --yes cmake make
+
+    script:
+        - >
+           if [ ! -d "${BUILD_DIRECTORY}" ]; then
+               cmake -E make_directory ${BUILD_DIRECTORY}
+           fi
+
+        - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_INSTALL_PREFIX=/opt/dds
+#        - cmake --build  ${BUILD_DIRECTORY} --target all --clean-first
+#        - cmake --build  ${BUILD_DIRECTORY} --target test
+
+    after_script:
+        - echo "${BUILD_DIRECTORY} directory created"
+
+

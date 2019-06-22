@@ -27,8 +27,8 @@
 cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 
 project (cfs.osal
-    VERSION 0.0.0.0 
-    DESCRIPTION "CFS OS Abstraction Layer!" 
+    VERSION 0.0.1
+    DESCRIPTION "CFS OS Abstraction Layer!"
     HOMEPAGE_URL "https://exemple.com"
     LANGUAGES CXX
 )
@@ -73,7 +73,7 @@ ProcessorCount(Ncpu)
 find_package(Log4cxx)
 find_package(GoogleTestFwk)
 find_package(Cucumber-cpp)
-find_package(Doxygen  
+find_package(Doxygen
    REQUIRED  dot
    OPTIONAL_COMPONENTS mscgen dia
 )
@@ -96,7 +96,7 @@ write_compiler_detection_header(
     FILE ${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/CompilerDetection.hpp
     PREFIX CFS_OSAL
 #   OUTPUT_FILES_VAR <output_files_var> OUTPUT_DIR <output_dir>
-    COMPILERS GNU 
+    COMPILERS GNU
     FEATURES ${cxx_known_features}
     VERSION "${CMAKE_VERSION}"
     PROLOG "//<prolog>"

@@ -2,6 +2,9 @@
 
 #include <pwd.h>
 #include <grp.h>
+#include <fstream>
+#include <string>
+#include <regex>
 
 #include <cfs/osal/SystemMonitor.hpp>
 
@@ -96,6 +99,19 @@
     float memoryAvailable = getMemoryAvailable();
     return (memoryAvailable /= 1024*1024*1024);
 
+   }
+
+   double SystemMonitor::cpuBaseFrequency()
+   {
+    std::regex re("model name\\s*:[^@]+@\\s*([0-9.]+)\\s*GHz");
+    std::ifstream cpuinfo("/proc/cpuinfo");
+    std::smatch m;
+    for(std::string line; getline(cpuinfo, line);) {
+        regex_match(line, m, re);
+        if(m.size() == 2)
+            return std::stod(m[1]);
+    }
+    return 1e9;
    }
 
    void SystemMonitor::registerCommands()

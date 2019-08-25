@@ -1,4 +1,16 @@
 #Find bullseye executables first
+
+# ENV BULLSEYE_VERSION ${BULLSEYE:-8.15.31}
+# RUN cd /tmp/ \
+    # && curl -Lk http://www.bullseye.com/download/BullseyeCoverage-$BULLSEYE_VERSION-Linux-x64.tar | tar x -C /opt \
+   ##&&  echo | /opt/BullseyeCoverage-$BULLSEYE_VERSION/install --key 4ChKeY0AX2Et3CDftN2cqkhg0NUEf03o4gQX \
+    # && echo | /opt/BullseyeCoverage-$BULLSEYE_VERSION/install --key 2Ct8nh2WOwHc2t4gvl1IYzzX1uGCW82sERqr \
+    # && rm -rf /opt/BullseyeCoverage-$BULLSEYE_VERSION*
+
+#  ENV PATH /opt/BullseyeCoverage/bin:$PATH
+#export COVFILE=$HOME/bullseye.cov && cov01 --on && cov01 --status && make -j12 && cov01 --off
+   
+
 set(BULLSEYE_PATH "/opt/BullseyeCoverage/bin")
 if(ENABLE_COVERAGE)
 

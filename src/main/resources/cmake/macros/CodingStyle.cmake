@@ -1,4 +1,4 @@
-set (UNCRUSTIFY_CONFIG "${PROJECT_SOURCE_DIR}/src/main/resources/configs/cpp101-style.cfg")
+set (UNCRUSTIFY_CONFIG "${PROJECT_SOURCE_DIR}/src/main/resources/configs/code-formater.cfg")
 set (UNCRUSTIFY_FLAGS -q --if-changed --no-backup -l CPP  -c ${UNCRUSTIFY_CONFIG})
 
 find_program(UNCRUSTIFY uncrustify
@@ -31,8 +31,6 @@ function(apply_style_targets TARGET_NAME BASE_DIRECTORY)
     add_dependencies( configure ${TARGET_NAME}-style)
 
 endfunction()
-
-
 
 function(apply_style_targets_command TARGET_NAME BASE_DIRECTORY)
     if(UNCRUSTIFY)

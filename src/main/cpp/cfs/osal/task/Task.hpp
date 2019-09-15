@@ -22,6 +22,7 @@ namespace cfs::osal::task
             virtual ~Task() = default;
 
             Task(const Runnable & runnable, const std::size_t = 0);
+            Task(const double & hertz, const std::function<void()>& callback);
             void join();
             int cancel();
 

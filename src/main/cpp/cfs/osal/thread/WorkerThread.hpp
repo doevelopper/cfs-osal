@@ -89,11 +89,11 @@ namespace cfs::osal::thread
 
     namespace detail
     {
-        inline size_t* thread_id()
+        inline std::size_t * thread_id()
         {
-            static thread_local size_t tss_id = -1u;
+            static thread_local std::size_t tss_id = -1u;
 
-            return &tss_id;
+            return (&tss_id);
         }
     }
 }

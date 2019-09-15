@@ -187,7 +187,7 @@ src/main/resources/macros/
 #src/main/cpp/libexpat-R_2_2_5/
 #!src/main/cpp/libexpat-R_2_2_5/expat/CMakeLists.txt
 #
-
+*-build/*
 
 .vscode/*
 !.vscode/settings.json

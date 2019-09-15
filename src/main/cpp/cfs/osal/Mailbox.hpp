@@ -14,7 +14,7 @@ namespace cfs::osal
 {
     class CFS_OSAL_MAIN_EXPORT Mailbox : public std::enable_shared_from_this<Mailbox>
     {
-        enum class Command : std::uint16_t
+        enum class Command : std::uint8_t
         {
             STOP = 0,
             BIND = 1,
@@ -30,6 +30,8 @@ namespace cfs::osal
             Mailbox& operator=(Mailbox&&) = delete;
             ~Mailbox()
             {
+                [] () {
+                } ();
                 //[] { } ==> noOp()
             }
 

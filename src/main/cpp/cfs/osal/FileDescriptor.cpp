@@ -9,18 +9,19 @@
 using namespace cfs::osal;
 
 
-FileDescriptor::FileDescriptor(std::int32_t fd)
+FileDescriptor::FileDescriptor(std::int32_t fd) CFS_OSAL_NOEXCEPT
     :  m_fileDescriptor(fd)
 {
     if(m_fileDescriptor < 0)
     {
-        // throw bad fd
+        ;// throw bad fd
     }
 }
 
 FileDescriptor::FileDescriptor(FileDescriptor && rhs)
     : m_fileDescriptor(rhs.m_fileDescriptor)
 {
+    std::swap(m_fileDescriptor, rhs.m_fileDescriptor);
     rhs.m_fileDescriptor = -1;
 }
 
@@ -39,6 +40,11 @@ bool FileDescriptor::isInUse() const
 
 FileDescriptor & FileDescriptor::operator = (FileDescriptor && rhs)
 {
+    if (this != &rhs)
+    {
+        close();
+    }
+
     std::swap(m_fileDescriptor, rhs.m_fileDescriptor);
 
     return (*this);

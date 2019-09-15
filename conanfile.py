@@ -6,12 +6,12 @@ from conans.util import files
 
 class CfsOsal(ConanFile):
     name = "CFS OSAL"
-    version = "0.0.0"
+    version = "0.0.1"
     license = "Apache License, Version 2.0, Copyright (c) 2014-2018 Adrien H. <hppyman ad hotmiail dot fr>"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     description = "Core Flight System OS Abstraction Layer"
-    author = "Adrien H. <hppyman ad hotmiail dot fr>"
+    author = "Adrien H. <hppyman ad hotmail dot fr>"
     url = 'https://github.com/doevelopper/cfs-osal'
     scm = {
         "type": "git",

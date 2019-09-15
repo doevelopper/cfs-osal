@@ -36,11 +36,13 @@ namespace cfs::osal::task
              * @brief This method must be overritten
              */
             virtual void run () noexcept = 0;
-            std::atomic<bool> stopTask;
+            virtual void exception(const std::exception & exc) = 0;
+            virtual void error() = 0;
 
         private:
 
-            std::thread m_thread;
+            std::atomic<bool> stopTask;
+            std::thread       m_thread;
     };
 }
 

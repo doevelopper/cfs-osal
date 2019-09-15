@@ -57,8 +57,7 @@ namespace cfs::osal
         private:
 
             static MsgUID generateUniqueId();
-
-            int    m_msgId;
+            MsgUID m_msgId;
             MsgUID m_uniqueId;
     };
 }

@@ -3,12 +3,24 @@
 #ifndef CFS_OSAL_TIMER_HPP
 #define CFS_OSAL_TIMER_HPP
 
+#include <chrono>
+#include <condition_variable>
+#include <functional>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <thread>
+
 #include <cstdint>
 #include <signal.h>
 #include <time.h>
 
 namespace cfs::osal
 {
+    using timerClock = std::chrono::steady_clock;
+    using timerCallbackCancel = std::function<void ()>;
+    using timerCallbackFunction = std::function<void ()>;
+
     template <typename T>
     class Timer
     {
@@ -17,6 +29,40 @@ namespace cfs::osal
             SINGLE_SHOOT, //timer which Signals only ones
             MULTI_SHOOT   //Periodic timer
         };
+
+        class ScopeTimer
+        {
+            std::string                                    s;
+            std::chrono::high_resolution_clock::time_point t0;
+            std::chrono::high_resolution_clock::time_point start;
+
+            public:
+
+                //           template<typename ...Args>
+                //              ScopeTimer (Args&& ...args)
+                //               :s(std::forward<Args>(args)...),t0(std::chrono::high_resolution_clock::now())
+                //            {
+                //            }
+
+                ScopeTimer()
+                {
+                    start = std::chrono::high_resolution_clock::now();
+                }
+
+                virtual ~ScopeTimer()
+                {
+                    using std::chrono::duration_cast;
+                    using std::chrono::nanoseconds;
+                    auto end = std::chrono::high_resolution_clock::now();
+
+                    auto duration = duration_cast<nanoseconds>(end - start);
+
+                    //          fprintf(stderr,"%s:\t%.8fs\n",s.c_str()
+                    //          ,std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now()-t0).count());
+                }
+        };
+
+        //        using Timeouts = std::multimap<timerClock::time_point, std::shared_ptr<timerCallbackFunction>>;
 
         public:
 
@@ -114,8 +160,11 @@ namespace cfs::osal
             timer_t       m_TimerID;
             TimerType     m_TimerType;
             std::uint64_t m_interval;
-
-            static const std::uint64_t MS_TO_NS_FACTOR;
+            //Timeouts m_timeouts;
+            std::mutex                   m_mutex;
+            std::condition_variable      m_cv;
+            std::unique_ptr<std::thread> m_thread;
+            static const std::uint64_t   MS_TO_NS_FACTOR;
     };
 }
 #endif

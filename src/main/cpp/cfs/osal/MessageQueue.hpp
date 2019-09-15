@@ -137,7 +137,6 @@ namespace cfs::osal
              * @retval -1: on error. And errno set to indicate the error.
              */
 
-
             void unlink(const char * name);
 
         private:

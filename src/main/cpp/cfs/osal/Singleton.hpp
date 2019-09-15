@@ -25,9 +25,9 @@ namespace cfs::osal
             template <typename ... Args>
             static inline Derived *GetInstancePointer(Args && ... args)
             {
-                static Derived *instancePointer = CreateInstance(std::forward<Args>(args)...);
+                static Derived * m_instancePointer = CreateInstance(std::forward<Args>(args)...);
 
-                return instancePointer;
+                return m_instancePointer;
             }
 
         protected:
@@ -35,59 +35,53 @@ namespace cfs::osal
             using Access = Singleton<Derived>;
 
             Singleton(void) = default;
-
             Singleton(Singleton const &) = default;
-
             Singleton(Singleton &&) = default;
-
             Singleton &operator=(Singleton const &) = default;
-
             Singleton &operator=(Singleton &&) = default;
-
             virtual ~Singleton(void) = default;
 
         private:
 
-            static Derived *InstancePointer;
-
-            static SpinLock Lock;
-
             template <typename ... Args>
             static inline Derived *CreateInstance(Args && ... args)
             {
-                if (Singleton::InstancePointer == nullptr)
+                if (Singleton::m_instancePointer == nullptr)
                 {
-                    std::lock_guard<decltype(Singleton::Lock)> lock(Singleton::Lock);
-                    if (Singleton::InstancePointer == nullptr)
+                    std::lock_guard<decltype(Singleton::m_lock)> lock(Singleton::m_lock);
+                    if (Singleton::m_instancePointer == nullptr)
                     {
-                        void *data = static_cast<void *>(GetData());
+                        void *data = static_cast<void *>(getData());
                         new (data) Derived(std::forward<Args>(args)...);
-                        Singleton::InstancePointer = reinterpret_cast<Derived *>(data);
+                        Singleton::m_instancePointer = reinterpret_cast<Derived *>(data);
                         std::atexit(&Singleton::DestroyInstance);
                     }
                 }
 
-                return Singleton::InstancePointer;
+                return Singleton::m_instancePointer;
             }
 
             static inline void DestroyInstance(void)
             {
-                reinterpret_cast<Derived *>(GetData())->~Derived();
+                reinterpret_cast<Derived *>(getData())->~Derived();
             }
 
-            static inline unsigned char *GetData(void)
+            static inline unsigned char *getData(void)
             {
                 static unsigned char data[sizeof(Derived)];
 
                 return data;
             }
+
+            static Derived * m_instancePointer;
+            static SpinLock  m_lock;
     };
 
     template <class Derived>
-    Derived *Singleton<Derived>::InstancePointer = nullptr;
+    Derived *Singleton<Derived>::m_instancePointer = nullptr;
 
     template <class Derived>
-    SpinLock Singleton<Derived>::Lock;
+    SpinLock Singleton<Derived>::m_lock;
 }
 #endif
 

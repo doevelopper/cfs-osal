@@ -19,23 +19,29 @@ stages:
     - deploy
     - target-clean
 
-validate:
-    stage: configure
-    before_script:
-        - echo $CI_PIPELINE_ID
-        - echo "Validate ${CI_PROJECT_NAME} is correct and all necessary information is available."
-        - mkdir -p $HOME/.local
-        - export PATH=$HOME/.local/bin:$PATH
+include:
+    - local: .gitlab/ci/globals.yml
 
-    script:
-        - >
-           if [ ! -d "${BUILD_DIRECTORY}" ]; then
-               cmake -E make_directory ${BUILD_DIRECTORY}
-           fi
-        - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_INSTALL_PREFIX=/opt/dds
-        - cmake --build  ${BUILD_DIRECTORY} --target all --clean-first
-        - cmake --build  ${BUILD_DIRECTORY} --target test
-    after_script:
-        - echo "${BUILD_DIRECTORY} directory created"
+debug:appplication:build:
+    variables:
+        BUILD_TYPE: Debug
 
+release:appplication:build:
+    variables:
+        BUILD_TYPE: Release
 
+coverage:appplication:build:
+    variables:
+        BUILD_TYPE: Coverage
+
+profiling:appplication:build:
+    variables:
+        BUILD_TYPE: Profiling
+
+relwithdebinfo:appplication:build:
+    variables:
+        BUILD_TYPE: RelWithDebInfo
+
+minsizerel:appplication:build:
+    variables:
+        BUILD_TYPE: MinSizeRel

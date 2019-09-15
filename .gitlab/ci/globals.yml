@@ -32,29 +32,14 @@
 .prerequisites: &prerequisites
     before_script:
         - date
-        - hostname
-        - echo "Running $CI_JOB_NAME in stage $CI_JOB_STAGE"
-        - echo $CI_PIPELINE_ID
-        - gcc --version
-        - g++ --version
-        - cmake --version
-        - doxygen --version
-        - uncrustify --version
-        - export NUM_CORES=$(nproc --all)
+        - echo "Running ${CI_PIPELINE_ID}th $CI_JOB_NAME in stage $CI_JOB_STAGE"
         - export CCACHE_BASEDIR=$CI_PROJECT_DIR
         - export OS_NAME=$(lsb_release -is)
         - export OS_VERS_LONG=$(lsb_release -rs | sed -r "s/^([0-9]+).*/\1/") || true
         - export PROJECT_NAME=$CI_PROJECT_NAME
-        - export TAG=$CI_BUILD_REF_NAM
+        - export TAG=$CI_BUILD_REF_NAME
         - export BUILD_DATE=$(date +%Y-%m-%d-%H:%M:%S)
-        - export VERSION=`git describe --first-parent`
-        - export QTDIR=/opt/Qt5.11.2/5.11.2/gcc_64
         - export CMAKE_PREFIX_PATH=/opt/Qt5.11.2/5.11.2/gcc_64:$CMAKE_PREFIX_PATH
-        - export CMAKE_PREFIX_PATH=${DEPS_INSTALL_DIR}:$CMAKE_PREFIX_PATH
-        - export PATH=/opt/apache-maven/bin:/opt/jdk1.8.0_192/bin:$PATH
-        - export PATH="${PATH}:${DEPS_INSTALL_DIR}/include:${DEPS_INSTALL_DIR}/lib"
-        - export JAVA_HOME=/opt/jdk1.8.0_192/
-        - export M2_HOME=/opt/apache-maven
 
 .only_stable: &only_stable
     only:
@@ -82,7 +67,6 @@
         GET_SOURCES_ATTEMPTS: "3"
         BUILD_DIRECTORY: "build-$CI_PROJECT_NAME"
         BUILD_GENERATOR: "Unix Makefiles"
-        COVERITY_COVERAGE_FLAG: "--all --enable-slow"
 
 .Log files: &log_files  [./*.log, ./build/logs/]
 
@@ -212,10 +196,7 @@
     GET_SOURCES_ATTEMPTS: "3"
     ARTIFACT_DOWNLOAD_ATTEMPTS: "2"
     GIT_DEPTH: "1"
-    LSB_RELEASE_ID: "$(lsb_release -i 2> /dev/null || echo Distributor ID: Unknown)"
-    LSB_RELEASE_RELEASE: "$(lsb_release -r 2> /dev/null || echo Release: Unknown)"
     CACHE_KEY: '$(if [[ ! -z ${CI_COMMIT_TAG+x} || "${CI_COMMIT_REF_SLUG}" == "prod" ]]; then echo "${CI_COMMIT_REF_SLUG}"; else echo "not-prod-or-tag"; fi)'
-    STAGING_REGISTRY: "docker.io"
     DTR_NAMESPACE: $CI_PROJECT_NAMESPACE
     PROJECT_SOURCE_DIR: "$CI_PROJECT_DIR"
     PROJECT_NAME: $CI_PROJECT_NAME
@@ -223,110 +204,61 @@
     ARCH: amd64
     COMMIT_ID: ${CI_COMMIT_SHA:0:8}
     CCACHE_BASEDIR: $CI_PROJECT_DIR
-    OS_NAME: $(lsb_release -is) || true
-    OS_VERS_LONG: $(lsb_release -rs | sed -r "s/^([0-9]+).*/\1/") || true
     BUILD_DATE: $(date +%Y-%m-%d-%H:%M:%S)
     COMMIT_TIME: $(git show -s --format=%ct $CI_APPLICATION_TAG)
     DOCKER_TRUSTED_REGISTRY: ${STAGING_REGISTRY}
 
-.dind_hub_variables:
-    variables:
-        <<: *common_variables
-        DOCKER_DIRVER: overlay2
-        DOCKER_HOST: tcp://docker:2376
-        DOCKER_TLS_VERIFY: 1
-        DOCKER_TLS_CERTDIR: "/certs"
-        DOCKER_CERT_PATH: "/certs/client"
-        ROOT_IMG_IMAGE: ${STAGING_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}
-        IMG_NAME: ${ROOT_IMG_IMAGE}
-
-.docker-hub-dind:
-    image: docker:19.03.0
-    services:
-        - docker:19.03.0-dind
-    stage: Build in docker image
+.build-applications:
+    image: image: docker.io/doevelopper/cfs-com-common:0.0.1
     extends:
         - .agent-who
-        - .dind_hub_variables
-
-.docker:
-    stage: Build docker image
-    services:
-        - docker:19.03.0-dind
-    extends: .dind_hub_variables
-
-.app-build-prerequisities:
-    image: docker.io/doevelopper/cfs-com-common:latest
-
-.docker-app-prerequisities:
-    image: ${ROOT_IMG_IMAGE}-dind:0.0.1
-    extends: .docker
-    # only:
-        # refs:
-            # - branches
-        # changes:
-            # - src/main/resources/docker/${ARCH}/Dockerfile
-
-.create-docker-container:
-    extends:
-        - .agent-who
-        - .docker-app-prerequisities
+        # - .app-build-prerequisities
     before_script:
-        - echo "Performing (${GOAL}) on (${MODULE}) (${CI_JOB_STAGE}[${CI_JOB_NAME}])"
-        - export VERSIONFILE=${CI_PROJECT_DIR}/src/main/resources/docker/${ARCH}/${MODULE_DIR}/VERSION_FILE
-        - "[ -f ${VERSIONFILE} ] && export SEM_VERSION=$(head ${VERSIONFILE}) || export SEM_VERSION=0.0.1"
-        - export BUILD_LOG="2>&1 | tee ${CI_PROJECT_DIR}/${MODULE}.log"
-        - export DTR_PASSWORD=$DOCKER_PASSWORD
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
+        - echo "Building ${CI_PROJECT_NAME} $CI_PIPELINE_ID"
+        - mkdir -p ${STAGING_DIR}
+        - export PATH=${STAGING_DIR}/bin:$PATH
     script:
-        - |
-            if DOCKER_CLI_EXPERIMENTAL=enabled docker manifest inspect ${ROOT_IMG_IMAGE}-common:latest >/dev/null; then
-                 make DDS_DEV_IMAGE=${ROOT_IMG_IMAGE}-common:latest GOAL=${GOAL} ${MODULE} 2>&1 | tee ${CI_PROJECT_DIR}/${MODULE}.log
-            else
-                make GOAL=${GOAL} ${MODULE} 2>&1 | tee ${CI_PROJECT_DIR}/${MODULE}.log
-            fi
+        - >
+           if [ ! -d "${BUILD_DIRECTORY}" ]; then
+               cmake -E make_directory ${BUILD_DIRECTORY}
+           fi
+        - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" \
+            -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} \
+            -DCMAKE_PREFIX_PATH=/usr/local
+        # - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
+        # - cmake --build ${BUILD_DIRECTORY} --target test
+#        - cmake --build ${BUILD_DIRECTORY} --target features
+#        - cmake --build ${BUILD_DIRECTORY} --target install
     after_script:
-        - docker logout ${DOCKER_TRUSTED_REGISTRY} || true
+        - echo "Building ${BUILD_TYPE} mode done"
+    # artifacts:
+        # paths:
 
-.deploy_functions: &deploy_functions |
-    [[ "$TRACE" ]] && set -x
-    skipvar="SKIP_$(echo ${CI_JOB_STAGE} | tr 'a-z' 'A-Z')"
-    [ "$(printenv $skipvar)" ] && echo "Skipping stage!" && exit 0
-# before_script:
-#   - *deploy_functions
+# validate:
+    # stage: configure
+    # variables:
+        # BUILD_TYPE: Debug
+        # BUILD_DIRECTORY: ${CI_PROJECT_NAME}-build-${BUILD_TYPE}
+        # STAGING_DIR: ${BUILD_DIRECTORY}/.local
+    # before_script:
+        # - echo "Building ${CI_PROJECT_NAME} $CI_PIPELINE_ID"
+        # - mkdir -p ${STAGING_DIR}
+        # - export PATH=${STAGING_DIR}/bin:$PATH
 
-
-#  Caching configurations
-
-.push-cache: &push-cache
-    cache:
-        <<: *default-cache
-    policy: push
-
-.pull-cache: &pull-cache
-    cache:
-        <<: *default-cache
-    policy: pull
-
-.per job caching:
-    cache:
-        key: "$CI_BUILD_NAME"
-        untracked: true
-
-.per branch caching:
-    cache:
-        key: "$CI_BUILD_REF_NAME"
-        untracked: true
-
-.per job and per branch caching:
-    cache:
-        key: "$CI_BUILD_STAGE/$CI_BUILD_REF_NAME"
-        untracked: true
-
-.weekly build:
-    only:
-        variables:
-            - $SCHEDULE_TYPE == "weekly"
+    # script:
+        # - >
+           # if [ ! -d "${BUILD_DIRECTORY}" ]; then
+               # cmake -E make_directory ${BUILD_DIRECTORY}
+           # fi
+        # - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" \
+            # -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} \
+            # -DCMAKE_PREFIX_PATH=/usr/local
+        # - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
+        # - cmake --build ${BUILD_DIRECTORY} --target test
+                 - cmake --build ${BUILD_DIRECTORY} --target features
+                 - cmake --build ${BUILD_DIRECTORY} --target install
+    # after_script:
+        # - echo "${BUILD_DIRECTORY} directory created"
 
 Intro CI:
     stage: Intro

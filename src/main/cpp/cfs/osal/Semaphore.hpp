@@ -61,6 +61,37 @@ namespace cfs::osal
              *  @return bool false if semaphore was empty, true if semaphore was successfully acquired
              */
             bool tryWait();
+            /*! @brief It'll be locked when  constructed and released when
+             *         goes out of scope.
+             *
+             */
+            class Autolock
+            {
+                public:
+
+                    Autolock( Semaphore & mutex)
+                        : m_mtx(mutex)
+                    {
+                        m_mtx.wait();
+                    }
+
+                    Autolock( Semaphore * mutex)
+                        : m_mtx(*mutex)
+                    {
+                        m_mtx.wait();
+                    }
+
+                    ~Autolock()
+                    {
+                        m_mtx.post();
+                    }
+
+                protected:
+
+                private:
+
+                    Semaphore & m_mtx;
+            };
 
         private:
 

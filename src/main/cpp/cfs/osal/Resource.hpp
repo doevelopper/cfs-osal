@@ -1,7 +1,7 @@
 
 
-#ifndef CFS_OSAL_SINGLETON_HPP
-#define CFS_OSAL_SINGLETON_HPP
+#ifndef CFS_OSAL_RESOURCE_HPP
+#define CFS_OSAL_RESOURCE_HPP
 
 #include <mutex>
 #include <utility>

@@ -11,29 +11,29 @@ add_executable(cfs.osal.it-test.steps
 apply_style_targets_command(cfs.osal.it-test.steps ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(cfs.osal.it-test.steps
-    PUBLIC  
+    PUBLIC
         cfs.osal.main
 #        cfs.osal.test
-        CUCUMBER-CPP::CUCUMBER-CPP
+        CucumberCpp::cucumber-cpp
 #        PUBLIC BENCHMARK::BENCHMARK
 )
 
 add_custom_target(cfs.osal.integration-test
 
     COMMAND
-        ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/qa/test-result        
+        ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/qa/atp
     COMMAND
         cfs.osal.it-test.steps --port 3902  >/dev/null &
 
-    COMMAND 
-        cucumber ${FEATURE_TEST_FORMAT} ${FEATURE_TEST_OPTION} 
-            --out ${CMAKE_INSTALL_PREFIX}/qa/test-result/cfs.osal.test-report.html 
+    COMMAND
+        cucumber ${FEATURE_TEST_FORMAT} ${FEATURE_TEST_OPTION}
+            --out ${CMAKE_INSTALL_PREFIX}/qa/atp/cfs.osal.feature-tests-report.html
             --strict ${CMAKE_CURRENT_SOURCE_DIR}/features
 
-    WORKING_DIRECTORY 
+    WORKING_DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}
 
-    COMMENT 
+    COMMENT
         "Run cfs osal integration test."
 )
 
@@ -49,13 +49,14 @@ add_custom_target(cfs.osal.integration-test
 #        "Start cucumber's wire server on port 3902."
 #)
 
-add_custom_command(TARGET cfs.osal.integration-test 
+add_custom_command(TARGET cfs.osal.integration-test
     POST_BUILD
-    COMMAND 
-        fuser -k -n  tcp 3902 || true # kill -9 *.Seps which is using port 3902
-#        # iptables -I INPUT -p tcp --dport 3902 -j DROP ;# need to be root for this command
+    COMMAND :
+    #kill -9 $(lsof -t -i:3902 -sTCP:LISTEN)  ## best
+#        fuser -k -n  tcp 3902 || true # kill -9 *.Seps which is using port 3902
+#        iptables -I INPUT -p tcp --dport 3902 -j DROP ;# need to be root for this command
     COMMENT
-        // check pro opened lsof -i -P -n | grep LISTEN 
+         #// check pro opened lsof -i -P -n | grep LISTEN
         "Killing process to close cucumber wire port. (bind: Address already in use)"
 )
 

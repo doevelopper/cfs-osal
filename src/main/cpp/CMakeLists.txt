@@ -98,24 +98,18 @@ target_compile_options(cfs.osal.main
         $<$<CXX_COMPILER_ID:GNU>: ${GNU_CXX_FLAGS} -U_FORTIFY_SOURCE -fsanitize-address-use-after-scope>
         $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>: ${COMMON_CXX_FLAGS}>
         $<IF:$<COMPILE_LANGUAGE:CXX>,-Wold-style-cast,>
-
         $<$<CONFIG:Release>:${MY_RELEASE_OPTIONS}>
         $<$<CONFIG:Release>:-ffunction-sections>
         $<$<CONFIG:Release>:-fdata-sections>
         $<$<CONFIG:Release>:-Wl,--gc-sections>
-
         $<$<CONFIG:Debug>: ${MY_DEBUG_OPTIONS}>
         $<$<CONFIG:Debug>: -O0>
         $<$<CONFIG:Debug>: -ggdb3>
         $<$<CONFIG:Debug>: -O0 -g -D_DEBUG -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -fno-omit-frame-pointer>
-
 #        $<IF:$<CONFIG:Debug>: helper_debug.cpp,helper_release.cpp>
-
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Profile>>: DISABLE_VAR>
-        $<$<CONFIG:Coverage>: -O0  -fprofile-arcs -ftest-coverage --coverage>
-
+        $<$<CONFIG:Coverage>: -O0  ${CPP_COVERAGE_FLAGS}>
         $<$<CONFIG:Profile>: ${CHECK_MEMORY_FLAGS}>
-
 )
 
 target_include_directories(cfs.osal.main

@@ -45,7 +45,7 @@ function(getGitInfo)
 
         execute_process( COMMAND ${GIT_EXECUTABLE} rev-parse --short HEAD
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-            OUTPUT_VARIABLE GIT_REVISION 
+            OUTPUT_VARIABLE GIT_REVISION
             ERROR_QUIET
             OUTPUT_STRIP_TRAILING_WHITESPACE)
 
@@ -56,24 +56,24 @@ function(getGitInfo)
             OUTPUT_STRIP_TRAILING_WHITESPACE)
 
         execute_process( COMMAND ${GIT_EXECUTABLE} config --get remote.origin.url
-            OUTPUT_VARIABLE GIT_ORIGIN_URL 
+            OUTPUT_VARIABLE GIT_ORIGIN_URL
             OUTPUT_STRIP_TRAILING_WHITESPACE
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
         execute_process( COMMAND ${GIT_EXECUTABLE} config --get remote.root.url
-            OUTPUT_VARIABLE GIT_ROOT_URL 
+            OUTPUT_VARIABLE GIT_ROOT_URL
             OUTPUT_STRIP_TRAILING_WHITESPACE
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
         execute_process( COMMAND ${GIT_EXECUTABLE} branch --contains HEAD
-            OUTPUT_VARIABLE GIT_BRANCH 
+            OUTPUT_VARIABLE GIT_BRANCH
             OUTPUT_STRIP_TRAILING_WHITESPACE
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
         execute_process(COMMAND  "${GIT_EXECUTABLE}" log -1 --format=%ad --date=local
             WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
             OUTPUT_VARIABLE GIT_DATE
-            ERROR_QUIET 
+            ERROR_QUIET
             OUTPUT_STRIP_TRAILING_WHITESPACE)
 
         execute_process(COMMAND  "${GIT_EXECUTABLE}" rev-list HEAD --count
@@ -91,14 +91,14 @@ function(getGitInfo)
         execute_process(COMMAND  "${GIT_EXECUTABLE}" log -1 --format=%s
             WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
             OUTPUT_VARIABLE GIT_COMMIT_SUBJECT
-            ERROR_QUIET 
+            ERROR_QUIET
             OUTPUT_STRIP_TRAILING_WHITESPACE)
 
         execute_process( COMMAND "${GIT_EXECUTABLE}" diff-index --quiet HEAD --
             WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
             RESULT_VARIABLE res
             OUTPUT_VARIABLE out
-            ERROR_QUIET 
+            ERROR_QUIET
             OUTPUT_STRIP_TRAILING_WHITESPACE)
 
             if(res EQUAL 0)
@@ -141,9 +141,9 @@ function(getGitInfo)
         list(REMOVE_DUPLICATES GIT_AUTHORS)
         file(WRITE ${PROJECT_BINARY_DIR}/Authors.txt "${GIT_AUTHORS}")
     endif(EXISTS ${PROJECT_BINARY_DIR}/Authors.txt)
-endfunction(getGitInfo)  
+endfunction(getGitInfo)
 
-  
+
 function(generateGitInfo)
     if(EXISTS ${CMAKE_SOURCE_DIR}/.git)
         set(GIT_EXECUTABLE "git")
@@ -169,15 +169,15 @@ endfunction(targetName)
 find_program(VALGRIND "valgrind")
 set(MEMORYCHECK_COMMAND_OPTIONS "--xml=yes --xml-file=test.xml")
 set(MEMORYCHECK_SUPPRESSIONS_FILE "")
-if(VALGRIND)
-    add_custom_target(valgrind
-        COMMAND "${VALGRIND}" 
-                  --tool=memcheck 
-                  --leak-check=yes 
-                  --show-reachable=yes 
-                  --num-callers=20 
-                  --track-fds=yes $<TARGET_FILE:moduleTest>)
-endif()
+#if(VALGRIND)
+#    add_custom_target(valgrind
+#        COMMAND "${VALGRIND}"
+#                  --tool=memcheck
+#                  --leak-check=yes
+#                  --show-reachable=yes
+#                  --num-callers=20
+#                  --track-fds=yes $<TARGET_FILE:moduleTest>)
+#endif()
 
 function(add_memcheck_test name binary)
     set(memcheck_command "${CMAKE_MEMORYCHECK_COMMAND} ${CMAKE_MEMORYCHECK_COMMAND_OPTIONS}")
@@ -203,19 +203,19 @@ endfunction(run_it_test)
 
 macro(ADD_NEW_CUCUMBER_TEST TEST_SOURCE FOLDER_NAME FEATURE_FOLDER)
     set (TARGET_NAME ${TEST_SOURCE}_TESTTARGET)
-    add_executable(${TARGET_NAME} 
+    add_executable(${TARGET_NAME}
 	    ${FEATURE_FOLDER}/features/step_definitions/${TEST_SOURCE}
     )
-    
-    target_link_libraries(${TARGET_NAME} 
-	    CUCUMBER-CPP::CUCUMBER-CPP 
+
+    target_link_libraries(${TARGET_NAME}
+	    CUCUMBER-CPP::CUCUMBER-CPP
     )
-   
-    add_test(NAME ${TEST_SOURCE} 
+
+    add_test(NAME ${TEST_SOURCE}
 	    COMMAND ${TARGET_NAME}
     )
 
-    set_property(TARGET ${TARGET_NAME} 
+    set_property(TARGET ${TARGET_NAME}
 	    PROPERTY FOLDER ${FOLDER_NAME}
     )
 endmacro()

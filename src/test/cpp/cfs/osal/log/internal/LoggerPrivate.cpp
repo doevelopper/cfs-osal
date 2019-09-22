@@ -73,7 +73,7 @@ LoggerPrivate::LoggerPrivate( unsigned long delay )
 
         // log4cxx::BasicConfigurator::configure(log4cxx::AppenderPtr(rollingFileAppender));
         log4cxx::Logger::getRootLogger( )->setLevel( /*LOG-ALL*/ true ? log4cxx::Level::getTrace( ) :
-                                                                 log4cxx::Level::getInfo() );
+                                                     log4cxx::Level::getInfo() );
 
         log4cxx::LogManager::getLoggerRepository( )->setConfigured( true );
 

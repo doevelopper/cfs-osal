@@ -154,7 +154,7 @@ bool TestLogger::initLogger ()
 
             //       log4cxx::LogManager::getLoggerRepository()->setConfigured(true);
             log4cxx::Logger::getRootLogger( )->setLevel( /*DEFINED_LOG_ALL*/ true ? log4cxx::Level::getTrace( ) :
-                                                                             log4cxx::Level::getInfo() );
+                                                         log4cxx::Level::getInfo() );
             log4cxx::LogManager::getLoggerRepository()->getRootLogger()->info(
                 "Starting the nternal configured logging system.");
             LOG4CXX_TRACE(LOG, "Log4cxx file Path " << filePath);

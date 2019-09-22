@@ -23,7 +23,7 @@ else()
     list(APPEND LCOV_GENTHML_OPTIONS "--no-function-coverage")
 endif()
 
-set(LCOV_EXTRA_ARGS --base-directory "${CPP_SOURCE_DIR}" 
+set(LCOV_EXTRA_ARGS --base-directory "${CPP_SOURCE_DIR}"
     --directory "${OUTPUT_DIR}"
     --no-external
     --gcov-tool "${COVERAGE_COMMAND}"
@@ -49,31 +49,31 @@ set(GENHTML_EXTRA_ARGS --show-details --frames --legend
     set(CMAKE_CXX_FLAGS_COVERAGE
         "${COVERAGE_FLAGS} -fprofile-arcs -ftest-coverage"
         CACHE STRING "Flags used by the C++ compiler during coverage builds."
-        FORCE 
+        FORCE
     )
 
     set(CMAKE_C_FLAGS_COVERAGE
         "${COVERAGE_FLAGS} -fprofile-arcs -ftest-coverage"
         CACHE STRING "Flags used by the C compiler during coverage builds."
-        FORCE 
+        FORCE
     )
 
     set(CMAKE_EXE_LINKER_FLAGS_COVERAGE
         "${COVERAGE_LINK_FLAGS}"
         CACHE STRING "Flags used for linking binaries during coverage builds."
-        FORCE 
+        FORCE
     )
 
     set(CMAKE_STATIC_LINKER_FLAGS_COVERAGE
         "${CMAKE_STATIC_LINKER_FLAGS_DEBUG}"
         CACHE STRING "Flags used by the static libraries linker during coverage builds."
-        FORCE 
+        FORCE
     )
 
     set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE
         "${COVERAGE_LINK_FLAGS}"
         CACHE STRING "Flags used by the shared libraries linker during coverage builds."
-        FORCE 
+        FORCE
     )
 
     mark_as_advanced(
@@ -95,7 +95,7 @@ function(add_code_coverage_targets test_target module_name module_directory)
         find_program(GENINFO geninfo)
 
         mark_as_advanced(LCOV GENINFO GENHTML GCOVR)
-		
+
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_COVERAGE}")
         set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_COVERAGE}")
 
@@ -106,14 +106,18 @@ function(add_code_coverage_targets test_target module_name module_directory)
 		file(MAKE_DIRECTORY ${COVERAGE_WORKING_DIR})
 
 		add_test(NAME ${test_target}
-				WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-				COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${test_target}
+				WORKING_DIRECTORY
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+				COMMAND
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${test_target}
 		)
 
 		add_custom_target( ${test_target}-coverage
-			WORKING_DIRECTORY ${COVERAGE_WORKING_DIR}
+			WORKING_DIRECTORY
+                ${COVERAGE_WORKING_DIR}
 	#        COMMAND ${CMAKE_COMMAND} -E echo "Test coverage is disabled"
-			COMMENT "[Coverage report] : ${module_name}] ${module_directory}."
+			COMMENT
+                "[Coverage report] : ${module_name}] ${module_directory}."
 	#        DEPENDS
 		)
 
@@ -177,3 +181,37 @@ endfunction()
 # View e.g. via:
 #
 #     firefox coverage/index.html
+
+# llvm-cov
+#add_custom_target(${TARGET_NAME}-ccov-preprocessing
+#    COMMAND
+#        LLVM_PROFILE_FILE=${TARGET_NAME}.profraw $<TARGET_FILE:${TARGET_NAME}>
+#    COMMAND
+#        llvm-profdata merge -sparse ${TARGET_NAME}.profraw -o ${TARGET_NAME}.profdata
+#    DEPENDS
+#        ${TARGET_NAME})
+
+#add_custom_target(${TARGET_NAME}-ccov-show
+#    COMMAND
+#        llvm-cov show $<TARGET_FILE:${TARGET_NAME}> -instr-profile=${TARGET_NAME}.profdata -show-line-counts-or-regions
+#    DEPENDS
+#        ${TARGET_NAME}-ccov-preprocessing)
+
+#add_custom_target(${TARGET_NAME}-ccov-report
+#    COMMAND
+#        llvm-cov report $<TARGET_FILE:${TARGET_NAME}> -instr-profile=${TARGET_NAME}.profdata
+#    DEPENDS
+#        ${TARGET_NAME}-ccov-preprocessing)
+
+#add_custom_target(${TARGET_NAME}-ccov
+#    COMMAND
+#        llvm-cov show $<TARGET_FILE:${TARGET_NAME}> -instr-profile=${TARGET_NAME}.profdata -show-line-counts-or-regions -output-dir=${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TARGET_NAME}-llvm-cov -format="html"
+#    DEPENDS
+#        ${TARGET_NAME}-ccov-preprocessing)
+
+#add_custom_command(TARGET ${TARGET_NAME}-ccov POST_BUILD
+#    COMMAND ;
+#    COMMENT
+#        "Open ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TARGET_NAME}-llvm-cov/index.html in your browser to view the coverage report."
+#)
+

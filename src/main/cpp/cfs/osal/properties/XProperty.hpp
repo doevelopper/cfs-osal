@@ -25,9 +25,9 @@ namespace xp
 
     #ifdef __clang__
         #define xoffsetof(O, M)                                    \
-    _Pragma("clang diagnostic push")                           \
+    _Pragma("clang diagnostic push") \
     _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
-    __builtin_offsetof(O, M)                                   \
+    __builtin_offsetof(O, M) \
     _Pragma("clang diagnostic pop")
     #else
         #ifdef __GNUC__

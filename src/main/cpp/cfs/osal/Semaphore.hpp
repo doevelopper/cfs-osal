@@ -35,7 +35,7 @@ namespace cfs::osal
              * @param [in] value
              */
             Semaphore(std::string & name,OpenMode flag = SEM_OPEN, std::uint32_t mode = 0666,std::uint32_t value = -1);
-            Semaphore(std::int32_t pshared = 0, std::uint32_t value = 0);
+            Semaphore(std::int32_t pshared                          = 0, std::uint32_t value= 0);
             virtual ~Semaphore();
 
             /*!
@@ -61,37 +61,39 @@ namespace cfs::osal
              *  @return bool false if semaphore was empty, true if semaphore was successfully acquired
              */
             bool tryWait();
-            /*! @brief It'll be locked when  constructed and released when
-             *         goes out of scope.
-             *
-             */
-            class Autolock
-            {
-                public:
+        /*! @brief It'll be locked when  constructed and released when
+         *         goes out of scope.
+         *
+         */
+        /*
+           class Autolock
+           {
+            public:
 
-                    Autolock( Semaphore & mutex)
-                        : m_mtx(mutex)
-                    {
-                        m_mtx.wait();
-                    }
+                Autolock( Semaphore & mutex)
+                    : m_mtx(mutex)
+                {
+                    m_mtx.wait();
+                }
 
-                    Autolock( Semaphore * mutex)
-                        : m_mtx(*mutex)
-                    {
-                        m_mtx.wait();
-                    }
+                Autolock( Semaphore * mutex)
+                    : m_mtx(*mutex)
+                {
+                    m_mtx.wait();
+                }
 
-                    ~Autolock()
-                    {
-                        m_mtx.post();
-                    }
+                ~Autolock()
+                {
+                    m_mtx.post();
+                }
 
-                protected:
+            protected:
 
-                private:
+            private:
 
-                    Semaphore & m_mtx;
-            };
+                const Semaphore & m_mtx;
+           };
+         */
 
         private:
 

@@ -39,6 +39,7 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/main/resources/cmake/toolChains"
     "${CMAKE_SOURCE_DIR}/src/main/resources/cmake/macros"
     "${CMAKE_SOURCE_DIR}/src/test/resources/cmake"
+    "/usr/local/lib/cmake"
 )
 
 option(BUILD_SHARED_LIBS "If enabled, shared libs will be built by default, otherwise static libs" OFF)
@@ -55,7 +56,7 @@ include(CPPCheck)
 include(CpplintWrapper)
 include(lizard)
 include(GccCoverage)
-
+include(CucumberCppConfig)
 getGitInfo()
 TODAY(APP_BUILD_DATE)
 set(COPYRIGHT_YEAR ${APP_BUILD_DATE})
@@ -72,10 +73,19 @@ ProcessorCount(Ncpu)
 
 find_package(Log4cxx)
 find_package(GoogleTestFwk)
-find_package(Cucumber-cpp)
+
+#find_package(Cucumber-cpp)
+
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost 1.69.0
+    COMPONENTS
+        thread system regex date_time program_options filesystem unit_test_framework
+    REQUIRED
+)
+
 find_package(Doxygen
-   REQUIRED  dot
-   OPTIONAL_COMPONENTS mscgen dia
+    #   REQUIRED  dot
+   OPTIONAL_COMPONENTS mscgen dia dot
 )
 
 include(GoogleTest) #gtest_discover_tests
@@ -123,16 +133,6 @@ configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/configs/Version.cpp.in"
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(${CMAKE_INSTALL_PREFIX}/cmake/cfs-osal-config-version.cmake COMPATIBILITY ExactVersion)
-
-
-add_custom_target(build-time-make-directory-and-copy-files verify all
-    #COMMAND LD_LIBRARY_PATH=${ROOT_LIBRARY_DIR} ROOTSYS=${ROOTSYS} make
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/conf
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/logs
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${PROJECT_SOURCE_DIR}/src/main/resources/configs/log4cxx.xml
-            ${CMAKE_INSTALL_PREFIX}/bin/conf
-)
 
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)

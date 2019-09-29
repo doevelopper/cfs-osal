@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import subprocess
-
 from conans import ConanFile, tools, CMake
 from conans.util import files
 from conans.errors import ConanInvalidConfiguration
+from conans.errors import ConanException
+from conans.client.build.cppstd_flags import cppstd_flag
 from conans.model.version import Version
+
+import os
+import sys
+import shutil
+import subprocess
 
 class CfsOsal(ConanFile):
     name = "CFS OSAL"
@@ -22,11 +26,21 @@ class CfsOsal(ConanFile):
     exports = ["LICENSE"]
     exports_sources = ["CMakeLists.txt", "src/*"]
     generators = "cmake"
+
     scm = {
         "type": "git",
         "url": "auto",
         "revision": "auto"
     }
+
+    options = {
+        "shared": [True, False],
+        "header_only": [True, False],
+        "error_code_header_only": [True, False],
+        "fPIC": [True, False],
+        "namespace_alias": [True, False],  # enable namespace alias,ns=cfs::osal
+    }
+
 
     no_copy_source = True
 
@@ -56,3 +70,4 @@ class CfsOsal(ConanFile):
         self.cpp_info.libs.extend(tools.collect_libs(self))
         if self.settings.os == "Linux":
             self.cpp_info.libs.extend(["-Wl,--end-group", "pthread"])
+

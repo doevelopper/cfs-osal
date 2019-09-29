@@ -2,7 +2,7 @@
 #define GIT_REVISION_DATA_HPP
     #define HASH                       "@HASH@"
     #define DATE                       "@COPYRIGHT_YEAR@"
-    #define BRANCH                     "@GIT_BRANCH@"
+    #define BRANCH                     "GIT_BRANCH"
     #define GIT_COMMIT_VERSION         0x@GIT_REVISION@
     #define GIT_COMMIT_DESC            "@GIT_COMMIT_SUBJECT@"
     #define NB_GIT_COMMIT              "@NB_COMMIT@"
@@ -18,7 +18,7 @@
     #define HOST_OS_NAME               "@CMAKE_SYSTEM_NAME@"
     #define HOST_OS_LONGNAME           "@CMAKE_SYSTEM@"
     #define HOST_OS_VERSION            "@CMAKE_SYSTEM_VERSION@"
-    #define VER_FILEVERSION_STR         "@GIT_REVISION@ @GIT_DATE@ (@GIT_BRANCH@ branch)"
+    #define VER_FILEVERSION_STR        "@GIT_REVISION@ @GIT_DATE@"
     #define VER_PRODUCTVERSION          VER_FILEVERSION
     #define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
 #endif

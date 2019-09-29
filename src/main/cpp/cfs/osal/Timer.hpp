@@ -39,7 +39,7 @@ namespace cfs::osal
             std::chrono::high_resolution_clock::time_point t0;
             std::chrono::high_resolution_clock::time_point start;
 
-        public:
+            public:
 
                 //           template<typename ...Args>
                 //              ScopeTimer (Args&& ...args)
@@ -47,23 +47,22 @@ namespace cfs::osal
                 //            {
                 //            }
 
-            ScopeTimer()
-            {
-                start = std::chrono::high_resolution_clock::now();
-            }
+                ScopeTimer()
+                {
+                    start = std::chrono::high_resolution_clock::now();
+                }
 
-            virtual ~ScopeTimer()
-            {
-                using std::chrono::duration_cast;
-                using std::chrono::nanoseconds;
-                auto end = std::chrono::high_resolution_clock::now();
-                auto duration = duration_cast<nanoseconds>(end - start);
+                virtual ~ScopeTimer()
+                {
+                    using std::chrono::duration_cast;
+                    using std::chrono::nanoseconds;
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(end - start);
 
                     //          fprintf(stderr,"%s:\t%.8fs\n",s.c_str()
                     //          ,std::chrono::duration_cast<std::chrono::duration<double>>(std::chrono::high_resolution_clock::now()-t0).count());
-            }
+                }
         };
-
 
         public:
 

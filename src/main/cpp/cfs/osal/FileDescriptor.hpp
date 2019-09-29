@@ -44,7 +44,7 @@ namespace cfs::osal
             std::size_t pread(char *buffer, std::size_t size, std::size_t off) const;
             std::size_t pwrite(const char *buffer, std::size_t size, std::size_t off) const;
             bool isInUse() const;
-            void close() noexcept;
+            void close() CFS_OSAL_NOEXCEPT;
 
         private:
 

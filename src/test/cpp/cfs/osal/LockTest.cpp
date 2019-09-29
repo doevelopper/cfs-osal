@@ -34,6 +34,7 @@ void LockTest::TearDown()
 TEST_F(LockTest, lockAndUnlock)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+    Lockable<std::string> s1;
     ASSERT_TRUE(true);
 }
 

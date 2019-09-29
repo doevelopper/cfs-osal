@@ -63,7 +63,7 @@ gtest_discover_tests(cfs.osal.test.bin
     DISCOVERY_TIMEOUT
         10
     EXTRA_ARGS
-        --iterration 1 --outputpath ${CMAKE_INSTALL_PREFIX}/qa/tr --module cfs.osal.test.bin
+        --iterration 1 --gtest_output=xml:${CMAKE_INSTALL_PREFIX}/qa/tr/cfs-osal-Test-Report.xml
     WORKING_DIRECTORY
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )

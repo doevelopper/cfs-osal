@@ -23,7 +23,7 @@ namespace cfs::osal::test
             void TearDown() override;
 
         protected:
-
+            Lock * testee;
             static log4cxx::LoggerPtr logger;
 
         private:

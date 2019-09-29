@@ -1,5 +1,6 @@
 
 add_library(cfs.osal.main
+    cfs/osal/Comparator
     cfs/osal/TimeFixture
     cfs/osal/Timer
     cfs/osal/task/Runnable

@@ -1,5 +1,4 @@
 
-
 /*
 #
 #               Copyright (c) 2014-2018 A.H.L
@@ -25,52 +24,25 @@
 */
 
 #include <regex>
-
 #include <cfs/osal/Version.hpp>
 
 using namespace semver;
-
-/*
-Version::Version(const Version & orig)
-{
-
-}
-*/
 
 Version::Version( const std::string & vers) noexcept
 :  m_major (APPLICATION_VERSION_MAJOR)
 ,  m_minor (APPLICATION_VERSION_MINOR)
 ,  m_patch (APPLICATION_VERSION_PATCH)
-,  m_build (GIT_COMMIT_VERSION)
+//,  m_sha (GIT_COMMIT_VERSION)
 
 {
-/*
-    m_version = version.trimmed();
-    const QStringList parts = m_version.split(". ");
-    const int index = parts.value( 3 ).indexOf( QRegExp( "[A-Z|a-z]" ) );
-
-    major = parts.value( 0 ).toInt();
-    minor = parts.value( 1 ).toInt();
-    tweak = parts.value( 2 ).toInt();
-    patch = parts.value( 3 ).toInt();
-
-    // if ( index != -1 )
-    // {
-    // build = parts.value( 3 ).mid( 0, index ).toInt();
-    // extra = parts.value( 3 ).mid( index );
-    // }
-    // else
-    // {
-    // build = parts.value( 3 ).toInt();
-    // }*/
+    //std::sscanf(vers,"%lu.%lu.%lu-%5[^.].%lu",
 }
-
 
 Version::~Version()
 {
+
 }
 
-/*
 int Version::getMajor ()
 {
     return VERSION_MAJOR;
@@ -86,47 +58,6 @@ int Version::getPatch ()
     return VERSION_PATCH;
 }
 
-QString Version::compilerString ()
-{
-    #if defined (Q_CC_CLANG) // must be before GNU, because clang claims to be GNU too
-        QString isAppleString;
-
-        # if defined (__apple_build_version__)// Apple clang has other version numbers
-            isAppleString = QLatin1String(" (Apple)");
-        # endif
-
-        return QLatin1String("Clang " ) + QString::number(__clang_major__) + QLatin1Char('.')
-               + QString::number(__clang_minor__) + isAppleString;
-
-    #elif defined (Q_CC_GNU)
-        return QLatin1String("GCC " ) + QLatin1String(__VERSION__);
-    #elif defined (Q_CC_MSVC)
-
-        if (_MSC_VER > 1999)
-        {
-            return QLatin1String("MSVC <unknown>");
-        }
-
-        if (_MSC_VER >= 1900) // 1900: MSVC 2015
-        {
-            return QLatin1String("MSVC 2015");
-        }
-
-        if (_MSC_VER >= 1800) // 1800: MSVC 2013 (yearly release cycle)
-        {
-            return QLatin1String("MSVC ") + QString::number(2008 + ((_MSC_VER / 100) - 13));
-        }
-
-        if (_MSC_VER >= 1500) // 1500: MSVC 2008, 1600: MSVC 2010, ... (2-year release cycle)
-        {
-            return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
-        }
-
-    #endif
-
-    return QLatin1String("<unknown compiler>");
-}
-
 std::string Version::getABI ()
 {
     // return @NAMESPACE@_VERSION_ABI;
@@ -136,8 +67,7 @@ std::string Version::getABI ()
 
 bool Version::check ()
 {
-    return (getMajor() == VERSION_MAJOR &&
-            getMinor() == VERSION_MINOR);
+    return (getMajor() == VERSION_MAJOR && getMinor() == VERSION_MINOR);
 }
 
 std::string Version::getString ()
@@ -150,7 +80,7 @@ std::string Version::getString ()
 std::string Version::getRevision ()
 {
     // return @NAMESPACE@_VERSION_REVISION;
-    return QString( " %1 " ).arg( GIT_COMMIT_VERSION , 1 , 16 ).toUpper().toStdString();
+    return ("std::string( GIT_COMMIT_VERSION)");
 }
 
 std::string Version::getRevString ()
@@ -159,7 +89,7 @@ std::string Version::getRevString ()
     version << getString(); // << '.' << std::hex << getRevision() << std::dec;
     return version.str();
 }
-*/
+
 /*
    std::string Version::getSchema ()
    {
@@ -233,8 +163,25 @@ constexpr int Version::compareVersion (const Version &rhs) const
     {
         return (true);
     }
+        if (m_releaseType != rhs.m_releaseType) {
+      return static_cast<std::uint8_t>(m_releaseType) - static_cast<std::uint8_t>(rhs.m_releaseType);
+    }
 */
 }
+
+/*!
+ * @brief Regex to capture semantic version
+ * @note The regex matches case insensitive
+ *       (1) major version 0 or unlimited number
+ *       (2) . minor version (0 or unlimited number)
+ *       (3) . patch version (0 or unlimited number)
+ *       (4) optional pre-release following a dash consisting of a alphanumeric letters
+ *           and hyphens using a non-capture subclause to exclude the dash from the
+ *           pre-release string
+ *       (5) optional build following a plus consisting of alphanumeric letters and
+ *           hyphens using a non-capture subclause to exclude the plus from the build string
+ *           Metadata (build time, number, etc.)
+ */
 
 void Version::set(const std::string & vers)
 {
@@ -246,5 +193,7 @@ void Version::set(const std::string & vers)
                   "(?:\\+([0-9a-z-]+[\\.0-9a-z-]*))?"  // (5)
                   , std::regex_constants::ECMAScript
                   | std::regex_constants::icase);
+// ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[a-zA-Z\d][-a-zA-Z.\d]*)?(\+[a-zA-Z\d][-a-zA-Z.\d]*)?$
+//(?<Major>0|(?:[1-9]\d*))(?:\.(?<Minor>0|(?:[1-9]\d*))(?:\.(?<Patch>0|(?:[1-9]\d*)))?(?:\-(?<PreRelease>[0-9A-Z\.-]+))?(?:\+(?<Meta>[0-9A-Z\.-]+))?)?
 }
 

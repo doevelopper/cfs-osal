@@ -7,7 +7,7 @@ export RND_NS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
 function helpFunction()
 {
 	cat <<tac
-Usage: $0 [options] 
+Usage: $0 [options]
 
 Options:
     --base        -b   Run common SW developemment platform.
@@ -40,7 +40,7 @@ select_container () {
 			case $ARG in
 				-b|--base)
 					export CONTAINER="doevelopper/cfs-dev-tools-common"
-					run_container 
+					run_container
 					;;
 				-a|--adlinktech)
 					export CONTAINER="doevelopper/cfs-dev-tools-adlinktech"
@@ -70,20 +70,14 @@ select_container () {
 	done
 }
 
+# --memory="1024m"
 # --memory=$(($(head -n 1 /proc/meminfo | awk '{print $2}') * 4 / 5))k \
 # --cpus=$((`nproc` - 1))
 # --log-opt max-size=50m  \
-# --volume $(GIT_ROOTDIR)/src/main/resources/dotfiles/.vim:/home/${DTR_NAMESPACE}/.vim \
-# --volume $(GIT_ROOTDIR)/src/main/resources/dotfiles/.vimrc:/home/${DTR_NAMESPACE}/.vimrc \
-# --volume $(GIT_ROOTDIR)/src/main/resources/dotfiles/.bashrc:/home/${DTR_NAMESPACE}/.bashrc \
 # --volume /etc/passwd:/etc/passwd:ro \
 # --volume /tmp/.X11-unix:/tmp/.X11-unix:rw \
 # --volume ${HOME}/.Xauthority:/root/.Xauthority \
 # --env DISPLAY=unix${DISPLAY}
-# --volume ${HOME}/.conan:/home/${USER}/.conan \
-# --volume ${HOME}/.ssh:/home/${USER}/.ssh \
-# --volume ${HOME}/.m2:/home/${USER}/.m2 \
- # \
 # --env LANG=C.UTF-8 \
 # --env LC_ALL=C.UTF-8 \
 # --env DOCKER_USER=`id -un` \
@@ -92,7 +86,7 @@ select_container () {
 # --env DOCKER_GROUP_ID=`id -g`
 
 run_container() {
-	docker run --rm  --workdir "/home/${USER}/workspace" --volume ${PWD}:/home/${USER}/workspace --user $(id -u ${USER}):$(id -g ${USER}) --name=$(whoami) --hostname="$(basename ${PWD})-${RND_NS}" --memory="1024m" --tty --interactive ${CONTAINER}:0.0.1
+	docker run --rm --volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro --volume ${HOME}/.ssh:/home/${USER}/.ssh --volume ${HOME}/.conan:/home/${USER}/.conan --volume ${HOME}/.m2:/home/${USER}/.m2 --volume $GIT_ROOTDIR/src/main/resources/dotfiles/.vim:/home/${USER}/.vim --volume $GIT_ROOTDIR/src/main/resources/dotfiles/.vimrc:/home/${USER}/.vimrc  --volume $GIT_ROOTDIR/src/main/resources/dotfiles/.bashrc:/home/${USER}/.bashrc --workdir "/home/${USER}/$(basename ${PWD})" --volume ${PWD}:/home/${USER}/$(basename ${PWD}) --user $(id -u ${USER}):$(id -g ${USER}) --name=$(whoami) --hostname="$(basename ${PWD})-${RND_NS}" --tty --interactive ${CONTAINER}:0.0.1
 }
 
 select_container $@

@@ -40,6 +40,7 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/main/resources/cmake/macros"
     "${CMAKE_SOURCE_DIR}/src/test/resources/cmake"
     "/usr/local/lib/cmake"
+    "/usr/lib/cmake"
 )
 
 option(BUILD_SHARED_LIBS "If enabled, shared libs will be built by default, otherwise static libs" OFF)
@@ -73,8 +74,6 @@ ProcessorCount(Ncpu)
 
 find_package(Log4cxx)
 find_package(GoogleTestFwk)
-
-#find_package(Cucumber-cpp)
 
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost 1.69.0

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="36" failures="0" disabled="0" errors="0" time="0.012" timestamp="2019-09-28T14:58:49" name="AllTests">
+  <testsuite name="TimeFixtureTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="TimeFixtureTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="TimeFixtureTest" />
+  </testsuite>
+  <testsuite name="MSPMSConsumerQueueTest" tests="4" failures="0" disabled="0" errors="0" time="0.001" timestamp="2019-09-28T14:58:49">
+    <testcase name="spscTest" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MSPMSConsumerQueueTest" />
+    <testcase name="mpmcTest" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MSPMSConsumerQueueTest" />
+    <testcase name="spscTest1" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="MSPMSConsumerQueueTest" />
+    <testcase name="mpscTest" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MSPMSConsumerQueueTest" />
+  </testsuite>
+  <testsuite name="MessageTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MessageTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MessageTest" />
+  </testsuite>
+  <testsuite name="MessageDataTest" tests="2" failures="0" disabled="0" errors="0" time="0.001" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MessageDataTest" />
+    <testcase name="test_2" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="MessageDataTest" />
+  </testsuite>
+  <testsuite name="FileDescriptorTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="FileDescriptorTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="FileDescriptorTest" />
+  </testsuite>
+  <testsuite name="MappedMemoryTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MappedMemoryTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MappedMemoryTest" />
+  </testsuite>
+  <testsuite name="MailboxTest" tests="2" failures="0" disabled="0" errors="0" time="0.001" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="MailboxTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MailboxTest" />
+  </testsuite>
+  <testsuite name="BidirectionnalContainerTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="BidirectionnalContainerTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="BidirectionnalContainerTest" />
+  </testsuite>
+  <testsuite name="WorkerThreadTest" tests="2" failures="0" disabled="0" errors="0" time="0.001" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="WorkerThreadTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="WorkerThreadTest" />
+  </testsuite>
+  <testsuite name="SpinLockTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="SpinLockTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="SpinLockTest" />
+  </testsuite>
+  <testsuite name="SingletonTest" tests="2" failures="0" disabled="0" errors="0" time="0" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="SingletonTest" />
+    <testcase name="test_2" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="SingletonTest" />
+  </testsuite>
+  <testsuite name="SemaphoreTest" tests="2" failures="0" disabled="0" errors="0" time="0.001" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="SemaphoreTest" />
+    <testcase name="test_2" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="SemaphoreTest" />
+  </testsuite>
+  <testsuite name="MessageQueueTest" tests="2" failures="0" disabled="0" errors="0" time="0.001" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="MessageQueueTest" />
+    <testcase name="test_2" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="MessageQueueTest" />
+  </testsuite>
+  <testsuite name="BinaryWriterTest" tests="2" failures="0" disabled="0" errors="0" time="0.002" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_1" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="BinaryWriterTest" />
+    <testcase name="test_2" status="run" result="completed" time="0.001" timestamp="2019-09-28T14:58:49" classname="BinaryWriterTest" />
+  </testsuite>
+  <testsuite name="VersionTest" tests="6" failures="0" disabled="0" errors="0" time="0.004" timestamp="2019-09-28T14:58:49">
+    <testcase name="test_Simple_Version" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="VersionTest" />
+    <testcase name="test_Simple_Version_Error" status="run" result="completed" time="0.004" timestamp="2019-09-28T14:58:49" classname="VersionTest" />
+    <testcase name="test_Version_Error" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="VersionTest" />
+    <testcase name="test_Version_build" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="VersionTest" />
+    <testcase name="test_Version_pre_release" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="VersionTest" />
+    <testcase name="test_abi_operators" status="run" result="completed" time="0" timestamp="2019-09-28T14:58:49" classname="VersionTest" />
+  </testsuite>
+</testsuites>

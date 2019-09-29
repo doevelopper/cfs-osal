@@ -33,7 +33,7 @@ set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wnoexcept -Winit-self  -Wmissing-decl
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wfloat-equal)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wcomment -Wimport  -Wchar-subscripts -Wswitch-default -Wdisabled-optimization)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wcast-qual  -Wold-style-cast -Wcast-align  -Wctor-dtor-privacy  )
-set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wredundant-decls -Wmissing-include-dirs -Wvariadic-macros -Wwrite-strings)
+set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wredundant-decls -Wvariadic-macros -Wwrite-strings) #-Wmissing-include-dirs
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wlong-long -Wmissing-braces -Wreturn-type -Wsequence-point -Wsign-compare)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wmissing-format-attribute -Wpacked -Wparentheses -Wpointer-arith)
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wunused-variable  -Wunused-parameter -Wunused-value -Wuninitialized)

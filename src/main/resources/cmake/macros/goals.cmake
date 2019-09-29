@@ -1,15 +1,15 @@
-if(NOT TARGET ${PROJECT_NAME}-${BUILD_TYPE})
-    add_custom_target(${PROJECT_NAME}-${BUILD_TYPE}
-        COMMAND
-            ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ${CMAKE_SOURCE_DIR}
-        WORKING_DIRECTORY
-            ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE} #${PROJECT_SOURCE_DIR} vs ${CMAKE_SOURCE_DIR}
-        COMMAND
-            ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE}
-        COMMENT
-            "Switch CMAKE_BUILD_TYPE to ${BUILD_TYPE}. Building  ${BUILD_TYPE} application"
-    )
-endif()
+#if(NOT TARGET ${PROJECT_NAME}-${BUILD_TYPE})
+#    add_custom_target(${PROJECT_NAME}-${BUILD_TYPE}
+#        COMMAND
+#            ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ${CMAKE_SOURCE_DIR}
+#        WORKING_DIRECTORY
+#            ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE} #${PROJECT_SOURCE_DIR} vs ${CMAKE_SOURCE_DIR}
+#        COMMAND
+#            ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target all WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build-${CMAKE_BUILD_TYPE}
+#        COMMENT
+#            "Switch CMAKE_BUILD_TYPE to ${BUILD_TYPE}. Building  ${BUILD_TYPE} application"
+#    )
+#endif()
 
 # Build goals added hire are an adaptation for maven build licyle
 # https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
@@ -107,7 +107,7 @@ endif()
 if(NOT TARGET ${PROJECT_NAME}-compile)
     add_custom_target(${PROJECT_NAME}-compile
         COMMENT "Compile the source code of the project."
-        DEPENDS ${PROJECT_NAME}-process-resources
+        DEPENDS ${PROJECT_NAME}.main ${PROJECT_NAME}-process-resources
     )
 endif()
 
@@ -149,7 +149,7 @@ endif()
 if(NOT TARGET ${PROJECT_NAME}-test-compile)
     add_custom_target(${PROJECT_NAME}-test-compile
         COMMENT "Compile the test source code into the test destination directory."
-        DEPENDS ${PROJECT_NAME}-process-test-resources
+        DEPENDS ${PROJECT_NAME}.test ${PROJECT_NAME}-process-test-resources
     )
 endif()
 
@@ -191,7 +191,7 @@ endif()
 if(NOT TARGET ${PROJECT_NAME}-integration-test)
     add_custom_target(${PROJECT_NAME}-integration-test
         COMMENT "Process and deploy the package if necessary into an environment where integration tests can be run."
-        DEPENDS ${PROJECT_NAME}-pre-integration-test
+        DEPENDS ${PROJECT_NAME}.it-test.steps ${PROJECT_NAME}-pre-integration-test
     )
 endif()
 

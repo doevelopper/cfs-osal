@@ -5,6 +5,8 @@
 
 #include <atomic>
 #include <thread>
+#include <memory>
+#include <functional>
 
 namespace cfs::osal::task
 {
@@ -17,6 +19,7 @@ namespace cfs::osal::task
         public:
 
             Runnable();
+            Runnable( std::function<void()> action);
             Runnable(Runnable const&) = delete;
             Runnable& operator =(Runnable const&) = delete;
             virtual ~Runnable();

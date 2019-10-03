@@ -32,30 +32,30 @@ namespace cfs::osal
             Error& operator=(Error&&) noexcept;
             Error(const Error&);
             Error& operator=(const Error&);
-            template <typename... Args>
-            raiseError(typename std::remove_reference<decltype(errno)>::type const errval,	Args&&... args)
+            template <typename ... Args>
+            raiseError(typename std::remove_reference<decltype(errno)>::type const errval,  Args&&... args)
             {
-              throw	std::system_error {
-    		    errval,
-			    std::system_category().default_error_condition(errval).category(),
-			    std::forward<Args>(args)...};
+                throw std::system_error {
+                          errval,
+                          std::system_category().default_error_condition(errval).category(),
+                          std::forward<Args>(args)...};
             }
             void logSystemErrorMsg()
             {
-               	try
-	            {
-		            throw;
-	            }
-	            catch (std::system_error const& e)
-	            {
-		            auto c = e.code();
-		            std::cout << "errno = "     << c.value() << "..."  << std::endl
-		                << "      What: " << e.what()            << std::endl
-		                << "  Category: " << c.category().name() << std::endl
-		                << "     Value: " << c.value()           << std::endl
-		                << "   Message: " << c.message()         << std::endl
-		                << std::endl;
-	            }
+                try
+                {
+                    throw;
+                }
+                catch (std::system_error const& e)
+                {
+                    auto c = e.code();
+                    std::cout << "errno = "     << c.value() << "..."  << std::endl
+                              << "      What: " << e.what()            << std::endl
+                              << "  Category: " << c.category().name() << std::endl
+                              << "     Value: " << c.value()           << std::endl
+                              << "   Message: " << c.message()         << std::endl
+                              << std::endl;
+                }
             }
     };
 }

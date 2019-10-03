@@ -1,9 +1,10 @@
 
+
 #include <cfs/osal/CpuAffinity.hpp>
 
 /*
- *TEST(cpuset, construction)
-{
+ * TEST(cpuset, construction)
+   {
     {
         cpuset cpuset;
         EXPECT_EQ(0u, cpuset.size());
@@ -30,10 +31,10 @@
         cpuset cpuset2 = cpuset1;
         EXPECT_EQ(cpuset1, cpuset2);
     }
-}
+   }
 
-TEST(cpuset, insertion)
-{
+   TEST(cpuset, insertion)
+   {
     cpuset cpuset;
 
     // first try to add something above CPU_SETSIZE
@@ -44,10 +45,10 @@ TEST(cpuset, insertion)
     cpuset.insert(2);
     cpuset.insert(3);
     EXPECT_EQ(3u, cpuset.size());
-}
+   }
 
-TEST(cpuset, find)
-{
+   TEST(cpuset, find)
+   {
     cpuset cpuset;
 
     cpuset.insert(1);
@@ -55,10 +56,10 @@ TEST(cpuset, find)
     EXPECT_TRUE(cpuset.find(1));
     EXPECT_FALSE(cpuset.find(2));
     EXPECT_TRUE(cpuset.find(3));
-}
+   }
 
-TEST(cpuset, removal)
-{
+   TEST(cpuset, removal)
+   {
     cpuset cpuset;
 
     cpuset.insert(1);
@@ -67,10 +68,10 @@ TEST(cpuset, removal)
 
     cpuset.remove(2);
     EXPECT_FALSE(cpuset.find(2));
-}
+   }
 
-TEST(cpuset, operators)
-{
+   TEST(cpuset, operators)
+   {
     {
         // Test AND
         cpuset cpuset1, cpuset2;
@@ -122,10 +123,10 @@ TEST(cpuset, operators)
         EXPECT_TRUE(cpuset1.find(3));
         EXPECT_EQ(cpuset1, cpuset3);
     }
-}
+   }
 
-TEST(cpuset, set_affinity)
-{
+   TEST(cpuset, set_affinity)
+   {
     cpuset cpuset_save = get_cpu_affinity();
 
     {
@@ -151,10 +152,10 @@ TEST(cpuset, set_affinity)
     }
 
     set_cpu_affinity(cpuset_save);
-}
+   }
 
-TEST(cpuset, get_affinity)
-{
+   TEST(cpuset, get_affinity)
+   {
     cpuset cpuset_save = get_cpu_affinity();
 
     {
@@ -170,6 +171,7 @@ TEST(cpuset, get_affinity)
     }
 
     set_cpu_affinity(cpuset_save);
-}
+   }
 
-*/
+ */
+

@@ -3,7 +3,6 @@
 #include <cfs/osal/CpuAffinity.hpp>
 #include <pthread.h>
 #include <sched.h>
-#include <sys/cpuset.h>
 
 using namespace cfs::osal;
 

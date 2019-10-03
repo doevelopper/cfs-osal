@@ -1,5 +1,9 @@
 
 add_library(cfs.osal.main
+    #cfs/osal/CpuAffinity
+    cfs/osal/CharacterDevice
+    cfs/osal/BlockDevice
+    cfs/osal/ByteStram
     cfs/osal/Comparator
     cfs/osal/TimeFixture
     cfs/osal/Timer
@@ -23,6 +27,14 @@ add_library(cfs.osal.main
     cfs/osal/Semaphore
     cfs/osal/BinaryWriter
     cfs/osal/task/Task
+    cfs/osal/network/IOService
+    cfs/osal/network/Socket
+    cfs/osal/network/serial/Uart
+    cfs/osal/network/i2c/I2c
+    cfs/osal/network/i2s/I2s
+    cfs/osal/network/spi/Spi
+    cfs/osal/network/rpi/RpiUart
+    cfs/osal/network/can/CAN
     ${CMAKE_BINARY_DIR}/cfs/osal/Version
 )
 

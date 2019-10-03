@@ -8,6 +8,12 @@
 
 namespace cfs::osal
 {
+    template<class Mutex, class Locker = std::unique_lock<Mutex> >
+    Locker makeLock(Mutex& mutex)
+    {
+        return Locker(mutex);
+    }
+
     template <typename L>
     class Lock
     {

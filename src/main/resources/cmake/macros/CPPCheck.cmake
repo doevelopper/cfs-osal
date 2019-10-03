@@ -1,6 +1,6 @@
 set(CPPCHECK_HTMLREPORT_GENERATOR "${PROJECT_SOURCE_DIR}/src/main/resources/scripts/cppcheck-htmlreport.py")
 set(CONTROVERSIAL "–inconclusive")
-set(CPPCHECK_TEMPLATE_ARG --template gcc) # --template="[{severity}][{id}] {message} {callstack} \(On {file}:{line}\)" 
+set(CPPCHECK_TEMPLATE_ARG --template gcc) # --template="[{severity}][{id}] {message} {callstack} \(On {file}:{line}\)"
 
 set(CPPCHECK_OPTIONS
     ${CONTROVERSIAL}
@@ -16,8 +16,8 @@ set(CPPCHECK_OPTIONS
     --inline-suppr
 #    --language=c, c++
 #    --suppress=missingIncludeSystem
-#    --library=qt.cfg 
-    --verbose 
+#    --library=qt.cfg
+    --verbose
 #    --quiet
     --xml-version=2
     -j4
@@ -34,8 +34,8 @@ function(add_cppcheck_analysis target_name bin_folder)
 
         find_program(CPPCHECK cppcheck
             NAMES cppcheck
-            PATHS  
-                /usr/local/bin 
+            PATHS
+                /usr/local/bin
                 /opt/cmake/bin/
 #           NO_DEFAULT_PATH
         )
@@ -45,7 +45,7 @@ function(add_cppcheck_analysis target_name bin_folder)
 
             set(WORKING_DIR "${CMAKE_INSTALL_PREFIX}/qa/cppcheck/${target_name}")
             file(MAKE_DIRECTORY ${WORKING_DIR})
-            file(GLOB_RECURSE ALL_SOURCE_FILES ${bin_folder} *.cpp) 
+            file(GLOB_RECURSE ALL_SOURCE_FILES ${bin_folder} *.cpp)
             file(GLOB_RECURSE ALL_HEADER_FILES ${bin_folder} *.hpp)
 
             add_custom_target( ${target_name}-cppcheck
@@ -85,7 +85,7 @@ function(add_cppcheck_analysis_command target_name bin_folder)
 
         find_program(CPPCHECK cppcheck
             NAMES cppcheck
-            PATHS  
+            PATHS
                 /usr/local/bin
                 /opt/cmake/bin/
 #            NO_DEFAULT_PATH
@@ -101,23 +101,23 @@ function(add_cppcheck_analysis_command target_name bin_folder)
              add_custom_command(TARGET ${target_name} PRE_BUILD
                 COMMAND
                     ${CMAKE_COMMAND} -E make_directory ${WORKING_DIR}
-                COMMAND 
+                COMMAND
                     ${CPPCHECK} ${CPPCHECK_OPTIONS} ${CPPCHECK_TEMPLATE_ARG} ${ALL_SOURCE_FILES} ${ALL_HEADER_FILES}
                         --cppcheck-build-dir=${WORKING_DIR} 2> ${WORKING_DIR}/cppcheck.xml
-                COMMAND 
+                COMMAND
                     ${PYTHON_EXECUTABLE} ${CPPCHECK_HTMLREPORT_GENERATOR} --title=${target_name} --file=${WORKING_DIR}/cppcheck.xml
                         --source-dir=${bin_folder} --report-dir=${WORKING_DIR}
-                WORKING_DIRECTORY 
+                WORKING_DIRECTORY
                         ${bin_folder}
-                DEPENDS 
+                DEPENDS
                      ${ALL_SOURCE_FILES} ${ALL_HEADER_FILES}
-                COMMENT 
+                COMMENT
                      "[CPPCheck Static Code Analysis] ${bin_folder}"
         )
         else(CPPCHECK)
 #            add_custom_target( ${target_name}-cppcheck
             add_custom_command(TARGET ${target_name} PRE_BUILD
-                COMMAND 
+                COMMAND
                     ${CMAKE_COMMAND} -E echo "[---SKIPPED---] CPPCheck  Static Code analysis!"
            )
        endif(CPPCHECK)
@@ -126,7 +126,7 @@ function(add_cppcheck_analysis_command target_name bin_folder)
 #        add_custom_target(${target_name}-cppcheck
         add_custom_command(TARGET ${target_name}
             PRE_BUILD
-            COMMAND 
+            COMMAND
                 ${CMAKE_COMMAND} -E echo "[---SKIPPED---] CPPCheck  Static Code analysis! Python interp missing"
         )
     endif(PYTHONINTERP_FOUND)

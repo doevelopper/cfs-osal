@@ -45,3 +45,37 @@ relwithdebinfo:appplication:build:
 minsizerel:appplication:build:
     variables:
         BUILD_TYPE: MinSizeRel
+
+Code duplicate detection:
+    variables:
+        BUILD_TYPE: Release
+
+Continuous code quality:
+    variables:
+        BUILD_TYPE: Release
+
+Dynamic code analysis:
+    variables:
+        BUILD_TYPE: Release
+
+Dynamic application security testing:
+    variables:
+        BUILD_TYPE: Release
+
+Static application security testing:
+    variables:
+        BUILD_TYPE: Release
+
+Run time application security protection:
+    variables:
+        BUILD_TYPE: Release
+
+Binary code performance:
+    variables:
+        BUILD_TYPE: Release
+
+Publish code quality:
+    variables:
+        BUILD_TYPE: Release
+
+

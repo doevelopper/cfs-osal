@@ -65,7 +65,7 @@
         PROJECT_SOURCE_DIR: "$CI_PROJECT_DIR"
         GIT_SUBMODULE_STRATEGY: "none"
         GET_SOURCES_ATTEMPTS: "3"
-        BUILD_DIRECTORY: "build-$CI_PROJECT_NAME"
+        BUILD_DIRECTORY: ${CI_PROJECT_NAME}-build-${BUILD_TYPE}
         BUILD_GENERATOR: "Unix Makefiles"
 
 .Log files: &log_files  [./*.log, ./build/logs/]
@@ -233,32 +233,6 @@
         - echo "Building ${BUILD_TYPE} mode done"
     # artifacts:
         # paths:
-
-# validate:
-    # stage: configure
-    # variables:
-        # BUILD_TYPE: Debug
-        # BUILD_DIRECTORY: ${CI_PROJECT_NAME}-build-${BUILD_TYPE}
-        # STAGING_DIR: ${BUILD_DIRECTORY}/.local
-    # before_script:
-        # - echo "Building ${CI_PROJECT_NAME} $CI_PIPELINE_ID"
-        # - mkdir -p ${STAGING_DIR}
-        # - export PATH=${STAGING_DIR}/bin:$PATH
-
-    # script:
-        # - >
-           # if [ ! -d "${BUILD_DIRECTORY}" ]; then
-               # cmake -E make_directory ${BUILD_DIRECTORY}
-           # fi
-        # - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" \
-            # -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} \
-            # -DCMAKE_PREFIX_PATH=/usr/local
-        # - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
-        # - cmake --build ${BUILD_DIRECTORY} --target test
-                 - cmake --build ${BUILD_DIRECTORY} --target features
-                 - cmake --build ${BUILD_DIRECTORY} --target install
-    # after_script:
-        # - echo "${BUILD_DIRECTORY} directory created"
 
 Intro CI:
     stage: Intro

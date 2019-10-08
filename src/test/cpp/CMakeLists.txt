@@ -3,23 +3,22 @@ add_executable (cfs.osal.test.bin
 #add_library(cfs.osal.test
     cfs/osal/Test
     cfs/osal/unitTest
-    cfs/osal/TimeFixtureTest
-    cfs/osal/log/TestLogger
-    cfs/osal/queues/MSPMSConsumerQueueTest
-    cfs/osal/MessageTest
-    cfs/osal/MessageDataTest
-    cfs/osal/FileDescriptorTest
-    cfs/osal/MappedMemoryTest
-    cfs/osal/MailboxTest
-    cfs/osal/BidirectionnalContainerTest
-
-    cfs/osal/thread/WorkerThreadTest
-    cfs/osal/SpinLockTest
-    cfs/osal/SingletonTest
-    cfs/osal/SemaphoreTest
-    cfs/osal/MessageQueueTest
-    cfs/osal/BinaryWriterTest
-    cfs/osal/mocks/SystemCallMock
+    # cfs/osal/TimeFixtureTest
+    # cfs/osal/log/TestLogger
+    # cfs/osal/queues/MSPMSConsumerQueueTest
+    # cfs/osal/MessageTest
+    # cfs/osal/MessageDataTest
+    # cfs/osal/FileDescriptorTest
+    # cfs/osal/MappedMemoryTest
+    # cfs/osal/MailboxTest
+    # cfs/osal/BidirectionnalContainerTest
+    # cfs/osal/thread/WorkerThreadTest
+    # cfs/osal/SpinLockTest
+    # cfs/osal/SingletonTest
+    # cfs/osal/SemaphoreTest
+    # cfs/osal/MessageQueueTest
+    # cfs/osal/BinaryWriterTest
+    # cfs/osal/mocks/SystemCallMock
     cfs/osal/VersionTest
 )
 
@@ -63,7 +62,8 @@ gtest_discover_tests(cfs.osal.test.bin
     DISCOVERY_TIMEOUT
         10
     EXTRA_ARGS
-        --iterration 1 --gtest_output=xml:${CMAKE_INSTALL_PREFIX}/qa/tr/cfs-osal-Test-Report.xml
+        --gtest_repeat=1 --gtest_color=auto --gtest_print_utf8=0 --gtest_output=xml:${CMAKE_INSTALL_PREFIX}/qa/tr/cfs-osal-Test-Report.xml
+		# --gtest_break_on_failure/ --gtest_catch_exceptions=0   add for debug mode
     WORKING_DIRECTORY
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )

@@ -49,9 +49,9 @@ int Test::run (int argc, char * argv[])
 
     // ::testing::GTEST_FLAG(filter) = suite;
     // GTEST_FLAG(output) = "xml:" + testOuputPath;
-    ::testing::GTEST_FLAG(output) = "xml:cfs-osal-Test-Report.xml";
-    ::testing::FLAGS_gmock_verbose = "verbose";
-    //    ::testing::GTEST_FLAG(print_time) = false;
+    // ::testing::GTEST_FLAG(output) = "xml:cfs-osal-Test-Report.xml";
+    // ::testing::FLAGS_gmock_verbose = "verbose";
+    // ::testing::GTEST_FLAG(print_time) = false;
 
     try
     {

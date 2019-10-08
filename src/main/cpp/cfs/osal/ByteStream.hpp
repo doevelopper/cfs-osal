@@ -37,7 +37,7 @@ namespace cfs::osal
             template <typename T>
             ByteStream & operator>>(T& outData)
             {
-                //                this->read(reinterpret_cast<char *>(&outData), sizeof(outData));
+                //this->read(reinterpret_cast<char *>(&outData), sizeof(outData));
 
                 return (*this);
             }
@@ -45,7 +45,7 @@ namespace cfs::osal
             template <typename T>
             ByteStream & operator<<(T& outData)
             {
-                //               this->write(reinterpret_cast<const char *>(&data), sizeof(data));
+                //this->write(reinterpret_cast<const char *>(&data), sizeof(data));
 
                 return (*this);
             }
@@ -60,13 +60,14 @@ namespace cfs::osal
             ByteStream & operator>>(std::uint64_t & data);
             ByteStream & operator<<(const std::int8_t & data);
             ByteStream & operator>>(std::int8_t & data);
-        /*
+
                     ByteStream & operator<<(const std::int16_t & data);
                     ByteStream & operator>>(std::int16_t & data);
                     ByteStream & operator<<(const std::int32_t & data);
                     ByteStream & operator>>(std::int32_t & data);
                     ByteStream & operator<<(const std::int64_t & data);
                     ByteStream & operator>>(std::int64_t & data);
+        /*
                     ByteStream & operator<<(const bool & data);
                     ByteStream & operator>>(bool & data);
                     ByteStream & operator<<(const char & data);

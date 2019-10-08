@@ -2,39 +2,39 @@
 add_library(cfs.osal.main
     #cfs/osal/CpuAffinity
     cfs/osal/CharacterDevice
-    cfs/osal/BlockDevice
-    cfs/osal/ByteStram
-    cfs/osal/Comparator
-    cfs/osal/TimeFixture
-    cfs/osal/Timer
-    cfs/osal/task/Runnable
-    cfs/osal/properties/XProperty
-    cfs/osal/thread/WorkerThread
-    cfs/osal/queues/MultiProducerMultiConsumerQueue
-    cfs/osal/queues/SingleProducerSingleConsumerQueue
-    cfs/osal/queues/MultiProducerSingleConsumerQueue
-    cfs/osal/MessageQueue
+    # cfs/osal/BlockDevice
+    # cfs/osal/ByteStream
+    # cfs/osal/Comparator
+    # cfs/osal/TimeFixture
+    # cfs/osal/Timer
+    # cfs/osal/task/Runnable
+    # cfs/osal/properties/XProperty
+    # cfs/osal/thread/WorkerThread
+    # cfs/osal/queues/MultiProducerMultiConsumerQueue
+    # cfs/osal/queues/SingleProducerSingleConsumerQueue
+    # cfs/osal/queues/MultiProducerSingleConsumerQueue
+    # cfs/osal/MessageQueue
 #    cfs/osal/Mailbox
-    cfs/osal/Message
-    cfs/osal/MessageData
-    cfs/osal/Object
-    cfs/osal/BidirectionnalContainer
-    cfs/osal/FileDescriptor
-    cfs/osal/MappedMemory
-    cfs/osal/Singleton
-    cfs/osal/SpinLock
-    cfs/osal/SystemMonitor
-    cfs/osal/Semaphore
-    cfs/osal/BinaryWriter
-    cfs/osal/task/Task
-    cfs/osal/network/IOService
-    cfs/osal/network/Socket
-    cfs/osal/network/serial/Uart
-    cfs/osal/network/i2c/I2c
-    cfs/osal/network/i2s/I2s
-    cfs/osal/network/spi/Spi
-    cfs/osal/network/rpi/RpiUart
-    cfs/osal/network/can/CAN
+    # cfs/osal/Message
+    # cfs/osal/MessageData
+    # cfs/osal/Object
+    # cfs/osal/BidirectionnalContainer
+    # cfs/osal/FileDescriptor
+    # cfs/osal/MappedMemory
+    # cfs/osal/Singleton
+    # cfs/osal/SpinLock
+    # cfs/osal/SystemMonitor
+    # cfs/osal/Semaphore
+    # cfs/osal/BinaryWriter
+    # cfs/osal/task/Task
+    # cfs/osal/network/IOService
+    # cfs/osal/network/Socket
+    # cfs/osal/network/serial/Uart
+    # cfs/osal/network/i2c/I2c
+    # cfs/osal/network/i2s/I2s
+    # cfs/osal/network/spi/Spi
+    # cfs/osal/network/rpi/RpiUart
+    # cfs/osal/network/can/CAN
     ${CMAKE_BINARY_DIR}/cfs/osal/Version
 )
 
@@ -46,6 +46,11 @@ target_link_libraries(cfs.osal.main
         $<$<PLATFORM_ID:Linux>:pthread>
         LOG4CXX::LOG4CXX
 )
+
+#target_link_options(cfs.osal.main
+#    PUBLIC
+#        -m64
+#)
 
 set_target_properties( cfs.osal.main PROPERTIES
     VERSION
@@ -95,8 +100,8 @@ target_compile_definitions(cfs.osal.main
         "VERBOSITY=$<IF:$<BOOL:${VERBOSE}>,30,10>"
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Debug>>: -DRELEASE_LEVEL="SNAPSHOOT"> # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
         $<$<CXX_COMPILER_ID:GNU>: NOMINMAX>
-        -D_GLIBCXX_SANITIZE_VECTOR
-
+        # -D_GLIBCXX_SANITIZE_VECTOR
+        #QNX POSIX XENOMAI PREEMPT_RT
 )
 
 set_target_properties ( cfs.osal.main PROPERTIES LINK_FLAGS -m64 )

@@ -79,7 +79,7 @@ before_script:
   ## email.
   ##
   - git config --global user.email "happyman@hotmail.fr"
-  - git config --global user.name "Darth Vader"
+  - git config --global user.name "Nicols J. FURY"
 
 
 Test SSH:
@@ -89,3 +89,4 @@ Test SSH:
 
   # try to clone yourself. A *PUBLIC* key paired to the SSH_PRIVATE_KEY was added as deploy key to this repository
   - git clone git@gitlab.com:gitlab-examples/ssh-private-key.git
+

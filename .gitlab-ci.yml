@@ -23,59 +23,101 @@ include:
     - local: .gitlab/ci/globals.yml
 
 debug:appplication:build:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Debug
+        BUILD_OPTIONS: ""
 
 release:appplication:build:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 coverage:appplication:build:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Coverage
+        BUILD_OPTIONS: ""
 
 profiling:appplication:build:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Profiling
+        BUILD_OPTIONS: ""
 
 relwithdebinfo:appplication:build:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: RelWithDebInfo
+        BUILD_OPTIONS: ""
 
 minsizerel:appplication:build:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: MinSizeRel
+        BUILD_OPTIONS: ""
 
 Code duplicate detection:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Continuous code quality:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Dynamic code analysis:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Dynamic application security testing:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Static application security testing:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Run time application security protection:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Binary code performance:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 Publish code quality:
+    extends:
+        .build-applications
     variables:
         BUILD_TYPE: Release
+        BUILD_OPTIONS: ""
 
 

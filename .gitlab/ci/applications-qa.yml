@@ -35,8 +35,8 @@ Continuous code quality:
     <<: *agent-who
     variables:
         JOB_DATE: "date +%Y-%m-%d-%H:%M:%S"
-        SONAR_PROJECT_KEY: "<YOUR PROJECT KEY>"  
-        SONAR_PROJECT_NAME: "$CI_PROJECT_NAME"  
+        SONAR_PROJECT_KEY: "<YOUR PROJECT KEY>"
+        SONAR_PROJECT_NAME: "$CI_PROJECT_NAME"
         SONAR_PROJECT_VERSION: "$CI_BUILD_ID"
     stage: Quality assurance
     before_script:
@@ -61,7 +61,7 @@ Continuous code quality:
     artifacts:
         paths:
             - $BUILD_DIRECTORY
-    only: 
+    only:
         - /^features\/.*/
     except:
         - tags
@@ -106,7 +106,7 @@ Static Code Analysis:
 #                rm -f coverity-tool.tgz;
 #                mv cov-*  cov-analysis;
 #            fi
-#        - export PATH=$PATH:${PWD}/cov-analysis/bin	
+#        - export PATH=$PATH:${PWD}/cov-analysis/bin
     script:
         - uname -a
 #        - cov-configure --comptype gcc --compiler aarch64-linux-gnu-gcc --template
@@ -181,8 +181,9 @@ Publish code quality:
     artifacts:
         paths:
             - $BUILD_DIRECTORY
-    only: 
+    only:
         - /^(master|develop)$/
     except:
         - tags
         - schedules
+

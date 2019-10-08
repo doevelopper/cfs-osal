@@ -142,6 +142,8 @@ namespace cfs::osal
             gnutls_certificate_credentials m_x509Credential;
             std::uint32_t                  m_nbbits;
             bool                           m_tls;
+            static const int INVALID_SOCKET = -1;
+            static const int SOCKET_ERROR = -1;
     };
     Socket& operator<<(Socket& socket, const std::string& data);
     Socket& operator>>(Socket& socket, std::string & data);

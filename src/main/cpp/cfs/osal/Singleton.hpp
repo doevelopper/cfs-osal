@@ -25,10 +25,10 @@ namespace cfs::osal
             template <typename ... Args>
             static inline Derived *GetInstancePointer(Args && ... args)
             {
-                //static Derived * m_instancePointer = CreateInstance(std::forward<Args>(args)...);
-                m_instancePointer = CreateInstance(std::forward<Args>(args)...);
+                static Derived * instancePointer = CreateInstance(std::forward<Args>(args)...);
+                //m_instancePointer = CreateInstance(std::forward<Args>(args)...);
 
-                return m_instancePointer;
+                return instancePointer;
             }
 
         protected:

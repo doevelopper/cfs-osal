@@ -58,16 +58,6 @@
         paths:
             - ${DEPS_INSTALL_DIR}
 
-.variables: &variables
-    variables:
-        GIT_DEPTH: "1"
-        PROJECT_NAME: "$CI_PROJECT_NAME"
-        PROJECT_SOURCE_DIR: "$CI_PROJECT_DIR"
-        GIT_SUBMODULE_STRATEGY: "none"
-        GET_SOURCES_ATTEMPTS: "3"
-        BUILD_DIRECTORY: ${CI_PROJECT_NAME}-build-${BUILD_TYPE}
-        BUILD_GENERATOR: "Unix Makefiles"
-
 .Log files: &log_files  [./*.log, ./build/logs/]
 
 # .Build logs: &save_build_logs
@@ -170,6 +160,29 @@
         TRIPLET=aarch64-linux-gnu
         # - export PATH=/opt/aarch64-linux-gnu/bin/:/opt/armv8l-linux-gnueabihf/bin/:$PATH
 
+.cross_compile_variables: &cross_compile_variables
+    CC: ${TRIPLET}-gcc
+    CXX: ${TRIPLET}-g++
+    NM: ${TRIPLET}-nm
+    AR: ${TRIPLET}-ar
+    AS: ${TRIPLET}-as
+    LD: ${TRIPLET}-ld
+    CPP: ${TRIPLET}-cpp
+    OBJDUMP: ${TRIPLET}-objdump
+    OBJCOPY: ${TRIPLET}-objcopy
+    READELF: ${TRIPLET}-readelf
+    RANLIB: ${TRIPLET}-ranlib
+    GDB: ${TRIPLET}-gdb
+    GFORTRAN: ${TRIPLET}-gfortran
+    STRINGS: ${TRIPLET}-strings
+    SIZE: ${TRIPLET}-size
+    GCOV: ${TRIPLET}-gcov
+    STRIP: ${TRIPLET}-strip
+    GPROF: ${TRIPLET}-gprof
+    BUILDTYPE_ARGS: >
+        -Dpython=enabled
+        -Drtsp_server=enabled
+
 .pre_shared: &pre_shared
     before_script:
         - date
@@ -190,12 +203,14 @@
 .variables: &common_variables
 #    CI_DEBUG_TRACE: "true"
 #    GIT_SUBMODULE_STRATEGY: "none"
-#    GIT_SUBMODULE_STRATEGY: "recursive"
 #    GIT_STRATEGY: "fetch"
 #    GIT_CHECKOUT: "false"
+    GIT_DEPTH: "1"
+    GIT_SUBMODULE_STRATEGY: "recursive"
+    BUILD_DIRECTORY: ${CI_PROJECT_NAME}-build-${BUILD_TYPE}
+    BUILD_GENERATOR: "Unix Makefiles"
     GET_SOURCES_ATTEMPTS: "3"
     ARTIFACT_DOWNLOAD_ATTEMPTS: "2"
-    GIT_DEPTH: "1"
     CACHE_KEY: '$(if [[ ! -z ${CI_COMMIT_TAG+x} || "${CI_COMMIT_REF_SLUG}" == "prod" ]]; then echo "${CI_COMMIT_REF_SLUG}"; else echo "not-prod-or-tag"; fi)'
     DTR_NAMESPACE: $CI_PROJECT_NAMESPACE
     PROJECT_SOURCE_DIR: "$CI_PROJECT_DIR"
@@ -208,31 +223,61 @@
     COMMIT_TIME: $(git show -s --format=%ct $CI_APPLICATION_TAG)
     DOCKER_TRUSTED_REGISTRY: ${STAGING_REGISTRY}
 
-.build-applications:
-    image: image: docker.io/doevelopper/cfs-com-common:0.0.1
-    extends:
-        - .agent-who
-        # - .app-build-prerequisities
+.application-build-container-prerequisities: &application-build-container-prerequisities
+    variables:
+        BUILD_IMAGE:${STAGING_REGISTRY}/${DTR_NAMESPACE}/${CI_PROJECT_NAME}/${DDS_TYPE}:${VERSION}
+    image: ${BUILD_IMAGE}
+    services:
+        - docker:dind
+
+
+.build_template: &build_definition
+
     before_script:
-        - echo "Building ${CI_PROJECT_NAME} $CI_PIPELINE_ID"
+        - echo "${BUILD_TYPE} mode for ${CI_PROJECT_NAME} : $CI_JOB_STAGE[$CI_JOB_NAME] <->($CI_PIPELINE_ID)"
         - mkdir -p ${STAGING_DIR}
-        - export PATH=${STAGING_DIR}/bin:$PATH
+        - curl -s "https://cmake.org/files/dev/cmake-3.16.20191007-g7232563-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local        
+        - export PATH=$HOME/.local/bin:${STAGING_DIR}/bin:$PATH
+        - g++ --version
+        - cmake --version
+        - make --version
+
     script:
         - >
            if [ ! -d "${BUILD_DIRECTORY}" ]; then
                cmake -E make_directory ${BUILD_DIRECTORY}
            fi
-        - cmake -E chdir  ${BUILD_DIRECTORY} cmake .. -G"Unix Makefiles" \
-            -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} \
-            -DCMAKE_PREFIX_PATH=/usr/local
-        # - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
-        # - cmake --build ${BUILD_DIRECTORY} --target test
-#        - cmake --build ${BUILD_DIRECTORY} --target features
-#        - cmake --build ${BUILD_DIRECTORY} --target install
+        - cmake -E chdir build cmake .. -G "${BUILD_GENERATOR}" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+                -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} -DCMAKE_PREFIX_PATH=/usr/local
+        - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
+        - cmake --build ${BUILD_DIRECTORY} --target test -- --gtest_output=xml:${BUILD_DIRECTORY}/${CI_PROJECT_NAME}.xml
+        - cmake --build ${BUILD_DIRECTORY} --target features
+        - cmake --build ${BUILD_DIRECTORY} --target install
+
     after_script:
         - echo "Building ${BUILD_TYPE} mode done"
+
+    artifacts:
+        name: "${CI_BUILD_REF_NAME}_${CI_BUILD_REF}"
+        when: on_success
+        expire_in: 1 day
+        paths:
+           - "$BUILD_DIRECTORY/*"
+
+#        - make -C $BUILD_DIRECTORY test ARGS="--extra-verbose"
+#        - cmake --build $BUILD_DIRECTORY --target test
+#        - ctest $BUILD_DIRECTORY -V --build-and-test
+#        - cmake --build $BUILD_DIRECTORY --target test -- ARGS="$TEST_ARGS"
+#        - cmake -E env CTEST_OUTPUT_ON_FAILURE=TRUE cmake --build $BUILD_DIRECTORY --target test
+#        - cmake --build build --target test -- --gtest_output=xml:tests/result.xml
     # artifacts:
         # paths:
+
+.build-applications:
+    image: image: docker.io/doevelopper/cfs-dev-tools-common:0.0.1
+    extends:
+        - .agent-who
+        - .build_definition
 
 Intro CI:
     stage: Intro

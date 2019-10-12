@@ -37,11 +37,14 @@ namespace cfs::osal
             virtual void read(const char* name, const void* value, std::uint64_t size) override;
 
         protected:
+
             BinaryReader(std::auto_ptr<TStream> & stream)
-            : m_stream(stream)
+                : m_stream(stream)
             {
             }
+
         private:
+
             std::auto_ptr<TStream> m_stream;
     };
 }

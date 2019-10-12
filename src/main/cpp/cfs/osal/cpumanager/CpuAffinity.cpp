@@ -11,9 +11,9 @@ CpuAffinity::CpuAffinity()
     ,m_totalCores(std::max<ushort>(std::thread::hardware_concurrency(), 1))
 {
     std::ifstream cpuinfo("/proc/cpuinfo");
-    m_totalCores=std::count(std::istream_iterator<std::string>(cpuinfo),
-                      std::istream_iterator<std::string>(),
-                      std::string("processor"));
+    m_totalCores = std::count(std::istream_iterator<std::string>(cpuinfo),
+                              std::istream_iterator<std::string>(),
+                              std::string("processor"));
 }
 
 CpuAffinity::~CpuAffinity()

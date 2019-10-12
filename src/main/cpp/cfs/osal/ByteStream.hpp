@@ -61,12 +61,12 @@ namespace cfs::osal
             ByteStream & operator<<(const std::int8_t & data);
             ByteStream & operator>>(std::int8_t & data);
 
-                    ByteStream & operator<<(const std::int16_t & data);
-                    ByteStream & operator>>(std::int16_t & data);
-                    ByteStream & operator<<(const std::int32_t & data);
-                    ByteStream & operator>>(std::int32_t & data);
-                    ByteStream & operator<<(const std::int64_t & data);
-                    ByteStream & operator>>(std::int64_t & data);
+            ByteStream & operator<<(const std::int16_t & data);
+            ByteStream & operator>>(std::int16_t & data);
+            ByteStream & operator<<(const std::int32_t & data);
+            ByteStream & operator>>(std::int32_t & data);
+            ByteStream & operator<<(const std::int64_t & data);
+            ByteStream & operator>>(std::int64_t & data);
         /*
                     ByteStream & operator<<(const bool & data);
                     ByteStream & operator>>(bool & data);

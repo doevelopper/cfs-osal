@@ -1,10 +1,10 @@
 
-add_executable (cfs.osal.test.bin
 #add_library(cfs.osal.test
+add_executable (cfs.osal.test.bin
     cfs/osal/Test
     cfs/osal/unitTest
     # cfs/osal/TimeFixtureTest
-    # cfs/osal/log/TestLogger
+    cfs/osal/log/TestLogger
     # cfs/osal/queues/MSPMSConsumerQueueTest
     # cfs/osal/MessageTest
     # cfs/osal/MessageDataTest
@@ -79,3 +79,4 @@ gtest_discover_tests(cfs.osal.test.bin
 #)
 
 #add_dependencies(test-compile cfs.osal.test.bin)
+

@@ -10,13 +10,15 @@ int main(int argc, char**argv)
     cfs::osal::test::Test cfsOsalTest;
     // log4cxx::LogManager::getLoggerRepository()->getRootLogger()->info("Running UnitTest");
     cfsOsalTest.run(argc,argv);
-//    static_cast<void>(argv);
-//    static_cast<void>(argc);
+    //    static_cast<void>(argv);
+
+    //    static_cast<void>(argc);
     return (EXIT_SUCCESS);
 }
+
 /*
-int main(int argc, char **argv)
-{
+   int main(int argc, char **argv)
+   {
     // initialize
     ::testing::InitGoogleTest(&argc, argv);
 
@@ -42,5 +44,6 @@ int main(int argc, char **argv)
 
     // run
     return RUN_ALL_TESTS();
-}
-*/
+   }
+ */
+

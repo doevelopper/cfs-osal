@@ -41,12 +41,6 @@ int Test::run (int argc, char * argv[])
     //    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
 
     //  ::testing::InitGoogleTest(&argc, argv);
-
-    if ( m_numberOfTestIteration > 0)
-    {
-        ::testing::GTEST_FLAG(repeat) = m_numberOfTestIteration;
-    }
-
     // ::testing::GTEST_FLAG(filter) = suite;
     // GTEST_FLAG(output) = "xml:" + testOuputPath;
     // ::testing::GTEST_FLAG(output) = "xml:cfs-osal-Test-Report.xml";
@@ -69,7 +63,6 @@ int Test::run (int argc, char * argv[])
     {
         std::cerr << "Unhandled exception" <<std::endl;
     }
-
 
     return RUN_ALL_TESTS();
 }

@@ -36,13 +36,13 @@ namespace cfs::osal
              * @brief Checks if the error bit is set.
              */
             operator bool() const;
-/*
-Error::operator bool() const
-{
-    return error_is_set(std::addressof(error));
-}
+            /*
+               Error::operator bool() const
+               {
+                return error_is_set(std::addressof(error));
+               }
 
- */
+             */
             template <typename ... Args>
             raiseError(typename std::remove_reference<decltype(errno)>::type const errval,  Args&&... args)
             {

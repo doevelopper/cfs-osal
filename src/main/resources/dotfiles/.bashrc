@@ -8,9 +8,9 @@ case $- in
       *) return;;
 esac
 
-GIT_PS1_SHOWDIRTYSTATE=1 
-GIT_PS1_SHOWUNTRACKEDFILES=1 
-GIT_PS1_SHOWSTASHSTATE=1 
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUPSTREAM="verbose"
 
 #https://github.com/ryanoasis/public-bash-scripts
@@ -18,143 +18,9 @@ GIT_PS1_SHOWUPSTREAM="verbose"
 #https://www.booleanworld.com/customizing-coloring-bash-prompt/
 #https://webbreacher.com/2016/11/27/bash-prompt-ps1/
 
-Color_Off="\[\033[0m\]"       # Text# Reset
-Color_Off="\[\033[0m\]"       # Text Reset
-
-# Regular Colors
-Black="\[\033[0;30m\]"        # Black
-Red="\[\033[0;31m\]"          # Red
-Green="\[\033[0;32m\]"        # Green
-Yellow="\[\033[0;33m\]"       # Yellow
-Blue="\[\033[0;34m\]"         # Blue
-Purple="\[\033[0;35m\]"       # Purple
-Cyan="\[\033[0;36m\]"         # Cyan
-White="\[\033[0;37m\]"        # White
-
-# Bold
-BBlack="\[\033[1;30m\]"       # Black
-BRed="\[\033[1;31m\]"         # Red
-BGreen="\[\033[1;32m\]"       # Green
-BYellow="\[\033[1;33m\]"      # Yellow
-BBlue="\[\033[1;34m\]"        # Blue
-BPurple="\[\033[1;35m\]"      # Purple
-BCyan="\[\033[1;36m\]"        # Cyan
-BWhite="\[\033[1;37m\]"       # White
-
-# Underline
-UBlack="\[\033[4;30m\]"       # Black
-URed="\[\033[4;31m\]"         # Red
-UGreen="\[\033[4;32m\]"       # Green
-UYellow="\[\033[4;33m\]"      # Yellow
-UBlue="\[\033[4;34m\]"        # Blue
-UPurple="\[\033[4;35m\]"      # Purple
-UCyan="\[\033[4;36m\]"        # Cyan
-UWhite="\[\033[4;37m\]"       # White
-
-# Background
-On_Black="\[\033[40m\]"       # Black
-On_Red="\[\033[41m\]"         # Red
-On_Green="\[\033[42m\]"       # Green
-On_Yellow="\[\033[43m\]"      # Yellow
-On_Blue="\[\033[44m\]"        # Blue
-On_Purple="\[\033[45m\]"      # Purple
-On_Cyan="\[\033[46m\]"        # Cyan
-On_White="\[\033[47m\]"       # White
-
-# High Intensty
-IBlack="\[\033[0;90m\]"       # Black
-IRed="\[\033[0;91m\]"         # Red
-IGreen="\[\033[0;92m\]"       # Green
-IYellow="\[\033[0;93m\]"      # Yellow
-IBlue="\[\033[0;94m\]"        # Blue
-IPurple="\[\033[0;95m\]"      # Purple
-ICyan="\[\033[0;96m\]"        # Cyan
-IWhite="\[\033[0;97m\]"       # White
-
-# Bold High Intensty
-BIBlack="\[\033[1;90m\]"      # Black
-BIRed="\[\033[1;91m\]"        # Red
-BIGreen="\[\033[1;92m\]"      # Green
-BIYellow="\[\033[1;93m\]"     # Yellow
-BIBlue="\[\033[1;94m\]"       # Blue
-BIPurple="\[\033[1;95m\]"     # Purple
-BICyan="\[\033[1;96m\]"       # Cyan
-BIWhite="\[\033[1;97m\]"      # White
-
-# High Intensty backgrounds
-On_IBlack="\[\033[0;100m\]"   # Black
-On_IRed="\[\033[0;101m\]"     # Red
-On_IGreen="\[\033[0;102m\]"   # Green
-On_IYellow="\[\033[0;103m\]"  # Yellow
-On_IBlue="\[\033[0;104m\]"    # Blue
-On_IPurple="\[\033[10;95m\]"  # Purple
-On_ICyan="\[\033[0;106m\]"    # Cyan
-On_IWhite="\[\033[0;107m\]"   # White
-
-
-
-BLACK="\[\e[00;30m\]"
-DARY_GRAY="\[\e[01;30m\]"
-RED="\[\e[00;31m\]"
-BRIGHT_RED="\[\e[01;31m\]"
-GREEN="\[\e[00;32m\]"
-BRIGHT_GREEN="\[\e[01;32m\]"
-BROWN="\[\e[00;33m\]"
-YELLOW="\[\e[01;33m\]"
-BLUE="\[\e[00;34m\]"
-BRIGHT_BLUE="\[\e[01;34m\]"
-PURPLE="\[\e[00;35m\]"
-LIGHT_PURPLE="\[\e[01;35m\]"
-CYAN="\[\e[00;36m\]"
-BRIGHT_CYAN="\[\e[01;36m\]"
-LIGHT_GRAY="\[\e[00;37m\]"
-WHITE="\[\e[01;37m\]"
-ENDCOLOR="\e[m"
-
-# sample FOO="${GREEN}bar${ENDCOLOR}"
-# OR
-# echo echo -e "\e[00;32mfoo\e[mbar"
-# OR
-# echo -e "\033[0;42m hi \033[0m"
-# OR
-# echo -e "${On_Green} hi${Color_Off} man"
-__git_status() {
-    STATUS=$(git status 2>/dev/null |
-    awk '
-    /^On branch / {printf($3)}
-    /^You are currently rebasing/ {printf("rebasing %s", $6)}
-    /^Initial commit/ {printf(" (init)")}
-    /^Untracked files/ {printf(" |+ ")}
-    /^Changes not staged / {printf(" |? ")}
-    /^Changes to be committed/ {printf(" |* ")}
-    /^Your branch is ahead of/ {printf(" |^ ")}
-    /^fatal: not a git repository/ {printf("\|/")}
-    ')
-    if [ -n "$STATUS" ]; then
-        echo -ne " ($STATUS) [$(git log 2> /dev/null | head -n 3 | grep ^Date | cut -f4- -d' ')]"
-    fi
-}
-
-myjobs() {
-    myjobs=$(jobs | wc -l);
-    if [ $myjobs -ne 0 ]; then
-        myjobs=$(echo -en "${GREEN}(${myjobs})${NORMAL}");
-    else myjobs="";
-    fi;
-}
-
-__ps1_startline="\[\033[0;32m\]\[\033[0m\033[0;38m\]\u\[\033[0;36m\]@\[\033[0;36m\]\h on ${_ip_add}:\w\[\033[0;32m\]"
-__ps1_endline="\[\033[0;32m\]└─\[\033[0m\033[0;31m\] [\D{%F %T}] \$\[\033[0m\033[0;32m\] >>>\[\033[0m\] "
-#PS1="${__ps1_startline} \$(__git_status)\n ${__ps1_endline}"
-rightprompt()
-{
-    printf "%*s" $COLUMNS "right prompt"
-}
-#PS1='\[$(tput sc; rightprompt; tput rc)\]left prompt > '
-
 if [[ ${EUID} == 0 ]] ; then
     sq_color="\[\033[0;31m\]"
-else		
+else
     sq_color="\[\033[0;34m\]"
 fi
 
@@ -278,7 +144,7 @@ PS1="\[\033[0;31m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0
 #PS1="\n\[\033[0;35m\]\342\224\214\342\224\200$([[ $? != 0 ]] && echo "[\[\033[0;37m\]\342\234\227\[\033[0;35m\]]\342\224\200")[\[\033[0;33m\]\t\[\033[0;35m\]]\342\224\200[\[\033[0;37m\]\h : \[\033[0;32m\]\w\[\033[0;35m\]]\n\342\224\224\342\224\200\342\224\200> \[\033[0;37m\]\$ \[\033[0m\]"
 #PS1="\[\033[0;31m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]Nick FURY\[\033[01;33m\]@\[\033[01;96m\]\h'; else echo '\[\033[0;39m\]\u\[\033[01;33m\]@\[\033[01;96m\]\h'; fi)\[\033[0;31m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;31m\]]\n\[\033[0;31m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]\[\e[01;33m\] $(__git_status) \\$\[\033[0m\033[0;32m\] ⇨▶\[\033[0m\]"
 #PS1="\[\033[0;31m\]\[\033[1;31m\]\[\033[1;30m\](\[\033[1;31m\]\u\[\033[0;31m\]@\[\033[1;31m\]\h\[\033[1;30m\]) -> \[\033[0m\]\[\033[0;31m\]$(__git_ps1 "${HOTBLK2}(${REGRED2}%s${HOTBLK2})")\[\033[0m\]\n\[\033[0;31m\]\[\033[1;31m\]\[\033[1;30m\](\[\033[0;31m\]\w\[\033[1;30m\])\[\033[0;31m\]>\[\033[0m\]"
-#PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;32m\]\n$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]└─\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\]\[\033[0m\] '       
+#PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;32m\]\n$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]└─\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\]\[\033[0m\] '
 #PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \[\033[0;36m\]\h \w\[\033[0;32m\]$(__git_ps1)\n\[\033[0;32m\]└─\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\] ▶\[\033[0m\] '
 #PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;32m\] - [$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;32m\]]\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\]\[\033[0m\] '
 #PS1='\[\033[32m\]\u \[\033[36m\]@ \h \w\[\033[32m\]$(__git_ps1)\n└─ \$ ▶\[\033[0m\] '
@@ -312,126 +178,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias ll='ls -alh'                                                              # List files
-alias llr='ls -alhr'                                                            # List files (reverse)
-alias lls='ls -alhS'                                                            # List files by size
-alias llsr='ls -alhSr'                                                          # List files by size (reverse)
-alias lld='ls -alht'                                                            # List files by date
-alias lldr='ls -alhtr'                                                          # List files by date (reverse)
-alias lldc='ls -alhtU'                                                          # List files by date created
-alias lldcr='ls -alhtUr'                                                        # List files by date created (reverse)
-h() { history | grep "$1"; }                                                    # Shorthand for `history` with added grepping
-disk-usage() { du -hs "$@" | sort -nr; }                                        # List disk usage of all the files in a directory (use -hr to sort on server)
-alias home='clear && cd ~ && ll'                                                # Home directory
-alias downloads='clear && cd ~/Downloads && ll'                                 # Downloads directory
-mktar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }    # Creates a *.tar.gz archive of a file or folder
-mkzip() { zip -r "${1%%/}.zip" "$1" ; }               # Create a *.zip archive of a file or folder
-#alias mktar='tar -cvf'
-alias mkbz2='tar -cvjf'
-alias mkgz='tar -cvzf'
-alias svi='sudo vi'
-alias vis='vim "+set si"'
-
-alias perm="stat -f '%Lp'"                                                      # View the permissions of a file/dir as a number
-alias atree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"             # List the file structure of the current directory
-alias lsd='ll | grep "^d"'                  # Preferred 'ls' implementation (only directories)
-alias cp='cp -iv'                           # Preferred 'cp' implementation
-alias mv='mv -iv'                           # Preferred 'mv' implementation
-alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
-alias less='less -FSRXc'                    # Preferred 'less' implementation
-cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
-alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
-alias ..='cd ../'                           # Go back 1 directory level
-alias ...='cd ../../'                       # Go back 2 directory levels
-alias .3='cd ../../../'                     # Go back 3 directory levels
-alias .4='cd ../../../../'                  # Go back 4 directory levels
-alias .5='cd ../../../../../'               # Go back 5 directory levels
-alias .6='cd ../../../../../../'            # Go back 6 directory levels
-alias edit='subl'                           # edit:         Opens any file in sublime editor
-alias ~="cd ~"                              # ~:            Go Home
-alias cls='clear'                             # c:            Clear terminal display
-alias which='type -all'                     # which:        Find executables
-alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
-alias show_options='shopt'                  # Show_options: display bash options settings
-alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
-alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
-alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
-alias sagi='sudo apt-get install' #packages
-alias sagu='sudo apt-get update'
-alias sags='sudo apt-cache search' #string-in-package-name-or-descr
-alias sagsh='sudo apt-cache show' #string
-alias sagr='sudo apt-get remove' #packages
-alias sagd='sudo apt-get dist-upgrade'
-alias sagc='sudo apt-get clean'
-alias sagac='sudo apt-get autoclean'
-#alias sapt='sudo apt-get'
-#alias saptu='sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove && sudo apt-get autoclean'
-#alias saptg=`apt-get update`             #->  apt update
-#alias  `apt-get upgrade`            #->  apt upgrade
-#alias  `apt-get dist-upgrade`       #->  apt full-upgrade
-#alias  `apt-get install `    #->  apt install package
-#alias  `apt-get remove `     #->  apt remove package
-#alias  `apt-get autoremove`         #->  apt autoremove
-#alias  `apt-cache search`     #->  apt search string
-#alias  `apt-cache policy`    #->  apt list -a package
-#alias  `apt-cache show`      #->  apt show package
-#alias  `apt-cache showpkg`   #->  apt show -a package
-
-multiextract () {
-	for archive in $*; do
-		if [ -f $archive ] ; then
-			case $archive in
-				*.tar.bz2)   tar xvjf $archive    ;;
-				*.tar.gz)    tar xvzf $archive    ;;
-				*.bz2)       bunzip2 $archive     ;;
-				*.rar)       rar x $archive       ;;
-				*.gz)        gunzip $archive      ;;
-				*.tar)       tar xvf $archive     ;;
-				*.tbz2)      tar xvjf $archive    ;;
-				*.tgz)       tar xvzf $archive    ;;
-				*.zip)       unzip $archive       ;;
-				*.Z)         uncompress $archive  ;;
-				*.7z)        7z x $archive        ;;
-				*)           echo "don't know how to extract '$archive'..." ;;
-			esac
-		else
-			echo "'$archive' is not a valid file!"
-		fi
-	done
-}
-
-    extract () {
-        if [ -f $1 ] ; then
-          case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)     echo "'$1' cannot be extracted via extract()" ;;
-             esac
-         else
-             echo "'$1' is not a valid file"
-         fi
-    }
-ff () { /usr/bin/find . -name "$@" ; }      # ff:       Find file under the current directory
-ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
-ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -455,3 +201,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# User configuration
+source "$HOME/.env"
+source "$HOME/.functions"
+source "$HOME/.aliases"
+

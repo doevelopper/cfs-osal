@@ -108,6 +108,31 @@
         - master
         - /^release-.*$/
 
+.only-code-changes:
+    only:
+        changes:
+        - "Dangerfile"
+        - "doc/README.md"  # Some RSpec test rely on this file
+
+.only-review:
+	only:
+		variables:
+			- $CI_SERVER_HOST == "local.scm" && $CI_PROJECT_NAMESPACE == "gitlab.com"
+		kubernetes: active
+	except:
+		refs:
+			- master
+			- /^\d+-\d+-auto-deploy-\d+$/
+			- /^[\d-]+-stable(-ee)?$/
+
+.only-review-schedules:
+	only:
+		refs:
+			- schedules
+		variables:
+			- $CI_SERVER_HOST == "local.scm" && $CI_PROJECT_NAMESPACE == "gitlab.com"
+		kubernetes: active
+
 .tumbleweed:
     only:
         - develop
@@ -158,7 +183,7 @@
         HOSTCC=aarch64-linux-gnu-gcc
         HOSTCXX=aarch64-linux-gnu-g++
         TRIPLET=aarch64-linux-gnu
-        # - export PATH=/opt/aarch64-linux-gnu/bin/:/opt/armv8l-linux-gnueabihf/bin/:$PATH
+    # - export PATH=/opt/aarch64-linux-gnu/bin/:/opt/armv8l-linux-gnueabihf/bin/:$PATH
 
 .cross_compile_variables: &cross_compile_variables
     CC: ${TRIPLET}-gcc
@@ -236,7 +261,7 @@
     before_script:
         - echo "${BUILD_TYPE} mode for ${CI_PROJECT_NAME} : $CI_JOB_STAGE[$CI_JOB_NAME] <->($CI_PIPELINE_ID)"
         - mkdir -p ${STAGING_DIR}
-        - curl -s "https://cmake.org/files/dev/cmake-3.16.20191007-g7232563-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local        
+        - curl -s "https://cmake.org/files/v3.16/cmake-3.16.0-rc1-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local
         - export PATH=$HOME/.local/bin:${STAGING_DIR}/bin:$PATH
         - g++ --version
         - cmake --version
@@ -250,7 +275,7 @@
         - cmake -E chdir build cmake .. -G "${BUILD_GENERATOR}" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
                 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} -DCMAKE_PREFIX_PATH=/usr/local
         - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
-        - cmake --build ${BUILD_DIRECTORY} --target test -- --gtest_output=xml:${BUILD_DIRECTORY}/${CI_PROJECT_NAME}.xml
+        - cmake --build ${BUILD_DIRECTORY} --target test #-- --gtest_output=xml:${BUILD_DIRECTORY}/${CI_PROJECT_NAME}.xml
         - cmake --build ${BUILD_DIRECTORY} --target features
         - cmake --build ${BUILD_DIRECTORY} --target install
 

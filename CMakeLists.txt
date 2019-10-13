@@ -51,7 +51,6 @@ include(LSBInfo)
 include(CompilerOption)
 include(DefinePlatformSpecfic)
 include(macros)
-include(goals)
 include(CodingStyle)
 include(CPPCheck)
 include(CpplintWrapper)
@@ -90,6 +89,7 @@ find_package(Doxygen
 include(GoogleTest) #gtest_discover_tests
 include(CTest)
 set (CMAKE_TEST_COMMAND ctest -V) # Work aroound do console output
+include(goals)
 
 option(EXCLUDE_DEPRECATED "Exclude deprecated parts of the library" TRUE)
 
@@ -133,6 +133,9 @@ configure_file("${PROJECT_SOURCE_DIR}/src/main/resources/configs/Version.cpp.in"
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(${CMAKE_INSTALL_PREFIX}/cmake/cfs-osal-config-version.cmake COMPATIBILITY ExactVersion)
 
+include(TestFeatures)
+
 add_subdirectory (src/main/cpp)
 add_subdirectory (src/test/cpp)
 add_subdirectory (src/it)
+

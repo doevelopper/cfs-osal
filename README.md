@@ -16,6 +16,10 @@
 
 [d]: #project
 **[Overview][ovw] | [Features][feat] |[License][cpl] | [Support][ps]**
+A small layer of software that allows programs to run on many different
+operating systems and hardware platforms.
+Independent of the underlying OS & hardware.
+Allows developers to write and maintain one version of code
 
 ### Overview
 [ovw]: #Overview 'Project Overview'
@@ -26,11 +30,20 @@ The OSAL consists of a set of interfaces (abstract classes) that provide all the
 
 The  following  table  provides more  information  on OS  Abstractor  Interface API  level  of  support across different target OS‘s
 
- - Tasking services
- - Synchronization services
- - Message queues
+ - Tasking services: Create, Delete, Exit, Delay, Set Priority, Get Info, Register, Get ID, Get ID by name
+ - Synchronization services:
+     - Binary Semaphores
+     - Counting Semaphores
+     - Mutexes
+     - Create, Delete, Take, Give, Get Info, Timed Wait, Get ID by Name
+ - Message queues:  Create, Delete, Get (wl timeout), Put, Get ID, Get ID by Name, Get Info,
  - Communication service
- - Timer service
+ - Timer service: Millisecs to System Ticks, Ticks to MicroSecs, Get Time
+ - Misc: Interrupt Disablel/Enable and Lock/Unlock
+ *- File API:
+     - Create, Remove, Open, Close, Read, Write, Lseek, Rename, Copy, Move Files
+     - Make, Remove, Open, Close, Read Files
+     - File Descriptors
 
 <p align="left">
 	<a href="https://github.com/doevelopper/cfs-osal"><img alt="CFS: OSAL" src="https://img.shields.io/badge/CFS%20OSAL-API-000000.svg"></a>

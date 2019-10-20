@@ -2,6 +2,13 @@
 add_library(cfs.osal.main
     #cfs/osal/CpuAffinity
     cfs/osal/CharacterDevice
+    cfs/osal/ResourceLimit
+    cfs/osal/ResourceUsage
+    cfs/osal/Activator
+    cfs/osal/NoOp
+    cfs/osal/cpumanager/Topology
+    cfs/osal/cpumanager/CpuAffinity
+    cfs/osal/cpumanager/CpuInfo
     # cfs/osal/BlockDevice
     # cfs/osal/ByteStream
     # cfs/osal/Comparator
@@ -45,6 +52,8 @@ target_link_libraries(cfs.osal.main
         $<$<PLATFORM_ID:Linux>:rt>
         $<$<PLATFORM_ID:Linux>:pthread>
         LOG4CXX::LOG4CXX
+        $<$<CONFIG:Coverage>:${CPP_COVERAGE_FLAGS}>
+        #        $<$<OR:$<CXX_COMPILER_ID:Clang>, $<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:${BLD_FLAGS}>
 )
 
 #target_link_options(cfs.osal.main

@@ -1,9 +1,9 @@
 # language: en
 # Project CFS-OSAL
-# file 001-Dummy.feature
+# file 001-oxal.feature
 #
 
-Feature: Dummy Featuree
+Feature: UxS OS Abstraction Layer Featuree
     As a developer starting a new project
     I want to have a dummy feature test
     In order to get started and now that the Behavior Driven Development toolchain works

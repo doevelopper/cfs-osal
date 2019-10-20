@@ -1,3 +1,8 @@
+find_program( MEMORYCHECK_COMMAND valgrind )
+set( MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full" )
+set( MEMORYCHECK_SUPPRESSIONS_FILE "${PROJECT_SOURCE_DIR}/src/main/resources/configs/valgrind_suppress.txt" )
+#  COMMAND "${VALGRIND}" --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes
+#  $<TARGET_FILE:cfs.osal.main>)
 set(${PROJECT_NAME}_valgrind memcheck CACHE STRING
     "Valgrind tools: memcheck, cachegrind, callgrind, massif, helgrind, drd.")
 

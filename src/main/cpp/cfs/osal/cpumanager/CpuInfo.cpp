@@ -10,3 +10,13 @@
 
 using namespace cfs::osal::cpumanager;
 
+void CpuInfo::readProcFile ()
+{
+    std::ifstream procCpuInfo( "/proc/cpuinfo" );
+    {
+        for ( std::string line; std::getline( procCpuInfo, line ); )
+        {
+        }
+    }
+}
+

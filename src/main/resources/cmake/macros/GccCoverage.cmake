@@ -23,7 +23,8 @@ else()
     list(APPEND LCOV_GENTHML_OPTIONS "--no-function-coverage")
 endif()
 
-set(LCOV_EXTRA_ARGS --base-directory "${CPP_SOURCE_DIR}"
+set(LCOV_EXTRA_ARGS 
+	--base-directory "${CPP_SOURCE_DIR}"
     --directory "${OUTPUT_DIR}"
     --no-external
     --gcov-tool "${COVERAGE_COMMAND}"
@@ -37,64 +38,16 @@ set(GENHTML_EXTRA_ARGS --show-details --frames --legend
     --title "${PROJECT_NAME}"
 )
 
-    set(CMAKE_CXX_FLAGS_COVERAGE            "${CMAKE_CXX_FLAGS_DEBUG}         --coverage") # == old -fprofile-arcs -ftest-coverage
-
-    set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE  "${CMAKE_SHARED_LINKER_FLAGS_DEBUG}")
-    set(CMAKE_STATIC_LINKER_FLAGS_COVERAGE  "${CMAKE_STATIC_LINKER_FLAGS_DEBUG}")
-    set(CMAKE_MODULE_LINKER_FLAGS_COVERAGE  "${CMAKE_MODULE_LINKER_FLAGS_DEBUG}")
-
-    set(COVERAGE_FLAGS "-pg -O0 --coverage -Wall -Wextra -Wpedantic")
-    set(COVERAGE_LINK_FLAGS "--coverage -fprofile-arcs -ftest-coverage ") # -lgcov
-
-    set(CMAKE_CXX_FLAGS_COVERAGE
-        "${COVERAGE_FLAGS} -fprofile-arcs -ftest-coverage"
-        CACHE STRING "Flags used by the C++ compiler during coverage builds."
-        FORCE
-    )
-
-    set(CMAKE_C_FLAGS_COVERAGE
-        "${COVERAGE_FLAGS} -fprofile-arcs -ftest-coverage"
-        CACHE STRING "Flags used by the C compiler during coverage builds."
-        FORCE
-    )
-
-    set(CMAKE_EXE_LINKER_FLAGS_COVERAGE
-        "${COVERAGE_LINK_FLAGS}"
-        CACHE STRING "Flags used for linking binaries during coverage builds."
-        FORCE
-    )
-
-    set(CMAKE_STATIC_LINKER_FLAGS_COVERAGE
-        "${CMAKE_STATIC_LINKER_FLAGS_DEBUG}"
-        CACHE STRING "Flags used by the static libraries linker during coverage builds."
-        FORCE
-    )
-
-    set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE
-        "${COVERAGE_LINK_FLAGS}"
-        CACHE STRING "Flags used by the shared libraries linker during coverage builds."
-        FORCE
-    )
-
-    mark_as_advanced(
-        CMAKE_CXX_FLAGS_COVERAGE
-        CMAKE_C_FLAGS_COVERAGE
-        CMAKE_EXE_LINKER_FLAGS_COVERAGE
-        CMAKE_SHARED_LINKER_FLAGS_COVERAGE
-        CMAKE_STATIC_LINKER_FLAGS_COVERAGE
-        CMAKE_SHARED_LINKER_FLAGS_COVERAGE
-        CMAKE_STATIC_LINKER_FLAGS_COVERAGE
-        CMAKE_MODULE_LINKER_FLAGS_COVERAGE
-    )
-
 function(add_code_coverage_targets test_target module_name module_directory)
     if(CMAKE_COMPILER_IS_GNUCXX)
         find_program(GCOVR gcovr)
         find_program(GENHTML genhtml)
         find_program(LCOV lcov)
         find_program(GENINFO geninfo)
+        find_program(GENDESC gendesc)
+        find_program(GENPNG genpng)
 
-        mark_as_advanced(LCOV GENINFO GENHTML GCOVR)
+        mark_as_advanced(LCOV GENINFO GENHTML GCOVR GENDESC GENPNG)
 
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_COVERAGE}")
         set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_COVERAGE}")

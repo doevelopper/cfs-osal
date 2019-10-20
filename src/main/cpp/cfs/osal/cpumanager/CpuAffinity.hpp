@@ -15,98 +15,63 @@
 #include <iomanip>
 #include <system_error>
 
-namespace cfs::osal
+namespace cfs::osal::cpumanager
 {
     class CpuAffinity
     {
         public:
 
-            ~CpuAffinity();
-            /*!
-             * @brief
-             */
+            CpuAffinity();
+            CpuAffinity(std::uint8_t cpu);
+            CpuAffinity(const CpuAffinity &other);
+            //           CpuAffinity(const CpuAffinity&) = default;
+            //           CpuAffinity(CpuAffinity&&) = default;
+            //           CpuAffinity& operator=(const CpuAffinity&) = default;
+            //           CpuAffinity& operator=(CpuAffinity&&) = default;
+            virtual ~CpuAffinity();
+
             int setMask(const std::uint8_t & core) const;
-            friend bool operator==(const CpuAffinity &lhs, const CpuAffinity &rhs);
-            friend CpuAffinity operator&(const CpuAffinity &rhs, const CpuAffinity &lhs);
-            friend CpuAffinity operator|(const CpuAffinity &rhs, const CpuAffinity &lhs);
-            friend CpuAffinity operator^(const CpuAffinity &rhs, const CpuAffinity &lhs);
-
-            CpuAffinity()
-            {
-                clear();
-            }
-
-            CpuAffinity(std::uint8_t cpu)
-            {
-                clear();
-                insert(cpu);
-            }
-
-            CpuAffinity(const CpuAffinity &other)
-            {
-                copy_cpuset(other);
-            }
-
             CpuAffinity &operator=(const CpuAffinity &other)
             {
                 copy_cpuset(other);
 
-                return *this;
+                return (*this);
             }
 
-            void clear()
-            {
-                CPU_ZERO(&m_cpu);
-            }
-
-            void insert(std::uint8_t cpu)
-            {
-                CPU_SET(cpu, &m_cpu);
-            }
-
-            void remove(std::uint8_t cpu)
-            {
-                CPU_CLR(cpu, &m_cpu);
-            }
-
-            bool find(std::uint8_t cpu) const
-            {
-                return CPU_ISSET(cpu, &m_cpu);
-            }
-
-            std::size_t size() const
-            {
-                return CPU_COUNT(&m_cpu);
-            }
-
-            std::size_t max_cpus() const
-            {
-                return CPU_SETSIZE - 1;
-            }
-
-            friend void   set_cpu_affinity(const CpuAffinity &CpuAffinity);
-            friend CpuAffinity get_cpu_affinity();
+            void clear();
+            void insert(std::uint8_t cpu);
+            void remove(std::uint8_t cpu);
+            bool find(std::uint8_t cpu) const;
+            std::size_t size() const;
+            std::size_t max_cpus() const;
 
             CpuAffinity &operator&=(const CpuAffinity &rhs)
             {
                 CPU_AND(&m_cpu, &rhs.m_cpu, &m_cpu);
 
-                return *this;
+                return (*this);
             }
 
             CpuAffinity &operator|=(const CpuAffinity &rhs)
             {
                 CPU_OR(&m_cpu, &rhs.m_cpu, &m_cpu);
 
-                return *this;
+                return (*this);
             }
 
             CpuAffinity &operator^=(const CpuAffinity &rhs)
             {
                 CPU_XOR(&m_cpu, &rhs.m_cpu, &m_cpu);
 
-                return *this;
+                return (*this);
             }
+
+            friend void   set_cpu_affinity(const CpuAffinity &CpuAffinity);
+            friend CpuAffinity get_cpu_affinity();
+            friend bool operator==(const CpuAffinity &lhs, const CpuAffinity &rhs);
+            friend CpuAffinity operator&(const CpuAffinity &rhs, const CpuAffinity &lhs);
+            friend CpuAffinity operator|(const CpuAffinity &rhs, const CpuAffinity &lhs);
+            friend CpuAffinity operator^(const CpuAffinity &rhs, const CpuAffinity &lhs);
 
         private:
 
@@ -118,12 +83,12 @@ namespace cfs::osal
             std::set<size_t> processorsAvailable();
             static thread_local int           m_core;
             mutable std::atomic<std::uint8_t> m_counter;
-            const std::uint8_t                mtotalCores;
+            std::uint8_t                      m_totalCores;
             cpu_set_t                         m_cpu;
     };
     bool operator==(const CpuAffinity &lhs, const CpuAffinity &rhs)
     {
-        return CPU_EQUAL(&lhs.m_cpu, &rhs.m_cpu);
+        return (CPU_EQUAL(&lhs.m_cpu, &rhs.m_cpu));
     }
 
     CpuAffinity operator&(const CpuAffinity &rhs, const CpuAffinity &lhs)
@@ -131,7 +96,7 @@ namespace cfs::osal
         CpuAffinity ret;
         CPU_AND(&ret.m_cpu, &rhs.m_cpu, &lhs.m_cpu);
 
-        return ret;
+        return (ret);
     }
 
     CpuAffinity operator|(const CpuAffinity &rhs, const CpuAffinity &lhs)
@@ -139,7 +104,7 @@ namespace cfs::osal
         CpuAffinity ret;
         CPU_OR(&ret.m_cpu, &rhs.m_cpu, &lhs.m_cpu);
 
-        return ret;
+        return (ret);
     }
 
     CpuAffinity operator^(const CpuAffinity &rhs, const CpuAffinity &lhs)
@@ -147,7 +112,7 @@ namespace cfs::osal
         CpuAffinity ret;
         CPU_XOR(&ret.m_cpu, &rhs.m_cpu, &lhs.m_cpu);
 
-        return ret;
+        return (ret);
     }
 
     std::ostream &operator<<(std::ostream &os, const CpuAffinity &CpuAffinity)
@@ -161,12 +126,12 @@ namespace cfs::osal
 
         os << "]";
 
-        return os;
+        return (os);
     }
 
     std::uint8_t get_current_cpu()
     {
-        return sched_getcpu();
+        return (sched_getcpu());
     }
 
     void set_cpu_affinity(const CpuAffinity &CpuAffinity)
@@ -185,7 +150,7 @@ namespace cfs::osal
             throw std::system_error(errno, std::system_category());
         }
 
-        return ret;
+        return (ret);
     }
 }
 

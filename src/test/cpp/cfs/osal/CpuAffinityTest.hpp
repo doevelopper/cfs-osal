@@ -1,6 +1,29 @@
 
 
-#include <cfs/osal/CpuAffinity.hpp>
+#ifndef CFS_OSAL_CPUAFFINITYTEST_HPP
+#define CFS_OSAL_CPUAFFINITYTEST_HPP
+#include <gtest/gtest.h>
+#include <cfs/osal/cpumanager/CpuAffinity.hpp>
+
+namespace cfs::osal::test
+{
+    class CpuAffinityTest : public ::testing::Test
+    {
+        public:
+
+            CpuAffinityTest();
+            virtual ~CpuAffinityTest();
+
+            virtual void SetUp ();
+            virtual void TearDown ();
+
+        protected:
+
+            cfs::osal::cpumanager::CpuAffinity * testee;
+
+        private:
+    };
+}
 
 /*
  * TEST(cpuset, construction)
@@ -174,4 +197,6 @@
    }
 
  */
+
+#endif
 

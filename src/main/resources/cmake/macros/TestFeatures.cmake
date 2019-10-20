@@ -67,7 +67,7 @@ function(add_feature_test_command TARGET_NAME BASE_DIRECTORY)
         )
 
     endif(CUCUMBER_RUBY)
-
+	add_dependencies( integration-test ${TARGET_NAME})
 endfunction()
 
 function(add_feature_test_target TARGET_NAME BASE_DIRECTORY)
@@ -110,6 +110,8 @@ function(add_feature_test_target TARGET_NAME BASE_DIRECTORY)
         )
 
     endif(CUCUMBER_RUBY)
+
+	add_dependencies( integration-test ${TARGET_NAME}.integration-test)
+
 endfunction()
-#add_dependencies( integration-test cfs.osal.integration-test cfs.osal.test.bin)
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-h() { history | grep "$1"; }                          # Shorthand for `history` with added grepping
+hst() { history | grep "$1"; }                          # Shorthand for `history` with added grepping
 disk-usage() { du -hs "$@" | sort -nr; }              # List disk usage of all the files in a directory (use -hr to sort on server)
 mktar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }    # Creates a *.tar.gz archive of a file or folder
 mkzip() { zip -r "${1%%/}.zip" "$1" ; }               # Create a *.zip archive of a file or folder
@@ -78,11 +78,11 @@ setup_common() {
 }
 
 # Remaps ssh to automatically start a tmux session on the remote server
-ssh () {
+txssh () {
   /usr/bin/ssh -t $@ "tmux attach || tmux new"
 }
 
-git_status() {
+func_git_status() {
     STATUS=$(git status 2>/dev/null |
     awk '
     /^On branch / {printf($3)}

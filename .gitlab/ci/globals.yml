@@ -29,6 +29,45 @@
     only:
         - schedules
 
+.define_config: &triggered_by_api_call_and_schedules
+  only:
+    - triggers
+    - schedules
+# -------------------------------------
+#          artifacts config
+# -------------------------------------
+
+.define_config: &configure_artifacts
+    artifacts:
+        paths:
+            - ${PROJECT_LOG_DIR}/configure.log
+        when: always
+        expire_in: 7 days # 5 mins  # see https://docs.gitlab.com/ce/ci/yaml/README.html#artifacts-expire_in
+
+.define_config: &build_artifacts
+  artifacts:
+    paths:
+    - ${PROJECT_LOG_DIR}/build.log
+    when: always
+    expire_in: 7 days
+
+.define_config: &test_artifacts
+  artifacts:
+    paths:
+    - ${PROJECT_LOG_DIR}/test.log
+    - ${PROJECT_LOG_DIR}/ci-test.log
+    - ${PROJECT_LOG_DIR}/rerun-test.log
+    when: always
+    expire_in: 7 days
+
+.define_config: &coverage_artifacts
+  artifacts:
+    paths:
+    - ${PROJECT_LOG_DIR}/coverage.log
+    - ${PROJECT_LOG_DIR}/*/
+    when: always
+    expire_in: 7 days
+
 .prerequisites: &prerequisites
     before_script:
         - date

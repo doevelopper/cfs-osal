@@ -3,6 +3,7 @@
 add_executable (cfs.osal.test.bin
     cfs/osal/Test
     cfs/osal/unitTest
+    cfs/osal/CpuAffinityTest.cpp
     # cfs/osal/TimeFixtureTest
     cfs/osal/log/TestLogger
     # cfs/osal/queues/MSPMSConsumerQueueTest

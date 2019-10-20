@@ -12,6 +12,7 @@ namespace cfs::osal
     {
         public:
 
+            Serializable() = default;
             Serializable(const Serializable&) = default;
             Serializable(Serializable&&) = default;
             Serializable& operator=(const Serializable&) = default;

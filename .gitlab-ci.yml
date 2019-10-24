@@ -26,98 +26,114 @@ debug:appplication:build:
     extends:
         .build-applications
     variables:
+        <<: *common_variables
         BUILD_TYPE: Debug
         BUILD_OPTIONS: ""
+#        BUILD_IMAGE: ${STAGING_REGISTRY}/${DTR_NAMESPACE}/${CI_PROJECT_NAME}/${DDS_TYPE}:${VERSION}
+        BUILD_IMAGE: docker.io/doevelopper/cfs-dev-tools-common:0.0.1
 
-release:appplication:build:
+.release:appplication:build:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-coverage:appplication:build:
+.coverage:appplication:build:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Coverage
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-profiling:appplication:build:
+.profiling:appplication:build:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Profiling
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-relwithdebinfo:appplication:build:
+.relwithdebinfo:appplication:build:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: RelWithDebInfo
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-minsizerel:appplication:build:
+.minsizerel:appplication:build:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: MinSizeRel
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Code duplicate detection:
+.Code duplicate detection:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Continuous code quality:
+.Continuous code quality:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Dynamic code analysis:
+.Dynamic code analysis:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Dynamic application security testing:
+.Dynamic application security testing:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Static application security testing:
+.Static application security testing:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Run time application security protection:
+.Run time application security protection:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Binary code performance:
+.Binary code performance:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
-Publish code quality:
+.Publish code quality:
     extends:
         .build-applications
     variables:
         BUILD_TYPE: Release
         BUILD_OPTIONS: ""
+        BUILD_IMAGE: ""
 
 

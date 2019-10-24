@@ -2,9 +2,19 @@
 
 alias ds="du -h --max-depth=1"
 alias gitpersonal="git config user.name 'Adrien H.L' && git config user.email 'happyman@hotmail.fr'"
-alias gce="git config --edit"
-alias gcge="git config --global --edit"
-
+alias gitce="git config --edit"
+alias gitcge="git config --global --edit"
+# Show untracked files
+alias gitu='git ls-files . --exclude-standard --others'
+alias gitgh='cd "$(git rev-parse --show-toplevel)"'
+# Show commits since last pull
+alias gitnew="git log HEAD@{1}..HEAD@{0}"
+alias gitst="git stash"
+alias gitstb="git stash branch"
+alias gitstd="git stash drop"
+alias gitstl="git stash list"
+# Add uncommitted and unstaged changes to the last commit
+alias gitcaa="git commit -a --amend -C HEAD"
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'

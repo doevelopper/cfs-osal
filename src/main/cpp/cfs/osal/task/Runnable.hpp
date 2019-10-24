@@ -38,7 +38,7 @@ namespace cfs::osal::task
             /*!
              * @brief This method must be overritten
              */
-            virtual void run () noexcept = 0;
+            virtual void routine () noexcept = 0;
             virtual void exception(const std::exception & except) = 0;
             virtual void error() = 0;
 

@@ -10,9 +10,9 @@ Runnable::Runnable()
 {
 }
 
-void Runnable::entry(Runnable * Run)
+void Runnable::entry(Runnable * runnable)
 {
-    Run->run();
+    runnable->routine();
 }
 
 Runnable::~Runnable()
@@ -34,6 +34,6 @@ void Runnable::stop()
 
 void Runnable::start()
 {
-    m_thread = std::thread(&Runnable::run, this);
+    m_thread = std::thread(&Runnable::routine, this);
 }
 

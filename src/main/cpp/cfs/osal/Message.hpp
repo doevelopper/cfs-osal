@@ -5,6 +5,9 @@
 
 #include <memory>
 #include <utility>
+#include <functional>
+#include <mutex>
+#include <queue>
 
 namespace cfs::osal
 {
@@ -59,6 +62,8 @@ namespace cfs::osal
             static MsgUID generateUniqueId();
             MsgUID m_msgId;
             MsgUID m_uniqueId;
+            std::mutex m_queueMutex;
+            std::queue<std::unique_ptr<Message>> m_MessageQueue;
     };
 }
 #endif

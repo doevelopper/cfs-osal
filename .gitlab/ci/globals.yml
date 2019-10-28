@@ -343,18 +343,18 @@
         - .agent-who
         - .build_template
 
-.Intro CI:
-    stage: Intro
-    extends:
-        - .docker-hub-dind
-    <<: *pre_shared
-    script:
-        - echo '...'
+# .Intro CI:
+    # stage: Intro
+    # extends:
+        # - .docker-hub-dind
+    # <<: *pre_shared
+    # script:
+        # - echo '...'
 
-.Outro CI:
-    stage: Outro
-    extends:
-        - .docker-hub-dind
-    <<: *post_shared
-    script:
-        - echo '...'
+# .Outro CI:
+    # stage: Outro
+    # extends:
+        # - .docker-hub-dind
+    # <<: *post_shared
+    # script:
+        # - echo '...'

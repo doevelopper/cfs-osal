@@ -23,13 +23,14 @@ include:
     - local: .gitlab/ci/globals.yml
 
 debug:appplication:build:
+    stage: verify
     extends:
         .build-applications
     variables:
         <<: *common_variables
         BUILD_TYPE: Debug
         BUILD_OPTIONS: ""
-#        BUILD_IMAGE: ${STAGING_REGISTRY}/${DTR_NAMESPACE}/${CI_PROJECT_NAME}/${DDS_TYPE}:${VERSION}
+#       BUILD_IMAGE: ${STAGING_REGISTRY}/${DTR_NAMESPACE}/${CI_PROJECT_NAME}/${DDS_TYPE}:${VERSION}
         BUILD_IMAGE: docker.io/doevelopper/cfs-dev-tools-common:0.0.1
 
 .release:appplication:build:

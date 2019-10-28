@@ -21,7 +21,7 @@ namespace cfs::osal
         long mq_msgsize;    /* Maximal size of each message in bytes*/
         long mq_curmsgs;    /* Number of messages actually in the queue */
 
-        MQAttrribute(long flag                                                               = 0L, long mxmsg= 10L, long msgSize = 8192L, long currentMsg = 0L)
+        MQAttrribute(long flag = 0L, long mxmsg= 10L, long msgSize = 8192L, long currentMsg = 0L)
             : mq_flags(flag)
             , mq_maxmsg(mxmsg)
             , mq_msgsize(msgSize)

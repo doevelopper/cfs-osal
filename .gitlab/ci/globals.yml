@@ -298,12 +298,6 @@
 .build_template:
     before_script:
         - echo "${BUILD_TYPE} mode for ${CI_PROJECT_NAME} : $CI_JOB_STAGE[$CI_JOB_NAME] <->($CI_PIPELINE_ID)"
-        - mkdir -p ${STAGING_DIR}
-        # - curl -s "https://cmake.org/files/v3.16/cmake-3.16.0-rc2-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local
-        - export PATH=$HOME/.local/bin:${STAGING_DIR}/bin:$PATH
-        - g++ --version
-        - cmake --version
-        - make --version
 
     script:
         - >
@@ -313,9 +307,6 @@
         - cmake -E chdir ${BUILD_DIRECTORY} cmake .. -G "${BUILD_GENERATOR}" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
                 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=${STAGING_DIR} -DCMAKE_PREFIX_PATH=/usr/local
         - cmake --build ${BUILD_DIRECTORY} --target all --clean-first
-        # - cmake --build ${BUILD_DIRECTORY} --target test #-- --gtest_output=xml:${BUILD_DIRECTORY}/${CI_PROJECT_NAME}.xml
-        # - cmake --build ${BUILD_DIRECTORY} --target features
-        # - cmake --build ${BUILD_DIRECTORY} --target install
 
     after_script:
         - echo "Building ${BUILD_TYPE} mode done"
@@ -327,6 +318,12 @@
         paths:
            - "$BUILD_DIRECTORY/*"
 
+# - mkdir -p ${STAGING_DIR}
+# - curl -s "https://cmake.org/files/v3.16/cmake-3.16.0-rc2-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local
+# - export PATH=$HOME/.local/bin:${STAGING_DIR}/bin:$PATH
+# - cmake --build ${BUILD_DIRECTORY} --target test #-- --gtest_output=xml:${BUILD_DIRECTORY}/${CI_PROJECT_NAME}.xml
+# - cmake --build ${BUILD_DIRECTORY} --target features
+# - cmake --build ${BUILD_DIRECTORY} --target install
 #        - make -C $BUILD_DIRECTORY test ARGS="--extra-verbose"
 #        - cmake --build $BUILD_DIRECTORY --target test
 #        - ctest $BUILD_DIRECTORY -V --build-and-test

@@ -296,8 +296,6 @@
 
 
 .build_template:
-    # before_script:
-        # - echo "${BUILD_TYPE} mode for ${CI_PROJECT_NAME} : $CI_JOB_STAGE[$CI_JOB_NAME] <->($CI_PIPELINE_ID)"
 
     script:
         - >
@@ -318,6 +316,8 @@
         paths:
            - "$BUILD_DIRECTORY/*"
 
+# before_script:
+#     - echo "${BUILD_TYPE} mode for ${CI_PROJECT_NAME} : $CI_JOB_STAGE[$CI_JOB_NAME] <->($CI_PIPELINE_ID)"
 # - mkdir -p ${STAGING_DIR}
 # - curl -s "https://cmake.org/files/v3.16/cmake-3.16.0-rc2-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C $HOME/.local
 # - export PATH=$HOME/.local/bin:${STAGING_DIR}/bin:$PATH

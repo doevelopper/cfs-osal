@@ -47,9 +47,10 @@ function(add_cppcheck_analysis target_name bin_folder)
             file(MAKE_DIRECTORY ${WORKING_DIR})
             file(GLOB_RECURSE ALL_SOURCE_FILES ${bin_folder} *.cpp)
             file(GLOB_RECURSE ALL_HEADER_FILES ${bin_folder} *.hpp)
+            # cppcheck --project=${CMAKE_BINARY_DIR}/compile_commands.json instead of globs above. to be tested
 
             add_custom_target( ${target_name}-cppcheck
-#                COMMAND ${CPPCHECK}  ${CPPCHECK_OPTIONS} ${CPPCHECK_TEMPLATE_ARG} ${ALL_SOURCE_FILES} ${ALL_HEADER_FILES}
+#               COMMAND ${CPPCHECK} ${CPPCHECK_OPTIONS} ${CPPCHECK_TEMPLATE_ARG} ${ALL_SOURCE_FILES} ${ALL_HEADER_FILES}
                 COMMAND ${CPPCHECK} ${CPPCHECK_OPTIONS} ${CPPCHECK_TEMPLATE_ARG} ${ALL_SOURCE_FILES} ${ALL_HEADER_FILES}
                     --cppcheck-build-dir=${WORKING_DIR} 2> ${WORKING_DIR}/cppcheck.xml
                 COMMAND ${PYTHON_EXECUTABLE} ${CPPCHECK_HTMLREPORT_GENERATOR} --title=${target_name} --file=${WORKING_DIR}/cppcheck.xml

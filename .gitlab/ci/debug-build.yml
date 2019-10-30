@@ -22,30 +22,13 @@
 #        WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 debug:appplication:build:
-    stage: verify
+    stage: Sw life cycle
     extends:
         .build-applications
     variables:
-#        <<: *common_variables
+       <<: *common_variables
         BUILD_TYPE: Debug
         BUILD_OPTIONS: ""
 #       BUILD_IMAGE: ${STAGING_REGISTRY}/${DTR_NAMESPACE}/${CI_PROJECT_NAME}/${DDS_TYPE}:${VERSION}
         BUILD_IMAGE: docker.io/doevelopper/cfs-dev-tools-common:0.0.1
-        GIT_DEPTH: "1"
-        GIT_SUBMODULE_STRATEGY: "recursive"
-        BUILD_DIRECTORY: ${CI_PROJECT_NAME}-build-${BUILD_TYPE}
-        BUILD_GENERATOR: "Unix Makefiles"
-        GET_SOURCES_ATTEMPTS: "3"
-        ARTIFACT_DOWNLOAD_ATTEMPTS: "2"
-        CACHE_KEY: '$(if [[ ! -z ${CI_COMMIT_TAG+x} || "${CI_COMMIT_REF_SLUG}" == "prod" ]]; then echo "${CI_COMMIT_REF_SLUG}"; else echo "not-prod-or-tag"; fi)'
-        DTR_NAMESPACE: $CI_PROJECT_NAMESPACE
-        PROJECT_SOURCE_DIR: "$CI_PROJECT_DIR"
-        PROJECT_NAME: $CI_PROJECT_NAME
-        TAG: $CI_BUILD_REF_NAME
-        ARCH: amd64
-        COMMIT_ID: ${CI_COMMIT_SHA:0:8}
-        CCACHE_BASEDIR: $CI_PROJECT_DIR
-        BUILD_DATE: $(date +%Y-%m-%d-%H:%M:%S)
-        COMMIT_TIME: $(git show -s --format=%ct $CI_APPLICATION_TAG)
-        DOCKER_TRUSTED_REGISTRY: ${STAGING_REGISTRY}
-        STAGING_DIR: $CI_PROJECT_DIR/${CI_PROJECT_NAME}/${BUILD_TYPE}
+

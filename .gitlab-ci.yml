@@ -6,7 +6,7 @@
 # %gitlab-runner ALL=(ALL) NOPASSWD: ALL
 
 stages:
-    - lifecycle
+    - Sw life cycle
     - Sw Quality Assessment
     - code review
     - documentations
@@ -14,7 +14,7 @@ stages:
 
 include:
     - local: .gitlab/ci/globals.yml
-    # - local: .gitlab/ci/debug-build.yaml
+    - local: .gitlab/ci/debug-build.yaml
     # - local: .gitlab/ci/release-build.yaml
     # - local: .gitlab/ci/profiling-build.yaml
     # - local: .gitlab/ci/coverage-build.yaml

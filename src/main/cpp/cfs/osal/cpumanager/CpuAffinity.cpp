@@ -83,3 +83,15 @@ std::size_t CpuAffinity::max_cpus() const
     return CPU_SETSIZE - 1;
 }
 
+CpuAffinity CpuAffinity::getCpuAffinity()
+{
+    /*
+       CpuAffinity ret;
+       auto err = sched_getaffinity(0, sizeof(ret.m_cpu), &ret.m_cpu);
+        if (err < 0) {
+            throw std::system_error(errno, std::system_category());
+        }
+     */
+    return (ret);
+}
+

@@ -6,6 +6,8 @@
 #include <mutex>
 #include <utility>
 #include <cstdlib>
+#include <memory>
+
 
 namespace cfs::osal
 {
@@ -29,7 +31,7 @@ namespace cfs::osal
                 m_instance.reset(new T);
             });
 
-                return *m_ins.get();
+                return *m_instance.get();
             }
 
             /**
@@ -81,4 +83,5 @@ namespace cfs::osal
             static std::once_flag                m_once;
     };
 }
+#endif
 

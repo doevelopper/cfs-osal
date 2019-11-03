@@ -1,3 +1,11 @@
+<!--
+Thanks for filing an issue! You're making our ecosystem a better place!
+
+Below are some templates to get you started, filling out any that are relevant
+to this issue will help us a lot! Feel free to delete any information or text
+that isn't relevant to your issue.
+-->
+
 <!-- NAMING YOUR ISSUE: Please prefix your issue with the name of the sub-project -->
 <!-- e.g. `messages: Define new StepDef message` -->
 <!-- This makes it easier to get some context when reading the names of issues -->
@@ -50,4 +58,12 @@ In general: Please provide as much information as you can to help us solving you
 * Version used:
 * Operating System and version:
 * Link to your project:
+
+### Version info
+- _What's the output of running `git describe --tags` in your OSCC directory?_
+- _Is this the same version flashed onto the hardware?_
+
+### Hardware info
+<!-- Are you using a custom board or something received from us? -->
+
 

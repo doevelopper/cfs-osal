@@ -6,9 +6,11 @@ add_library(cfs.osal.main
     cfs/osal/ResourceUsage
     cfs/osal/Activator
     cfs/osal/NoOp
-    cfs/osal/cpumanager/Topology
-    cfs/osal/cpumanager/CpuAffinity
-    cfs/osal/cpumanager/CpuInfo
+    cfs/osal/BinaryReader
+    cfs/osal/BinaryWriter
+    #cfs/osal/cpumanager/Topology
+    #cfs/osal/cpumanager/CpuAffinity
+    #cfs/osal/cpumanager/CpuInfo
     # cfs/osal/BlockDevice
     # cfs/osal/ByteStream
     # cfs/osal/Comparator

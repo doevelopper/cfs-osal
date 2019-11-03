@@ -35,7 +35,7 @@ namespace cfs::osal
              * @param [in] value
              */
             Semaphore(std::string & name,OpenMode flag = SEM_OPEN, std::uint32_t mode = 0666,std::uint32_t value = -1);
-            Semaphore(std::int32_t pshared                          = 0, std::uint32_t value= 0);
+            Semaphore(std::int32_t pshared = 0, std::uint32_t value = 0);
             virtual ~Semaphore();
 
             /*!

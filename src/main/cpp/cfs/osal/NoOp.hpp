@@ -45,26 +45,24 @@ namespace cfs::osal
             /** No-op performed on a lock() operation. */
             void lock()
             {
-                //*INDENT-OFF*
-                [] () {
-                } ();
-                //              |  |  |  |
-                //              |  |  |  The lambda is invoked.
-                //              |  |  The lambda does not do anything.
-                //              |  The lambda does not take any arguments.
-                //              The lambda does not capture anything.
-                //*INDENT-ON*
+                /* *INDENT-OFF* */
+                [] () { } ();
+//              |  |  |  |
+//              |  |  |  The lambda is invoked.
+//              |  |  The lambda does not do anything.
+//              |  The lambda does not take any arguments.
+//              The lambda does not capture anything.
+                /* *INDENT-ON* */
             }
 
             /** No-op performed on an unlock() operatior. */
-            //*INDENT-OFF*
+            /* *INDENT-OFF* */
             void unlock()
             {
-                [] () {
-                } ();
+                [] () { } ();
             }
 
-            //*INDENT-ON*
+            /* *INDENT-ON* */
     };
 }
 #endif

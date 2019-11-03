@@ -3,9 +3,12 @@
 add_executable (cfs.osal.test.bin
     cfs/osal/Test
     cfs/osal/unitTest
+    cfs/osal/VersionTest
+    cfs/osal/log/TestLogger
+	cfs/osal/ActivatorTest
+    cfs/osal/ResourceTest
     # cfs/osal/CpuAffinityTest.cpp
     # cfs/osal/TimeFixtureTest
-    cfs/osal/log/TestLogger
     # cfs/osal/queues/MSPMSConsumerQueueTest
     # cfs/osal/MessageTest
     # cfs/osal/MessageDataTest
@@ -20,7 +23,6 @@ add_executable (cfs.osal.test.bin
     # cfs/osal/MessageQueueTest
     # cfs/osal/BinaryWriterTest
     # cfs/osal/mocks/SystemCallMock
-    cfs/osal/VersionTest
 )
 
 apply_style_targets_command(cfs.osal.test.bin ${CMAKE_CURRENT_SOURCE_DIR})

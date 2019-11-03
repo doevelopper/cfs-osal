@@ -9,7 +9,7 @@ log4cxx::LoggerPtr VersionTest::logger = log4cxx::Logger::getLogger(std::string(
 
 
 VersionTest::VersionTest()
-    : objectVersionToTest()
+    : testee()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
 }
@@ -22,13 +22,13 @@ VersionTest::~VersionTest()
 void VersionTest::SetUp()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
-    objectVersionToTest = new semver::Version(std::string("1.2.3"));
+    testee = new semver::Version(std::string("1.2.3"));
 }
 
 void VersionTest::TearDown()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
-    delete objectVersionToTest;
+    delete testee;
 }
 
 TEST_F(VersionTest, test_Simple_Version)
@@ -67,7 +67,7 @@ TEST_F(VersionTest, test_Version_pre_release)
 TEST_F(VersionTest, test_abi_operators)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-    // test::notYetImplemented();
+    //test::notYetImplemented();
     ASSERT_TRUE(true);
 }
 

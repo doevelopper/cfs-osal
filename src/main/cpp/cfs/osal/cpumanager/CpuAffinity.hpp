@@ -66,8 +66,8 @@ namespace cfs::osal::cpumanager
                 return (*this);
             }
 
-            friend void   set_cpu_affinity(const CpuAffinity &CpuAffinity);
-            friend CpuAffinity get_cpu_affinity();
+            // friend void   set_cpu_affinity(const CpuAffinity &CpuAffinity);
+            // friend CpuAffinity get_cpu_affinity();
             friend bool operator==(const CpuAffinity &lhs, const CpuAffinity &rhs);
             friend CpuAffinity operator&(const CpuAffinity &rhs, const CpuAffinity &lhs);
             friend CpuAffinity operator|(const CpuAffinity &rhs, const CpuAffinity &lhs);
@@ -142,15 +142,6 @@ namespace cfs::osal::cpumanager
         }
     }
 
-    CpuAffinity get_cpu_affinity()
-    {
-        CpuAffinity ret;
-        auto err = sched_getaffinity(0, sizeof(ret.m_cpu), &ret.m_cpu);
-        if (err < 0) {
-            throw std::system_error(errno, std::system_category());
-        }
-
-        return (ret);
-    }
+    CpuAffinity getCpuAffinity();
 }
 

@@ -26,7 +26,7 @@ namespace cfs::osal::test
         protected:
 
             static log4cxx::LoggerPtr logger;
-            semver::Version *         objectVersionToTest;
+            semver::Version *         testee;
 
         private:
     };

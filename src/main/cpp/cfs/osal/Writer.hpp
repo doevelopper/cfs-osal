@@ -2,6 +2,8 @@
 
 #ifndef CFS_OSAL_WRITER_HPP
 #define CFS_OSAL_WRITER_HPP
+#include <cstdint>
+#include <vector>
 
 namespace cfs::osal
 {

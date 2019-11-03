@@ -4,14 +4,15 @@
 #define CFs_OSAL_READER_HPP
 
 #include <cstdint>
+#include <vector>
 
 namespace cfs::osal
 {
     class Reader
     {
-        using Buffer = std::vector<std::uint8_t>;
-
         public:
+
+            using Buffer = std::vector<std::uint8_t>;
 
             Reader() = default;
             Reader(const Reader&) = default;

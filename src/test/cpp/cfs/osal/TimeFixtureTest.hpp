@@ -5,6 +5,7 @@
 
 #include <gmock/gmock.h>
 #include <cfs/osal/log/TestLogger.hpp>
+#include <cfs/osal/TimeFixture.hpp>
 
 namespace cfs::osal::test
 {
@@ -24,6 +25,7 @@ namespace cfs::osal::test
 
         protected:
 
+            cfs::osal::TimeFixture *  testee;
             static log4cxx::LoggerPtr logger;
 
         private:

@@ -1,11 +1,11 @@
 #.rst:
 # FindOpenDDS
 # -------
-# 
+#
 # This module attempts to finds OpenDDS.
-# 
+#
 # It defines the following variables:
-# 
+#
 # * OpenDDS_FOUND                - True if OpenDDS was found
 # * OpenDDS_INCLUDE_DIRS
 # * OpenDDS_LIBRARY_DIRS
@@ -13,30 +13,9 @@
 # * OpenDDS_TAO_IDL_EXECUTABLE
 # * OpenDDS_IDL_EXECUTABLE
 # * OpenDDS_ROOT_DIR
-# * OpenDDS_FLAGS                
-# * OpenDDS_TAO_FLAGS                
-# 
-# Provides following function to compile idl files:
-# * dds_compile_idl(<file-list> <output-variable;generated_source_files> <output-variable;generated_header_files> )
-
-#.rst:
-# FindOpenDDS
-# -------
-# 
-# This module attempts to finds OpenDDS.
-# 
-# It defines the following variables:
-# 
-# * OpenDDS_FOUND                - True if OpenDDS was found
-# * OpenDDS_INCLUDE_DIRS
-# * OpenDDS_LIBRARY_DIRS
-# * OpenDDS_LIBRARIES
-# * OpenDDS_TAO_IDL_EXECUTABLE
-# * OpenDDS_IDL_EXECUTABLE
-# * OpenDDS_ROOT_DIR
-# * OpenDDS_FLAGS                
-# * OpenDDS_TAO_FLAGS                
-# 
+# * OpenDDS_FLAGS
+# * OpenDDS_TAO_FLAGS
+#
 # Provides following function to compile idl files:
 # * dds_compile_idl(<file-list> <output-variable;generated_source_files> <output-variable;generated_header_files> )
 
@@ -157,7 +136,7 @@ function(dds_compile_idl idl_filenames generated_source_files generated_header_f
 		add_custom_command(
 			OUTPUT ${IDL_C_CPP} ${IDL_C_H} ${IDL_C_INL} ${IDL_S_CPP} ${IDL_S_H}
 			DEPENDS ${filename}
-			COMMAND ${OpenDDS_TAO_IDL_EXECUTABLE} 
+			COMMAND ${OpenDDS_TAO_IDL_EXECUTABLE}
 			ARGS ${OpenDDS_TAO_FLAGS} ${filename}
 			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		)
@@ -181,7 +160,7 @@ function(dds_compile_idl idl_filenames generated_source_files generated_header_f
 		add_custom_command(
 			OUTPUT ${TYPE_SUPPORT_IDL} ${TYPE_SUPPORT_H} ${TYPE_SUPPORT_CPP}
 			DEPENDS ${filename} ${IDL_C_CPP} ${IDL_C_H} ${IDL_C_INL} ${IDL_S_CPP} ${IDL_S_H}
-			COMMAND ${OpenDDS_IDL_EXECUTABLE} 
+			COMMAND ${OpenDDS_IDL_EXECUTABLE}
 			ARGS ${OpenDDS_FLAGS} ${filename}
 			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		)
@@ -207,8 +186,8 @@ function(dds_compile_idl idl_filenames generated_source_files generated_header_f
 		add_custom_command(
 			OUTPUT ${TYPE_SUPPORT_IDL_C_CPP} ${TYPE_SUPPORT_IDL_C_H} ${TYPE_SUPPORT_IDL_C_INL} ${TYPE_SUPPORT_IDL_S_CPP} ${TYPE_SUPPORT_IDL_S_H}
 			DEPENDS ${TYPE_SUPPORT_IDL}
-			COMMAND ${OpenDDS_TAO_IDL_EXECUTABLE} 
-			ARGS ${OpenDDS_TAO_FLAGS} ${TYPE_SUPPORT_IDL} 
+			COMMAND ${OpenDDS_TAO_IDL_EXECUTABLE}
+			ARGS ${OpenDDS_TAO_FLAGS} ${TYPE_SUPPORT_IDL}
 			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		)
 

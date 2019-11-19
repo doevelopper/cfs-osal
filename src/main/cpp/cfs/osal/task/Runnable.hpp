@@ -20,8 +20,10 @@ namespace cfs::osal::task
 
             Runnable();
             Runnable( std::function<void()> action);
-            Runnable(Runnable const&) = delete;
-            Runnable& operator =(Runnable const&) = delete;
+            Runnable(const Runnable&) = delete;
+            Runnable(Runnable&&) = delete;
+            Runnable& operator=(const Runnable&) = delete;
+            Runnable& operator=(Runnable&&) = delete;
             virtual ~Runnable();
 
             /*! @brief
@@ -38,7 +40,7 @@ namespace cfs::osal::task
             /*!
              * @brief This method must be overritten
              */
-            virtual void routine () noexcept = 0;
+            virtual void routine () /*noexcept*/ = 0;
             virtual void exception(const std::exception & except) = 0;
             virtual void error() = 0;
 

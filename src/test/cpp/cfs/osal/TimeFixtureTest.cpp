@@ -9,6 +9,7 @@ log4cxx::LoggerPtr TimeFixtureTest::logger = log4cxx::Logger::getLogger(std::str
 
 
 TimeFixtureTest::TimeFixtureTest()
+    : testee()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
 }
@@ -21,19 +22,16 @@ TimeFixtureTest::~TimeFixtureTest()
 void TimeFixtureTest::SetUp()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    testee = new TimeFixture("TimeFixtureTest");
 }
 
 void TimeFixtureTest::TearDown()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    delete testee;
 }
 
-TEST_F(TimeFixtureTest, test_1)
-{
-    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-    ASSERT_TRUE(true);
-}
-TEST_F(TimeFixtureTest, test_2)
+TEST_F(TimeFixtureTest, test_scopedTimer)
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
     ASSERT_TRUE(true);

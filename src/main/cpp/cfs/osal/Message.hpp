@@ -28,11 +28,10 @@ namespace cfs::osal
              * @param msgId Message ID of this Message.
              */
             Message(int msgId);
-
-            virtual ~Message() = default;
+            Message();
             Message(const Message&) = delete;
             Message& operator=(const Message&) = delete;
-
+            virtual ~Message();
             /*!
              * @brief Virtual move constructor
              */

@@ -10,11 +10,6 @@ Runnable::Runnable()
 {
 }
 
-void Runnable::entry(Runnable * runnable)
-{
-    runnable->routine();
-}
-
 Runnable::~Runnable()
 {
     try
@@ -24,6 +19,11 @@ Runnable::~Runnable()
     catch(...)
     {     /*??*/
     }
+}
+
+void Runnable::entry(Runnable * runnable)
+{
+    runnable->routine();
 }
 
 void Runnable::stop()

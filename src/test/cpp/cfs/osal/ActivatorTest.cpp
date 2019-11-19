@@ -36,13 +36,13 @@ void ActivatorTest<V>::TearDown()
 #include <thread>
 TYPED_TEST_P(ActivatorTest, test_dummy)
 {
-    using namespace cfs::osal::test;
-    using namespace cfs::osal::log::test;
+    //using namespace cfs::osal::test;
+    //using namespace cfs::osal::log::test;
     //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
     //TypeParam n = 0;
 
-    using namespace std::chrono_literals;
-    std::this_thread::sleep_for(2s);
+    //using namespace std::chrono_literals;
+    //std::this_thread::sleep_for(2s);
     ASSERT_TRUE(true);
 }
 

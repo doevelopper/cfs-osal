@@ -17,49 +17,23 @@ namespace cfs::osal
     {
         public:
 
+            TimeFixture() = delete;
             /*!
              * @brief Construct a new Time Fixture object
              *
              * @param name
              * @param unit
              */
-            TimeFixture(const char* name, std::size_t unit = 0)
-                : m_start(std::chrono::system_clock::now())
-                , m_name(name)
-                , m_number(s_timer_number++)
-                , m_unit(unit)
-                , m_timeInformation()
-            {
-                m_timeInformation << "TIMER START [" << m_number << "] - " << m_name;
-            }
-
-            /*!
-             * @brief Destroy the Time Fixture object
-             *
-             */
-            ~TimeFixture()
-            {
-                std::chrono::time_point<std::chrono::system_clock> end
-                    = std::chrono::system_clock::now();
-                std::chrono::duration<double> elapsed_seconds = end - m_start;
-                std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-
-                char mbstr[100];
-                std::strftime(mbstr, sizeof(mbstr), "%X", std::localtime(&end_time));
-
-                m_timeInformation << "TIMER END [" << m_number << "] " << m_name
-                                  << " -  completed @ " << mbstr << " elapsed time: "
-                                  << elapsed_seconds.count() << "s";
-                if(m_unit)
-                {
-                    double per_unit = elapsed_seconds.count() / m_unit;
-                    m_timeInformation <<" @" << per_unit << " s/cycle freq: " << 1./per_unit << "/s";
-                }
-            }
+            TimeFixture(const char* name, std::size_t unit = 0);
+            TimeFixture(const TimeFixture&) = delete;
+            TimeFixture(TimeFixture&&) = delete;
+            TimeFixture& operator=(const TimeFixture&) = delete;
+            TimeFixture& operator=(TimeFixture&&) = delete;
+            ~TimeFixture();
 
         private:
 
-            static unsigned                                    s_timer_number;
+            static unsigned                                    m_timerNumber;
             std::chrono::time_point<std::chrono::system_clock> m_start;
             const char*                                        m_name;
             const unsigned                                     m_number;

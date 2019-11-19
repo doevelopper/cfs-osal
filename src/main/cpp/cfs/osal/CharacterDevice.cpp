@@ -1,83 +1,99 @@
 
 
 #include <cfs/osal/CharacterDevice.hpp>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-/*
+using namespace cfs::osal;
 
-   CharacterDevice::CharacterDevice(const std::string& path, Access access)
-   {
+CharacterDevice::CharacterDevice(const std::string& path, Access access)
+{
     int oflag = 0;
-
-    // parse access
-    switch (access) {
-    case Access::ReadOnly  : oflag |= O_RDONLY; break;
-    case Access::WriteOnly : oflag |= O_WRONLY; break;
-    case Access::ReadWrite : oflag |= O_RDWR;   break;
-    default                : throw std::invalid_argument("access invalid");
+    switch (access)
+    {
+    case Access::ReadOnly:
+        oflag |= O_RDONLY;
+        break;
+    case Access::WriteOnly:
+        oflag |= O_WRONLY;
+        break;
+    case Access::ReadWrite:
+        oflag |= O_RDWR;
+        break;
+    default:
+        throw std::invalid_argument("access invalid");
+        break;
     }
 
     // set no delay, and no ctty?
     oflag |= O_NOCTTY | O_NDELAY;
 
     // open
-    m_fd = ::open(path.c_str(), oflag);
-    if (m_fd < 0) {
-        throw std::system_error(EFAULT, std::system_category());
-    }
-   }
+    // m_fileDescriptor = ::open(path.c_str(), oflag);
+    // if (m_fd < 0) {
+    //     throw std::system_error(EFAULT, std::system_category());
+    // }
+}
 
+CharacterDevice::~CharacterDevice()
+{
+    /*
+        int error = ::close(m_fd);
+        if (error < 0) {
+            // ... can't throw in destructor, maybe log an error? ...
+        }
+     */
+}
 
-   CharacterDevice::~CharacterDevice()
-   {
-    int error = ::close(m_fd);
-    if (error < 0) {
-        // ... can't throw in destructor, maybe log an error? ...
-    }
-
-   }
-
-   unsigned int CharacterDevice::input_waiting() const
-   {
+unsigned int CharacterDevice::input() const
+{
     unsigned int count = 0;
-    int error = ::ioctl(m_fd, TIOCINQ, &count);
-    if (error < 0) {
-        std::cerr << "\n\n\nInput waiting ERROR = " << error << std::endl << std::endl << std::endl;
-        throw std::system_error(EFAULT, std::system_category());
-    }
-    return count;
-   }
 
+    /*
+        int error = ::ioctl(m_fd, TIOCINQ, &count);
+        if (error < 0) {
+            std::cerr << "\n\n\nInput waiting ERROR = " << error << std::endl << std::endl << std::endl;
+            throw std::system_error(EFAULT, std::system_category());
+        }
+     */
+    return (count);
+}
 
-   unsigned int CharacterDevice::output_waiting() const
-   {
+unsigned int CharacterDevice::output() const
+{
     unsigned int count = 0;
-    int error = ::ioctl(m_fd, TIOCOUTQ, &count);
-    if (error < 0) {
-        throw std::system_error(EFAULT, std::system_category());
-    }
-    return count;
-   }
 
+    /*
+        int error = ::ioctl(m_fd, TIOCOUTQ, &count);
+        if (error < 0) {
+            throw std::system_error(EFAULT, std::system_category());
+        }
+     */
+    return (count);
+}
 
-   bool CharacterDevice::poll(std::chrono::milliseconds timeout) const
-   {
-    struct pollfd fds[1];
+bool CharacterDevice::poll(std::chrono::milliseconds timeout) const
+{
+    /*
+        struct pollfd fds[1];
 
-    // ... poll ...
-    fds[0].fd = m_fd;
-    fds[0].events = POLLIN | POLLPRI;
-    int ret = ::poll(fds, 1, timeout.count());
-    // ... above uses scope resolution operator :: ...
-    // https://stackoverflow.com/a/7149954/953414
+        // ... poll ...
+        fds[0].fd = m_fd;
+        fds[0].events = POLLIN | POLLPRI;
+        int ret = ::poll(fds, 1, timeout.count());
+        // ... above uses scope resolution operator :: ...
+        // https://stackoverflow.com/a/7149954/953414
 
-    // ... ret < 0 is an error, ret > 0 is success, ret == 0 is timeout ...
-    if (ret < 0) {
-        throw std::system_error(EFAULT, std::system_category());
-    }
-    return (ret > 0);
-   }
+        // ... ret < 0 is an error, ret > 0 is success, ret == 0 is timeout ...
+        if (ret < 0) {
+            throw std::system_error(EFAULT, std::system_category());
+        }
+        return (ret > 0);
+     */
+    return(true);
+}
 
-
+/*
    void CharacterDevice::write(const_buffer buf) const
    {
     while (buf.size() > 0) {

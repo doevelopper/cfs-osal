@@ -1,39 +1,42 @@
 
 add_library(cfs.osal.main
-    #cfs/osal/CpuAffinity
-    cfs/osal/CharacterDevice
     cfs/osal/ResourceLimit
     cfs/osal/ResourceUsage
     cfs/osal/Activator
     cfs/osal/NoOp
+    cfs/osal/Serializable
     cfs/osal/BinaryReader
     cfs/osal/BinaryWriter
+    cfs/osal/CharacterDevice
+    cfs/osal/FileDescriptor
+    cfs/osal/Timer
+    cfs/osal/TimeFixture
+    cfs/osal/task/Runnable
+    cfs/osal/Mailbox
+    cfs/osal/Semaphore
+    cfs/osal/MessageData
+    cfs/osal/Semaphore
+
+    #cfs/osal/properties/Connection
+
     #cfs/osal/cpumanager/Topology
     #cfs/osal/cpumanager/CpuAffinity
     #cfs/osal/cpumanager/CpuInfo
     # cfs/osal/BlockDevice
     # cfs/osal/ByteStream
     # cfs/osal/Comparator
-    # cfs/osal/TimeFixture
-    # cfs/osal/Timer
-    # cfs/osal/task/Runnable
     # cfs/osal/properties/XProperty
     # cfs/osal/thread/WorkerThread
     # cfs/osal/queues/MultiProducerMultiConsumerQueue
     # cfs/osal/queues/SingleProducerSingleConsumerQueue
     # cfs/osal/queues/MultiProducerSingleConsumerQueue
     # cfs/osal/MessageQueue
-#    cfs/osal/Mailbox
-    # cfs/osal/Message
-    # cfs/osal/MessageData
     # cfs/osal/Object
     # cfs/osal/BidirectionnalContainer
-    # cfs/osal/FileDescriptor
     # cfs/osal/MappedMemory
     # cfs/osal/Singleton
     # cfs/osal/SpinLock
     # cfs/osal/SystemMonitor
-    # cfs/osal/Semaphore
     # cfs/osal/BinaryWriter
     # cfs/osal/task/Task
     # cfs/osal/network/IOService

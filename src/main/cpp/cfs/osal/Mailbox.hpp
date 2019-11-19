@@ -12,7 +12,7 @@
 
 namespace cfs::osal
 {
-    class CFS_OSAL_MAIN_EXPORT Mailbox : public std::enable_shared_from_this<Mailbox>
+    class CFS_OSAL_MAIN_EXPORT Mailbox //: public std::enable_shared_from_this<Mailbox>
     {
         enum class Command : std::uint8_t
         {
@@ -23,17 +23,12 @@ namespace cfs::osal
 
         public:
 
-            Mailbox() = delete;
+            Mailbox();
             Mailbox(const Mailbox&) = delete;
             Mailbox(Mailbox&&) = delete;
             Mailbox& operator=(const Mailbox&) = delete;
             Mailbox& operator=(Mailbox&&) = delete;
-            ~Mailbox()
-            {
-                [] () {
-                } ();
-                //[] { } ==> noOp()
-            }
+            virtual ~Mailbox();
 
             //std::shared_ptr<Mailbox> getMailbox()
             //{

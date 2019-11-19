@@ -9,6 +9,18 @@ namespace cfs::osal
 {
     class BlockDevice
     {
+        public:
+
+            BlockDevice() = default;
+            BlockDevice(const BlockDevice&) = default;
+            BlockDevice(BlockDevice&&) = default;
+            BlockDevice& operator=(const BlockDevice&) = default;
+            BlockDevice& operator=(BlockDevice&&) = default;
+            virtual ~BlockDevice() = default;
+
+        protected:
+
+        private:
     };
 }
 #endif

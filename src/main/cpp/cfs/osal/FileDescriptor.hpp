@@ -14,6 +14,15 @@ namespace cfs::osal
 {
     class CFS_OSAL_MAIN_EXPORT FileDescriptor
     {
+        int flag = 0;
+        enum class Access : std::uint8_t
+        {
+            ReadOnly /*= (flag |= O_RDONLY)*/,
+            WriteOnly /*= (flag |= O_WRONLY)*/,
+            ReadWrite /*= (flag |= O_RDWR)*/,
+            NO_DLAY_CTTY /*= (flag |= O_NOCTTY | O_NDELAY)*/
+        };
+
         public:
 
             FileDescriptor() = delete;

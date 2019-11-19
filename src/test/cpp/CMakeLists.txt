@@ -7,8 +7,9 @@ add_executable (cfs.osal.test.bin
     cfs/osal/log/TestLogger
 	cfs/osal/ActivatorTest
     cfs/osal/ResourceTest
+    cfs/osal/TimeFixtureTest
+    cfs/osal/task/RunnableTest
     # cfs/osal/CpuAffinityTest.cpp
-    # cfs/osal/TimeFixtureTest
     # cfs/osal/queues/MSPMSConsumerQueueTest
     # cfs/osal/MessageTest
     # cfs/osal/MessageDataTest

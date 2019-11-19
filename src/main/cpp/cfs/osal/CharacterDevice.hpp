@@ -6,6 +6,11 @@
 #include <string>
 #include <chrono>
 #include <ostream>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#include <cfs/osal/FileDescriptor.hpp>
+
 namespace cfs::osal
 {
     class CharacterDevice
@@ -25,14 +30,18 @@ namespace cfs::osal
             CharacterDevice(CharacterDevice&& orig) = default;
             CharacterDevice & operator=(const CharacterDevice& orig) = default;
             CharacterDevice & operator=(CharacterDevice && orig) = default;
-            virtual ~CharacterDevice() = default;
+            virtual ~CharacterDevice();
 
             bool poll(std::chrono::milliseconds timeout) const;
             void flush() const;
             unsigned int input() const;
             unsigned int output() const;
 
+        protected:
+
         private:
+
+            FileDescriptor * m_fileDescriptor;
     };
 }
 #endif

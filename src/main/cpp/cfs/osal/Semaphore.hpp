@@ -25,8 +25,12 @@ namespace cfs::osal
 
         public:
 
-            Semaphore(const Semaphore& arg) = delete;
+            Semaphore() = delete;
+            Semaphore(const Semaphore& rsh) = delete;
+            Semaphore(Semaphore&&) = delete;
             Semaphore& operator=(const Semaphore& rhs) = delete;
+            Semaphore& operator=(Semaphore&&) = delete;
+            virtual ~Semaphore();
             /*!
              * @brief Open or create a named semaphore
              * @param [in, out] name Name of Semaphore for a named semaphore
@@ -34,9 +38,8 @@ namespace cfs::osal
              * @param [in] mode
              * @param [in] value
              */
-            Semaphore(std::string & name,OpenMode flag = SEM_OPEN, std::uint32_t mode = 0666,std::uint32_t value = -1);
-            Semaphore(std::int32_t pshared = 0, std::uint32_t value = 0);
-            virtual ~Semaphore();
+            Semaphore(std::string & name, OpenMode flag = SEM_OPEN, std::uint32_t mode = 0666,std::uint32_t value = -1);
+            Semaphore(std::int32_t pshared, std::uint32_t value);
 
             /*!
              * @brief The semaphore referenced by sem is unlocked, the value of the semaphore is incremented, and all
@@ -50,8 +53,7 @@ namespace cfs::osal
              *        Takes the semaphore by decreasing the counter by 1, will wait for the semaphore
              *        to be given if the counter = 0.
              *  @return If successful (the lock was acquired), wait() and trywait() will return 0.  Otherwise, -1 is
-             *            returned and errno is set, and the state
-             *  of the semaphore is unchanged.
+             *            returned and errno is set, and the state of the semaphore is unchanged.
              */
             void wait();
 

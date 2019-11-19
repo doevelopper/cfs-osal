@@ -2,8 +2,8 @@
 
 #include <cfs/osal/task/RunnableTest.hpp>
 
-using namespace cfs::osal::test;
 using namespace cfs::osal::log::test;
+using namespace cfs::osal::task::test;
 
 log4cxx::LoggerPtr RunnableTest::logger = log4cxx::Logger::getLogger(std::string("cfs.osal.task.test.RunnableTest"));
 
@@ -29,5 +29,11 @@ void RunnableTest::TearDown()
 {
     LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
     delete testee;
+}
+
+TEST_F(RunnableTest, test_routine)
+{
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+    ASSERT_TRUE(true);
 }
 

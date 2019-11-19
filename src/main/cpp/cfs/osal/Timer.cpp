@@ -10,9 +10,11 @@ const std::uint64_t Timer<T>::MS_TO_NS_FACTOR = 1000000;
 template <typename T>
 Timer<T>::Timer(T * handler)
     : m_handler(handler)
+    , m_TimerID(NULL)
     , m_TimerType(TimerType::MULTI_SHOT)
     , m_interval(100)
-    , m_TimerID(NULL)
+    , m_mutex()
+    , m_cv()
 {
 }
 
@@ -31,7 +33,7 @@ T* Timer<T>::getHandler()
 
 /*
    template <typename T>
-   TimerType Timer<T>::getTimerType()
+   Timer::TimerType Timer<T>::getTimerType()
    {
     return m_TimerType;
    }

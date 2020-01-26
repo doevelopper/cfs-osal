@@ -42,7 +42,7 @@ set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Wformat=2 -Wfloat-equal  -Wformat -Wf
 
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Werror=reorder -Werror=non-virtual-dtor -fmax-errors=5 -Werror=return-type )
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -pedantic-errors -Werror=switch-default -Werror=unused-result)
-set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Werror=aggressive-loop-optimizations -Werror=implicit-function-declaration )
+set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Werror=aggressive-loop-optimizations ) #-Werror=implicit-function-declaration )
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Werror=missing-field-initializers ) #-Werror=conversion )
 set (COMMON_CXX_FLAGS ${COMMON_CXX_FLAGS} -Werror=format-security -Werror=shadow -Werror=address -Werror=sequence-point)
 

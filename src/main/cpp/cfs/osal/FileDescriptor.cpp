@@ -43,7 +43,7 @@ FileDescriptor & FileDescriptor::operator = (FileDescriptor && rhs)
 {
     if (this != &rhs)
     {
-        close();
+        //    close();
     }
 
     std::swap(m_fileDescriptor, rhs.m_fileDescriptor);

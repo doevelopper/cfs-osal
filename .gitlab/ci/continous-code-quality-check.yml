@@ -1,0 +1,33 @@
+
+
+# https://sonarcloud.io/dashboard?id=LinuxSonarCloud
+#
+
+
+Continuous Code Quality online:
+    <<: *agent-who
+    stage: Quality assurance
+    before_script:
+        - export SONAR_SCANNER_VERSION=4.2.0.1873
+        - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+        - rm -rf $SONAR_SCANNER_HOME
+        - mkdir -p $SONAR_SCANNER_HOME
+        - curl -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+        - unzip $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+        - rm $HOME/.sonar/sonar-scanner.zip
+        - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+        - export SONAR_SCANNER_OPTS="-server"
+        - curl -LsS https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip > build-wrapper-linux-x86.zip
+        - unzip build-wrapper-linux-x86.zip
+    script:
+        - build-wrapper-linux-x86 --out-dir bw-output make -C ${BUILD_DIRECTORY} clean all
+        - sonar-scanner
+            -Dsonar.projectKey=LinuxSonarCloud
+            -Dsonar.organization=doevelopper-github
+            -Dsonar.sources=.
+            -Dsonar.cfamily.build-wrapper-output=bw-output
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=6d1fb5ad96828262a019f317f5534b0d7bf07ce3
+            ## or only sonar-scanner -Dproject.settings=./.sonarcloud.properties
+    after_script:
+        - echo "Linux Sonar Cloud Done."

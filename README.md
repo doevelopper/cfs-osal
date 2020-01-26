@@ -16,7 +16,7 @@
 ------- 01000011 01000110 01010011  01001111 01010011 01000001 01001100 --------
                           -- A.H.L --
 ```
-
+![Work In Progress](https://unpkg.com/vvwip/WIP.svg)
 [d]: #project
 **[Overview][ovw] | [Features][feat] |[License][cpl] | [Support][ps]**
 A small layer of software that allows programs to run on many different
@@ -295,3 +295,8 @@ for details.
 
 [github-pull-requests-closed-shields]: https://img.shields.io/github/issues-pr-closed/doevelopper/cfs-osal.svg
 [github-pull-requests-closed]: https://github.com/doevelopper/cfs-osal/pull/
+
+
+[icon-fe]: https://img.shields.io/badge/%3D(%5E.%5E)%3D-fe-yellow.svg
+[icon-be]: https://img.shields.io/badge/%3D(%5E.%5E)%3D-be-yellow.svg
+[icon-cs]: https://img.shields.io/badge/%3D(%5E.%5E)%3D-computer%20science-yellow.svg

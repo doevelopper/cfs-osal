@@ -204,6 +204,6 @@ fi
 
 # User configuration
 source "$HOME/.env"
-source "$HOME/.functions"
 source "$HOME/.aliases"
+source "$HOME/.functions"
 

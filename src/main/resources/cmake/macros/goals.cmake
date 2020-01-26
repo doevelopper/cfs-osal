@@ -83,8 +83,6 @@ if(NOT TARGET rmproper)
     )
 endif()
 
-# add_dependencies( clean rmproper)
-
 if(NOT TARGET site)
     add_custom_target(site
         COMMAND :
@@ -107,6 +105,7 @@ if(NOT TARGET site-deploy)
     add_custom_target(site-deploy
         COMMAND :
         COMMENT "Deploy the generated site documentation to the specified web server."
+        DEPENDS site
     )
 endif()
 
@@ -137,12 +136,20 @@ if(NOT TARGET test-compile)
 	)
 endif()
 
-# add_dependencies( test ${PROJECT_NAME}-test)
+if(NOT TARGET unit-test)
+    add_custom_target(unit-test test
+        COMMAND :
+        COMMENT "Run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed."
+        DEPENDS test-compile
+    )
+endif()
+
 
 if(NOT TARGET pack)
     add_custom_target(pack
         COMMAND :
         COMMENT "Take the compiled code and package it in its distributable format, such as a ZIP."
+        DEPENDS unit-test
     )
 
     add_custom_command(TARGET pack
@@ -156,6 +163,7 @@ if(NOT TARGET integration-test)
     add_custom_target(integration-test
         COMMAND :
         COMMENT "Process and deploy the package if necessary into an environment where integration tests can be run."
+        DEPENDS pack
     )
 
     add_custom_command(TARGET integration-test
@@ -177,6 +185,7 @@ if(NOT TARGET verify)
     add_custom_target(verify
         COMMAND :
         COMMENT "Rrun any checks to verify the package is valid and meets quality criteria."
+        DEPENDS integration-test
     )
 endif()
 
@@ -184,6 +193,7 @@ if(NOT TARGET do-install)
     add_custom_target( do-install
         COMMAND :
         COMMENT "Install the package into the local repository, for use as a dependency in other projects locally."
+        DEPENDS verify
     )
 endif()
 
@@ -191,6 +201,7 @@ if(NOT TARGET deploy)
     add_custom_target( deploy
         COMMAND :
         COMMENT "Integration or release environment, copies the final package to the remote repository for sharing with other developers and projects."
+        DEPENDS verify
     )
 endif()
 

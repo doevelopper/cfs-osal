@@ -61,10 +61,10 @@ namespace cfs::osal
                 {
                     auto c = e.code();
                     std::cout << "errno = "     << c.value() << "..."  << std::endl
-                              << "      What: " << e.what()            << std::endl
-                              << "  Category: " << c.category().name() << std::endl
-                              << "     Value: " << c.value()           << std::endl
-                              << "   Message: " << c.message()         << std::endl
+                              << "What: " << e.what()            << std::endl
+                              << "Category: " << c.category().name() << std::endl
+                              << "Value: " << c.value()           << std::endl
+                              << "Message: " << c.message()         << std::endl
                               << std::endl;
                 }
             }

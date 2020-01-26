@@ -24,7 +24,7 @@
 
 ]]
 
-cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project (cfs.osal
     VERSION 0.0.1

@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include <cstdlib>
-
+#include <limits>
 #include <cfs/osal/Test.hpp>
 
 int main(int argc, char**argv)
 {
     cfs::osal::test::Test cfsOsalTest;
-    // log4cxx::LogManager::getLoggerRepository()->getRootLogger()->info("Running UnitTest");
+    log4cxx::LogManager::getLoggerRepository()->getRootLogger()->info("Running UnitTest");
     cfsOsalTest.run(argc,argv);
     //    static_cast<void>(argv);
 

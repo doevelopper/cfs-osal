@@ -1,21 +1,25 @@
 
-add_library(cfs.osal.main
-    cfs/osal/ResourceLimit
-    cfs/osal/ResourceUsage
-    cfs/osal/Activator
-    cfs/osal/NoOp
-    cfs/osal/Serializable
-    cfs/osal/BinaryReader
-    cfs/osal/BinaryWriter
-    cfs/osal/CharacterDevice
-    cfs/osal/FileDescriptor
-    cfs/osal/Timer
-    cfs/osal/TimeFixture
-    cfs/osal/task/Runnable
-    cfs/osal/Mailbox
-    cfs/osal/Semaphore
-    cfs/osal/MessageData
-    cfs/osal/Semaphore
+add_library(${PROJECT_NAME}.main)
+
+target_sources(${PROJECT_NAME}.main
+    PUBLIC
+        ${CMAKE_BINARY_DIR}/cfs/osal/Version
+        cfs/osal/ResourceLimit
+        cfs/osal/ResourceUsage
+        cfs/osal/Activator
+        cfs/osal/NoOp
+        cfs/osal/Serializable
+        cfs/osal/BinaryReader
+        cfs/osal/BinaryWriter
+        cfs/osal/CharacterDevice
+        cfs/osal/FileDescriptor
+        cfs/osal/Timer
+        cfs/osal/TimeFixture
+        cfs/osal/task/Runnable
+        cfs/osal/Mailbox
+        cfs/osal/Semaphore
+        cfs/osal/MessageData
+        cfs/osal/Semaphore
 
     #cfs/osal/properties/Connection
 
@@ -47,34 +51,38 @@ add_library(cfs.osal.main
     # cfs/osal/network/spi/Spi
     # cfs/osal/network/rpi/RpiUart
     # cfs/osal/network/can/CAN
-    ${CMAKE_BINARY_DIR}/cfs/osal/Version
 )
 
-apply_style_targets_command (cfs.osal.main ${CMAKE_CURRENT_SOURCE_DIR})
+apply_style_targets_command (${PROJECT_NAME}.main ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(cfs.osal.main
+target_link_libraries(${PROJECT_NAME}.main
     PUBLIC
         $<$<PLATFORM_ID:Linux>:rt>
         $<$<PLATFORM_ID:Linux>:pthread>
         LOG4CXX::LOG4CXX
         $<$<CONFIG:Coverage>:${CPP_COVERAGE_FLAGS}>
-        #        $<$<OR:$<CXX_COMPILER_ID:Clang>, $<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:${BLD_FLAGS}>
+#        $<$<OR:$<CXX_COMPILER_ID:Clang>, $<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:GNU>>:${BLD_FLAGS}>
 )
 
-#target_link_options(cfs.osal.main
+#target_link_options(${PROJECT_NAME}.main
 #    PUBLIC
 #        -m64
 #)
 
-set_target_properties( cfs.osal.main PROPERTIES
+set_target_properties( ${PROJECT_NAME}.main PROPERTIES
     VERSION
         ${PROJECT_VERSION}
     SOVERSION
         "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
 )
 
+#set_target_properties ( ${PROJECT_NAME}.main PROPERTIES
+#    LINK_FLAGS
+#        -m64
+#)
+
 include(GenerateExportHeader)
-generate_export_header(cfs.osal.main
+generate_export_header(${PROJECT_NAME}.main
     EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/cfs/osal/Export.hpp"
     INCLUDE_GUARD_NAME CFS_OSAL_EXPORT_HPP
 #    EXPORT_MACRO_NAME CFS_OSAL_API_DECLS
@@ -85,7 +93,7 @@ generate_export_header(cfs.osal.main
     ${NO_BUILD_DEPRECATED}
 )
 
-target_compile_features(cfs.osal.main
+target_compile_features(${PROJECT_NAME}.main
     PUBLIC
         cxx_std_17
         cxx_strong_enums
@@ -109,7 +117,7 @@ target_compile_features(cfs.osal.main
         $<$<CXX_COMPILER_ID:GNU>:cxx_attributes>
 )
 
-target_compile_definitions(cfs.osal.main
+target_compile_definitions(${PROJECT_NAME}.main
     PRIVATE
         "VERBOSITY=$<IF:$<BOOL:${VERBOSE}>,30,10>"
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Debug>>: -DRELEASE_LEVEL="SNAPSHOOT"> # SNAPSHOOT ,ALPHA , BETA , CANDIDATE , FINAL.
@@ -118,8 +126,10 @@ target_compile_definitions(cfs.osal.main
         #QNX POSIX XENOMAI PREEMPT_RT
 )
 
-set_target_properties ( cfs.osal.main PROPERTIES LINK_FLAGS -m64 )
+#set_target_properties ( ${PROJECT_NAME}.main PROPERTIES LINK_FLAGS -m64 )
+
 #export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1
+
 target_compile_options(cfs.osal.main
     INTERFACE
         $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
@@ -138,13 +148,21 @@ target_compile_options(cfs.osal.main
         $<$<CONFIG:Debug>: -O0>
         $<$<CONFIG:Debug>: -ggdb3>
         $<$<CONFIG:Debug>: -O0 -g -D_DEBUG -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -fno-omit-frame-pointer>
-#        $<IF:$<CONFIG:Debug>: helper_debug.cpp,helper_release.cpp>
+#        $<IF:$<CONFIG:Debug>: ${CMAKE_BINARY_DIR}/cfs/osal/helper_debug.cpp,${CMAKE_BINARY_DIR}/cfs/osal/helper_release.cpp>
         $<$<OR:$<CONFIG:Release>,$<CONFIG:Profile>>: DISABLE_VAR>
         $<$<CONFIG:Coverage>: -O0  ${CPP_COVERAGE_FLAGS}>
         $<$<CONFIG:Profile>: ${CHECK_MEMORY_FLAGS}>
+        #        $<$<OR:$<AND:$<CXX_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<CXX_COMPILER_VERSION>,6.0.0>>>
+        #	        ,$<AND:$<C_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<C_COMPILER_VERSION>,6.0.0>>>>:-Wnull-dereference>
+        #        $<$<OR:$<AND:$<CXX_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<CXX_COMPILER_VERSION>,6.0.0>>>
+        #	        ,$<AND:$<C_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<C_COMPILER_VERSION>,6.0.0>>>>:-Wduplicated-cond>
+        #        $<$<OR:$<AND:$<CXX_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<CXX_COMPILER_VERSION>,7.0.0>>>
+        #	        ,$<AND:$<C_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<C_COMPILER_VERSION>,7.0.0>>>>:-Wduplicated-branches>
+        #        $<$<OR:$<AND:$<CXX_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<CXX_COMPILER_VERSION>,7.0.0>>>
+        #	        ,$<AND:$<C_COMPILER_ID:GNU>,$<NOT:$<VERSION_LESS:$<C_COMPILER_VERSION>,7.0.0>>>>:-Wrestrict>
 )
 
-target_include_directories(cfs.osal.main
+target_include_directories(${PROJECT_NAME}.main
     PUBLIC
 #        ${CMAKE_BINARY_DIR}/cfs/osal
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
@@ -160,7 +178,6 @@ target_include_directories(cfs.osal.main
 #        ${CMAKE_INSTALL_INCLUDEDIR}/cfs/osal
 )
 
-#add_dependencies(compile cfs.osal.main)
 
 # Support find_package(<target> NO_MODULE).
 #configure_package_config_file(${MODULE_NAME}-config.cmake.in ${MODULE_NAME_LOWER}-config.cmake
@@ -207,3 +224,6 @@ target_include_directories(cfs.osal.main
 #	COMPONENT development
 #)
 
+
+
+add_dependencies(compile ${PROJECT_NAME}.main)

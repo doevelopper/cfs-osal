@@ -66,7 +66,18 @@ alias sagr='sudo apt-get remove'
 alias sagd='sudo apt-get dist-upgrade'
 alias sagc='sudo apt-get clean'
 alias sagac='sudo apt-get autoclean'
-
+alias saptu='sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove && sudo apt-get autoclean'
+alias yolo='!git add -A && git commit -m "$(curl --silent --fail https://whatthecommit.com/index.txt)"'
+alias fuckit='git commit -am "$(curl --silent --fail whatthecommit.com/index.txt)"'
+alias gitwip='git commit -am ""[WIP]$(curl --silent --fail whatthecommit.com/index.txt)"'
+alias gitwipskip='git commit -am ""[WIP]$(curl --silent --fail whatthecommit.com/index.txt) [ci skip]"'
+alias gitautopush='git add -A && git commit -m "$(curl --silent --fail https://whatthecommit.com/index.txt) && git flow feature publish"'
+alias fastccm='git add -A && git commit -m "[WIP] $(curl --silent --fail https://whatthecommit.com/index.txt)" && git
+flow feature publish'
+alias fastcskip='git add -A && git commit -m "[WIP] $(curl --silent --fail https://whatthecommit.com/index.txt) [ci skip]" &&
+    git flow feature publish'
+alias fortunewip='git add -A && git commit -m "[WIP] $(fortune -s -n 80)" && git flow feature publish'
+alias fortuneskip='git add -A && git commit -m "[WIP] $(fortune -s -n 80) [ci skip]" && git flow feature publish'
 #alias sapt='sudo apt-get'
 #alias saptu='sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove && sudo apt-get autoclean'
 #alias saptg=`apt-get update`             #->  apt update

@@ -41,14 +41,30 @@ Continuous code quality:
     stage: Quality assurance
     before_script:
         - echo  "Sonnar code source continuous Inspection."
+        - export SONAR_SCANNER_VERSION=4.2.0.1873
+        - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+        - rm -rf $SONAR_SCANNER_HOME
+        - mkdir -p $SONAR_SCANNER_HOME
+        - curl -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip 
+        - unzip $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+        - rm $HOME/.sonar/sonar-scanner.zip
+        - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+        - export SONAR_SCANNER_OPTS="-server"
+        - curl -LsS https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip > build-wrapper-linux-x86.zip
+        - unzip build-wrapper-linux-x86.zip
     script:
         - echo "Sonar scanner should be installed"
+        - build-wrapper-linux-x86 --out-dir bw-output make clean all
 #        - sonar-scanner
 #            -Dsonar.source=.
 #            -Dsonar.host.url=$SONAR_URL
+#            -Dsonar.host.url=https://sonarcloud.io
 #            -Dsonar.login=$SONAR_LOGIN
 #            -Dsonar.password=$PASSWD
 #            -Dsonar.projectKey="KEY"
+#            -Dsonar.sourceEncoding=UTF-8
+#            -Dsonar.organization=${CI_PROJECT_ID}-github
+#            -Dsonar.projectName="$CI_PROJECT_ID"
 #            -Dsonar.projectVersion=$SONAR_PROJECT_VERSION
 #            -Dsonar.gitlab.projectName=$CI_PROJECT_ID
 #            -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA $CI_BUILD_RE
@@ -56,6 +72,9 @@ Continuous code quality:
 #            -Dsonar.branch=$SONAR_BRANCH
 #            -Dsonar.analysis.mode=$SONAR_ANALYSIS_MODE
 #            -Dsonar.issuesReport.console.enable=true"
+#            -Dsonar.exclusions="qml_*.cpp,qrc_*.cpp,qml/**/*,translations/*"
+#            -Dsonar.cfamily.build-wrapper-output=.sonarbuild/bw-output
+#            -Dsonar.cpp.file.suffixes=.cpp,.mm
     after_script:
         - echo "Done."
     artifacts:

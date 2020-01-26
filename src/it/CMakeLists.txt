@@ -3,28 +3,30 @@
 set(FEATURE_TEST_FORMAT --format progress)  #--format pretty OR --format pretty --tags @wip OR ...
 set(FEATURE_TEST_OPTION --backtrace --format html --color)
 
-add_executable(cfs.osal.it-test.steps
-    features/step_definitions/cfs/osal/ApplicationSteps
+add_executable (${PROJECT_NAME}.integration-test)
 
+target_sources(${PROJECT_NAME}.integration-test
+    PRIVATE
+        features/step_definitions/cfs/osal/ApplicationSteps
 )
 
-apply_style_targets_command(cfs.osal.it-test.steps ${CMAKE_CURRENT_SOURCE_DIR})
+apply_style_targets_command(${PROJECT_NAME}.integration-test ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(cfs.osal.it-test.steps
+target_link_libraries(${PROJECT_NAME}.integration-test
     PUBLIC
-        cfs.osal.main
+        ${PROJECT_NAME}.main
 #        cfs.osal.test
         CucumberCpp::cucumber-cpp
 #        PUBLIC BENCHMARK::BENCHMARK
 )
 
-add_feature_test_command(cfs.osal.it-test.steps ${CMAKE_CURRENT_SOURCE_DIR})
+add_feature_test_command(${PROJECT_NAME}.integration-test ${CMAKE_CURRENT_SOURCE_DIR})
 
-#add_custom_target(cfs.osal.integration-test
+#add_custom_target(${PROJECT_NAME}.integration-test
 #    COMMAND
 #        ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/qa/atp
 #    COMMAND
-#        cfs.osal.it-test.steps --port 3902  >/dev/null &
+#        ${PROJECT_NAME}.integration-test --port 3902  >/dev/null &
 
 #    COMMAND
 #        cucumber ${FEATURE_TEST_FORMAT} ${FEATURE_TEST_OPTION}
@@ -61,5 +63,6 @@ add_feature_test_command(cfs.osal.it-test.steps ${CMAKE_CURRENT_SOURCE_DIR})
 #        "Killing process to close cucumber wire port. (bind: Address already in use)"
 #)
 
-#add_dependencies( feature-test cfs.osal.integration-test cfs.osal.test.bin)
+#add_dependencies( integration-test ${PROJECT_NAME}.integration-test unit-test)
+add_dependencies( integration-test ${PROJECT_NAME}.integration-test)
 

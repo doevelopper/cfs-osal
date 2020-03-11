@@ -7,7 +7,7 @@ add_executable (${PROJECT_NAME}.integration-test)
 
 target_sources(${PROJECT_NAME}.integration-test
     PRIVATE
-        features/step_definitions/cfs/osal/ApplicationSteps
+        cfs/osal/features/step_definitions/ApplicationSteps
 )
 
 apply_style_targets_command(${PROJECT_NAME}.integration-test ${CMAKE_CURRENT_SOURCE_DIR})

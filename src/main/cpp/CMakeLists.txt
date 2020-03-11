@@ -130,7 +130,7 @@ target_compile_definitions(${PROJECT_NAME}.main
 
 #export ASAN_OPTIONS=strict_string_checks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1
 
-target_compile_options(cfs.osal.main
+target_compile_options(${PROJECT_NAME}.main
     INTERFACE
         $<$<CONFIG:Debug>:-g3 -O0 -fstack-protector>
         $<$<CONFIG:Release>:-g0 -O2>

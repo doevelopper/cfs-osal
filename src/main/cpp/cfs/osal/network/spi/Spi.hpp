@@ -46,7 +46,7 @@ namespace cfs::osal::network::spi
             SPI_DATA_MODE3 = 3  /**< CPHA=1, CPOL=1 */
         };
 
-        enum class bcm283x_spi_speed : std::uint32_t
+        enum class SpiSpeed : std::uint32_t
         {
             SPEED_4kHz = 0,
             SPEED_7kHz = 32768,

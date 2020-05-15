@@ -30,6 +30,12 @@ CpuAffinity::CpuAffinity(const CpuAffinity &other)
     copy_cpuset(other);
 }
 
+CpuAffinity & CpuAffinity::operator=(const CpuAffinity & rhs)
+{
+    copy_cpuset(rhs);
+    return (*this);
+}
+
 CpuAffinity::~CpuAffinity()
 {
 }
@@ -83,15 +89,42 @@ std::size_t CpuAffinity::max_cpus() const
     return CPU_SETSIZE - 1;
 }
 
-CpuAffinity CpuAffinity::getCpuAffinity()
+CpuAffinity& CpuAffinity::getCpuAffinity()
 {
-    /*
        CpuAffinity ret;
        auto err = sched_getaffinity(0, sizeof(ret.m_cpu), &ret.m_cpu);
-        if (err < 0) {
+        if (err < 0)
+        {
             throw std::system_error(errno, std::system_category());
         }
-     */
     return (ret);
 }
 
+void CpuAffinity::copy_cpuset(const CpuAffinity &other)
+{
+    std::memcpy(&m_cpu, &other.m_cpu, sizeof(cpu_set_t));
+}
+
+std::uint32_t CpuAffinity::bindToCpu (std::uint32_t index)
+{
+    std::uint32_t retval;
+    cpu_set_t cpuset;
+    std::memset(&cpuset, 0, sizeof(cpu_set_t));
+    CPU_SET(index, &cpuset);
+    retval = sched_setaffinity(0, sizeof( cpu_set_t ), &cpuset);
+    return (retval);
+}
+
+std::uint8_t CpuAffinity::get_current_cpu()
+{
+    return (sched_getcpu());
+}
+
+void CpuAffinity::set_cpu_affinity(const CpuAffinity &cpuAffinity)
+{
+    auto err = sched_setaffinity(0, sizeof(cpuAffinity.m_cpu), &cpuAffinity.m_cpu);
+    if (err < 0)
+    {
+        throw std::system_error(errno, std::system_category());
+    }
+}

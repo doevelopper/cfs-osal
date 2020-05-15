@@ -10,7 +10,7 @@
 using namespace cfs::osal;
 
 
-FileDescriptor::FileDescriptor(std::int32_t fd) CFS_OSAL_NOEXCEPT
+FileDescriptor::FileDescriptor(std::int32_t fd) noexcept
     :  m_fileDescriptor(fd) //::open(path.c_str(), oflag);
 {
     if(m_fileDescriptor < 0)

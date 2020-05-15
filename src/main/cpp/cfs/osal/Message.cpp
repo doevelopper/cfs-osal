@@ -27,11 +27,11 @@ Message::Message(int msgId)
 }
 
 /*
-   std::unique_ptr<Message> Message::move()
-   {
+std::unique_ptr<Message> Message::move()
+{
     return std::unique_ptr<Message>(new Message(std::move(*this)));
-   }
- */
+}
+*/
 
 int Message::getMsgId() const
 {

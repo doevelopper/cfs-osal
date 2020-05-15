@@ -20,12 +20,12 @@ namespace cfs::osal
     {
         public:
 
-            NoOp() = default;
+            NoOp();
             NoOp(NoOp const&) = delete;
             NoOp(NoOp&&) = delete;
             NoOp& operator =(NoOp const&) = delete;
             NoOp& operator =(NoOp&&) = delete;
-            ~NoOp() = default;
+            ~NoOp();
 
             template<class... Args>
             constexpr void operator()(Args&&... args) const

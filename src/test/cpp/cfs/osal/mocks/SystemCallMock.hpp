@@ -10,7 +10,6 @@
 #include <gmock/gmock.h>
 
 #include <cfs/osal/FileDescriptor.hpp>
-#include <cfs/osal/log/TestLogger.hpp>
 
 namespace cfs::osal::mocks
 {
@@ -37,7 +36,7 @@ namespace cfs::osal::mocks
             static std::function<std::int32_t(const char*, std::int32_t)>                         m_open;
             static std::function<std::int32_t(std::int32_t, off_t)>                               m_ftruncate;
             static std::function<std::int32_t(std::int32_t, struct stat*)>                        m_fstat;
-            static log4cxx::LoggerPtr                                                             logger;
+
     };
 }
 #endif

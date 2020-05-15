@@ -8,7 +8,7 @@
 namespace cfs::osal
 {
     template< class T >
-    class CFS_OSAL_MAIN_EXPORT Object
+    class CFS_OSAL_MAIN_EXPORT Object //: public std::enable_shared_from_this<Forte::Object>
     {
         public:
 

@@ -47,12 +47,12 @@ namespace cfs::osal::network::can
                 std::uint8_t data[64];
             };
 
-            CAN() = default;
+            CAN();
             CAN(const CAN&) = default;
             CAN(CAN&&) = default;
             CAN& operator=(const CAN&) = default;
             CAN& operator=(CAN&&) = default;
-            virtual ~CAN() = default;
+            virtual ~CAN();
     };
 }
 #endif

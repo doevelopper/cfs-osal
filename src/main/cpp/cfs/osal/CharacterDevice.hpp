@@ -37,11 +37,20 @@ namespace cfs::osal
             unsigned int input() const;
             unsigned int output() const;
 
+            auto fileDescriptor() -> cfs::osal::FileDescriptor &
+            {
+                return (m_fileDescriptor);
+            }
+            auto fileDescriptor() const -> const cfs::osal::FileDescriptor &
+            {
+                return (m_fileDescriptor);
+            }
+
         protected:
 
         private:
 
-            FileDescriptor * m_fileDescriptor;
+            cfs::osal::FileDescriptor * m_fileDescriptor;
     };
 }
 #endif

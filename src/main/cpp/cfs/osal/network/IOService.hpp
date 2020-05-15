@@ -9,10 +9,11 @@ namespace cfs::osal::network
     {
         public:
 
-            IOService(const IOService&) = default;
-            IOService(IOService&&) = default;
-            IOService& operator=(const IOService&) = default;
-            IOService& operator=(IOService&&) = default;
+            IOService() = default;
+            IOService(const IOService&) = delete;
+            IOService(IOService&&) = delete;
+            IOService& operator=(const IOService&) = delete;
+            IOService& operator=(IOService&&) = delete;
             virtual ~IOService() = default;
 
             virtual void open() = 0;

@@ -3,6 +3,8 @@
 #ifndef CFS_OSAL_HELPERS_HPP
 #define CFS_OSAL_HELPERS_HPP
 
+#include<string>
+
 #define DECLARE(type)  type
 
 namespace cfs::osal

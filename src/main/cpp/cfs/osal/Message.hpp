@@ -8,7 +8,7 @@
 #include <functional>
 #include <mutex>
 #include <queue>
-
+#include <variant>
 namespace cfs::osal
 {
     /*!
@@ -27,15 +27,15 @@ namespace cfs::osal
              *
              * @param msgId Message ID of this Message.
              */
-            Message(int msgId);
             Message();
             Message(const Message&) = delete;
             Message& operator=(const Message&) = delete;
             virtual ~Message();
+            Message(int msgId);
             /*!
              * @brief Virtual move constructor
              */
-            virtual std::unique_ptr<Message> move();
+            //virtual std::unique_ptr<Message> move();
 
             /*!
              * Get Message ID.
@@ -50,7 +50,10 @@ namespace cfs::osal
              * All Message instances have a unique Message UID.
              */
             MsgUID getUniqueId() const;
-
+            // https://stackoverflow.com/questions/51615363/how-to-write-c-getters-and-setters
+            //auto data() &       -> std::variant<std::uint32_t> & { return m_data; }
+            //auto data() const -> const std::variant<std::uint32_t> & { return m_data; }
+            //auto data() &&     -> std::variant<std::uint32_t> &&  { return std::move(m_data); }
         protected:
 
             Message(Message&&) = default;
@@ -63,6 +66,7 @@ namespace cfs::osal
             MsgUID                                m_uniqueId;
             std::mutex                            m_queueMutex;
             std::queue<std::unique_ptr<Message> > m_MessageQueue;
+            std::variant<std::uint32_t> m_data;
     };
 }
 #endif

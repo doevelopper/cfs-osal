@@ -4,7 +4,6 @@
 #define CFS_OSAL_MESSAGETEST_HPP
 
 #include <gmock/gmock.h>
-#include <cfs/osal/log/TestLogger.hpp>
 #include <cfs/osal/Message.hpp>
 
 namespace cfs::osal::test
@@ -24,8 +23,6 @@ namespace cfs::osal::test
             void TearDown() override;
 
         protected:
-
-            static log4cxx::LoggerPtr logger;
 
         private:
     };

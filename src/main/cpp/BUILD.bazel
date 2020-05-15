@@ -10,10 +10,23 @@ cc_library(
 
     srcs = [
         "cfs/osal/Activator.cpp",
+        "cfs/osal/cpumanager/CpuAffinity.cpp",
+        "cfs/osal/cpumanager/CpuInfo.cpp",
+        "cfs/osal/driver/AbstractHWDriver.cpp",
+        "cfs/osal/Message.cpp",
+        "cfs/osal/MappedMemory.cpp",
+        "cfs/osal/FileDescriptor.cpp",
     ],
 
     hdrs = [
         "cfs/osal/Activator.hpp",
+        "cfs/osal/cpumanager/CpuAffinity.hpp",
+        "cfs/osal/cpumanager/CpuInfo.hpp",
+        "cfs/osal/driver/AbstractHWDriver.hpp",
+        "cfs/osal/driver/HWDriver.hpp",
+        "cfs/osal/Message.hpp",
+        "cfs/osal/MappedMemory.hpp",
+        "cfs/osal/FileDescriptor.hpp",
     ],
 
     copts = [

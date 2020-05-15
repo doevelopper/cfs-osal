@@ -4,7 +4,6 @@
 #define CFS_OSAL_TASK_ACTIVATORTEST_HPP
 
 #include <cfs/osal/Activator.hpp>
-#include <cfs/osal/log/TestLogger.hpp>
 #include <gmock/gmock.h>
 
 namespace cfs::osal::test
@@ -30,8 +29,7 @@ namespace cfs::osal::test
 
             using  testee = Activator<V>;
             using  ValueType = V;
-
-            static log4cxx::LoggerPtr logger;
+        private:
     };
 
     TYPED_TEST_SUITE_P(ActivatorTest);

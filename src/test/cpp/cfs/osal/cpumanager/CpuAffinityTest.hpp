@@ -1,11 +1,11 @@
 
 
-#ifndef CFS_OSAL_CPUAFFINITYTEST_HPP
-#define CFS_OSAL_CPUAFFINITYTEST_HPP
+#ifndef CFS_OSAL_CPUMANAGER_CPUAFFINITYTEST_HPP
+#define CFS_OSAL_CPUMANAGER_CPUAFFINITYTEST_HPP
 #include <gtest/gtest.h>
 #include <cfs/osal/cpumanager/CpuAffinity.hpp>
 
-namespace cfs::osal::test
+namespace cfs::osal::cpumanager::test
 {
     class CpuAffinityTest : public ::testing::Test
     {

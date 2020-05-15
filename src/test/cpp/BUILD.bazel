@@ -12,6 +12,14 @@ cc_test(
         "cfs/osal/unitTest.cpp",
         "cfs/osal/Test.cpp",
         "cfs/osal/Test.hpp",
+        "cfs/osal/ActivatorTest.cpp",
+        "cfs/osal/ActivatorTest.hpp",
+        "cfs/osal/cpumanager/CpuAffinityTest.cpp",
+        "cfs/osal/cpumanager/CpuAffinityTest.hpp",
+        "cfs/osal/cpumanager/CpuInfoTest.cpp",
+        "cfs/osal/cpumanager/CpuInfoTest.hpp",
+        "cfs/osal/MessageTest.cpp",
+        "cfs/osal/MessageTest.hpp",
     ],
 
     includes = [
@@ -21,11 +29,7 @@ cc_test(
     copts = [
        "-std=c++17",
        "-DLOG_LEVEL=1",
-       #"-lapr-1",
-       #"-laprutil-1",
-       #"-llog4cxx",
-       #"-lgtest",
-       "-D_REENTRANT",
+        "-D_REENTRANT",
        "-I/usr/local/include/",
     ],
 
@@ -46,6 +50,4 @@ cc_test(
     data = [
         "//src/main/resources/configs:log4cxx.xml",
     ],
-
 )
-

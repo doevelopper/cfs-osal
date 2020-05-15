@@ -7,12 +7,12 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include <cfs/osal/CompilerDetection.hpp>
-#include <cfs/osal/Export.hpp>
+//#include <cfs/osal/CompilerDetection.hpp>
+//#include <cfs/osal/Export.hpp>
 
 namespace cfs::osal
 {
-    class CFS_OSAL_MAIN_EXPORT FileDescriptor
+    class /*CFS_OSAL_MAIN_EXPORT*/ FileDescriptor
     {
         int flag = 0;
         enum class Access : std::uint8_t
@@ -26,7 +26,7 @@ namespace cfs::osal
         public:
 
             FileDescriptor() = delete;
-            FileDescriptor(std::int32_t fd = -1) CFS_OSAL_NOEXCEPT;
+            FileDescriptor(std::int32_t fd = -1) noexcept;
             FileDescriptor(const FileDescriptor&) = delete;
             FileDescriptor(FileDescriptor&&);
             FileDescriptor& operator=(const FileDescriptor&) = delete;
@@ -53,7 +53,7 @@ namespace cfs::osal
             std::size_t pread(char *buffer, std::size_t size, std::size_t off) const;
             std::size_t pwrite(const char *buffer, std::size_t size, std::size_t off) const;
             bool isInUse() const;
-            void close() CFS_OSAL_NOEXCEPT;
+            void close() noexcept;
 
         private:
 

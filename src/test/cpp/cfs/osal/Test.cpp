@@ -2,18 +2,18 @@
 
 #include <cfs/osal/Test.hpp>
 
+using namespace cfs::osal;
 using namespace cfs::osal::test;
-using namespace cfs::osal::log::test;
 
 const unsigned long Test::LOGGER_WATCH_DELAY = 5000UL;
-log4cxx::LoggerPtr Test::logger = log4cxx::Logger::getLogger(std::string("cfs.osal.log.test.Test"));
+//log4cxx::LoggerPtr Test::logger =
+//    log4cxx::Logger::getLogger(std::string("cfs.osal.log.test.Test"));
 
 Test::Test()
     : m_testSuites(std::string() )
     , m_numberOfTestIteration(1)
 {
-    testsLoggingService = new TestLogger(LOGGER_WATCH_DELAY);
-    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
 }
 
 Test::Test(std::string & suite, unsigned int iteration)
@@ -26,13 +26,12 @@ Test::Test(std::string & suite, unsigned int iteration)
 
 Test::~Test()
 {
-    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
-    delete testsLoggingService;
+    //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
 }
 
 void Test::notYetImplemented()
 {
-    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
     GTEST_NONFATAL_FAILURE_("Not YET implemented!!!!!!");
 }
 

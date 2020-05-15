@@ -12,7 +12,7 @@
 
 namespace cfs::osal
 {
-    class CFS_OSAL_MAIN_EXPORT Mailbox //: public std::enable_shared_from_this<Mailbox>
+    class CFS_OSAL_MAIN_EXPORT Mailbox //: public std::enable_shared_from_this<cfs::osal::Mailbox>
     {
         enum class Command : std::uint8_t
         {
@@ -36,7 +36,7 @@ namespace cfs::osal
             //}
 
             void *mapmem(std::uint32_t base, std::uint32_t size);
-            void *unmapmem(void *addr, std::uint32_t sizea);
+            void *unmapmem(void *addr, std::uint32_t size);
             static std::int16_t property(std::uint32_t fdesc, void *buf);
             std::uint32_t memoryAllocate(std::int32_t fdesc, std::uint32_t size, std::uint32_t align, std::uint32_t
                                          flags);
